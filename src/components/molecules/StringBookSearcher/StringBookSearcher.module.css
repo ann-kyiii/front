@@ -1,0 +1,13 @@
+.SearchBoxWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 85vw;
+  padding-right: 0.4em;
+  margin: 20px auto;
+  border: solid 5px var(--app-default-blue);
+  border-radius: 3px;
+}
+
+.SearchBoxHeadingWrapper {
+  margin: 0 auto;
+}

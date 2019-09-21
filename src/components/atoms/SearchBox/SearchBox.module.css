@@ -1,0 +1,13 @@
+.BookSearcher {
+  width: 100%;
+  padding: 0 0.4em;
+  font-size: 16px;
+  line-height: 1.4;
+  background: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}

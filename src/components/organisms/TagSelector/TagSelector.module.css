@@ -1,0 +1,43 @@
+.TagSelectorWraper {
+  width: 88vw;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.TagULWraper {
+  display: flex;
+  overflow-x: scroll;
+}
+
+.TagListWraper {
+  flex: 1 0 auto;
+  text-align: center;
+  list-style: none;
+  cursor: pointer;
+}
+
+.ListButton {
+  padding: 0 0.7em;
+  margin: 0 0.5em;
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--font-color-gray);
+  background-color: transparent;
+  border: none;
+  outline: none;
+  transition: 0.3s ease-in;
+  transition-property: background-color;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.ListButton:hover,
+.ListButton:focus {
+  background-color: var(--focus-background);
+}
+
+.isSelected {
+  font-weight: 700;
+  color: black;
+}
