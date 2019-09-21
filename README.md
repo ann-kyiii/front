@@ -1,44 +1,44 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![node-version](https://img.shields.io/badge/node-12.7.0-green.svg)](https://github.com/nodejs/node)
+[![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components)
 
-## Available Scripts
+**N-Lab Lib Booking system for Frontend**
 
-In the project directory, you can run:
+# Quick Start
 
-### `npm start`
+```console
+# change dir in front
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Install node_modules based on `yarn.lock`
+$ yarn
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+# Start
+$ yarn start
 
-### `npm test`
+# Access from Smart Phone by serveo
+$ ssh -R 80:localhost:3000 serveo.net
+# like this 👉 Forwarding HTTP traffic from https://***.serveo.net
+```
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Setup
 
-### `npm run build`
+## Install node and yarn
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Refer from [here](https://github.com/Dai7Igarashi/frontend-hands-on#setup-nodejs)  
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+You must install **node-12.7.0** !!  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+If you're working on **Windows**, please see next links.  
+- [nodist](https://github.com/nullivex/nodist/releases)(node version manager)
+  - [usage](https://github.com/nullivex/nodist#commands)
+- [yarn](https://yarnpkg.com/lang/ja/docs/install/#windows-stable)
 
-### `npm run eject`
+## Create React App by Typescript
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This is the way to init this app totally by yourself.  
+Need not to do below and you can get by `git clone` in first time or `git pull` on working, then you need reinstall node_modules by `yarn` command every time.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Refer from [here](https://create-react-app.dev/docs/adding-typescript)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```console
+$ yarn create react-app books-front --typescript
+```
