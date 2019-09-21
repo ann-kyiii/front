@@ -42,3 +42,80 @@ Refer from [here](https://create-react-app.dev/docs/adding-typescript)
 ```console
 $ yarn create react-app books-front --typescript
 ```
+
+## Setup eslint
+
+### install
+
+```console
+$ yarn add -D eslint-config-airbnb
+
+# init eslint
+$ yarn eslint --init
+
+? How would you like to use ESLint? 
+  To check syntax only 
+  To check syntax and find problems 
+❯ To check syntax, find problems, and enforce code style 
+
+? What type of modules does your project use? (Use arrow keys)
+❯ JavaScript modules (import/export) 
+  CommonJS (require/exports) 
+  None of these 
+
+? Which framework does your project use? (Use arrow keys)
+❯ React 
+  Vue.js 
+  None of these 
+
+? Does your project use TypeScript? (y/N) y  
+
+? Where does your code run? (Press <space> to select, <a> to toggle all, <i> to invert selection)
+❯◉ Browser
+ ◯ Node  
+
+? How would you like to define a style for your project? (Use arrow keys)
+❯ Use a popular style guide 
+  Answer questions about your style 
+  Inspect your JavaScript file(s) 
+
+? Which style guide do you want to follow? (Use arrow keys)
+❯ Airbnb (https://github.com/airbnb/javascript) 
+  Standard (https://github.com/standard/standard) 
+  Google (https://github.com/google/eslint-config-google) 
+
+? What format do you want your config file to be in? (Use arrow keys)
+❯ JavaScript 
+  YAML 
+  JSON 
+
+? Would you like to install them now with npm? (Y/n) n  
+```
+
+Now `.eslintrc.js` is created and you can delete these command in `package.json`.
+```
+# package.json
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+```
+
+### write scripts
+
+```console
+# install npm-run-all for run-s command
+# When adding stylelint, you can expand easily by this command.
+$ yarn add -D npm-run-all
+```
+
+Write these scripts in `package.json`.  
+
+```json
+"scripts": {
+  ...
+  "lint": "run-s lint:*",
+  "lint:js": "eslint 'src/**/*.{js,jsx,ts,tsx}' --quiet",
+  "fix": "run-s fix:*",
+  "fix:js": "eslint 'src/**/*.{js,jsx,ts,tsx}' --quiet --fix"
+}
+```
