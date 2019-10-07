@@ -119,3 +119,9 @@ Write these scripts in `package.json`.
   "fix:js": "eslint 'src/**/*.{js,jsx,ts,tsx}' --quiet --fix"
 }
 ```
+
+# Notification
+
+## CircleCI
+
+CircleCL watches lint error by `yarn lint` command. Before pushing on GitHub, you should do `yarn fix`.
