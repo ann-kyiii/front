@@ -7,10 +7,19 @@
     "@types/node": "12.7.5",
     "@types/react": "16.9.2",
     "@types/react-dom": "16.9.0",
+    "classnames": "^2.2.6",
+    "connected-react-router": "^6.5.2",
+    "history": "^4.10.1",
+    "lodash": "^4.17.15",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.2",
-    "typescript": "3.6.3"
+    "redux": "^4.0.4",
+    "typescript": "3.6.3",
+    "typescript-fsa": "^3.0.0",
+    "typescript-fsa-reducers": "^1.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -19,8 +28,10 @@
     "eject": "react-scripts eject",
     "lint": "run-s lint:*",
     "lint:js": "eslint 'src/**/*.{js,jsx,ts,tsx}' --quiet",
+    "lint:css": "stylelint 'src/**/*.css' --quiet",
     "fix": "run-s fix:*",
-    "fix:js": "eslint 'src/**/*.{js,jsx,ts,tsx}' --quiet --fix"
+    "fix:js": "eslint 'src/**/*.{js,jsx,ts,tsx}' --quiet --fix",
+    "fix:css": "stylelint 'src/**/*.css' --quiet --fix"
   },
   "browserslist": {
     "production": [
@@ -35,7 +46,23 @@
     ]
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.9",
+    "@types/history": "^4.7.3",
+    "@types/lodash": "^4.14.139",
+    "@types/react-redux": "^7.1.2",
+    "@types/react-router-dom": "^4.3.5",
+    "@welldone-software/why-did-you-render": "^3.3.6",
     "eslint-config-airbnb": "^18.0.1",
-    "npm-run-all": "^4.1.5"
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react-hooks": "^2.0.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
+    "stylelint": "^11.0.0",
+    "stylelint-config-prettier": "^6.0.0",
+    "stylelint-config-recess-order": "^2.0.3",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-prettier": "^1.1.1",
+    "typescript-styled-plugin": "^0.14.0"
   }
 }
