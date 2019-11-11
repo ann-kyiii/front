@@ -8,18 +8,28 @@ import SearchIcon from "../atoms/SearchIcon"
 import BorrowButton from "../molecules/BorrowButton"
 import BorrowUserNameInput from "../molecules/BorrowUserNameInput"
 
-export const Borrow = ({ history }: AppProps) =>  {
-  const [inputValue, setInputValue] = useState<string>("");
+import { ModalProvider, useModal } from "react-modal-hook";
+// import Dialog from "../molecules/Dialog"
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // console.log("test");
-    console.log(inputValue);
+export const Borrow = ({ history }: AppProps) =>  {
+  const [borrower, setBorrower] = useState<string>("");
+  const bookTitle = "Book A"  //TODO:booklistからもらう必要
+
+  // const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   // console.log("test");
+  //   console.log(inputValue);
+  //   console.log("window表示");
     
-  };
+  //   // return (
+  //   // <ModalProvider>
+  //   //   <Dialog />
+  //   // </ModalProvider>
+  //   // );
+  // };
 
   const handleOnChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setInputValue(e.target.value);
+      setBorrower(e.target.value);
     },
     []
   );
@@ -28,16 +38,21 @@ export const Borrow = ({ history }: AppProps) =>  {
     <>
       <Header history={history} backLink="/" />
       {/* <div>BorrowBookName</div> */}
-      <BookName>Book A</BookName>
+      <BookName>{bookTitle}</BookName>
       {/* <div>Username form</div> */}
       {/* <PopupWindow></PopupWindow> */}
       {/* <SearchBox></SearchBox> */}
       {/* <input  placeholder="UserName" /> */}
       <BorrowUserNameInput placeValue="UserName" handleOnChange={handleOnChange}/>
       {/* <button onClick={handleClick}>Borrow</button> */}
-      <BorrowButton handleClick={handleClick} name="borrow!" />
+      <ModalProvider>
+        <BorrowButton history={history} buttonName="Borrow" bookTitle={bookTitle} borrower={borrower}/>
+      </ModalProvider>
       {/* <SearchIcon handleClick={handleClick} /> */}
       {/* <div>Borrow Button</div> */}
+      {/* <ModalProvider>
+        <Dialog />
+      </ModalProvider> */}
     </>
   );
 };
