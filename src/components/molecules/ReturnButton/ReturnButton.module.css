@@ -1,0 +1,121 @@
+.ReturnButton {
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #0b413c;
+    width: 85vw;
+    height: 6vw;
+    margin: 20px auto;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .ReturnButtonWrapper {
+      /* text-align: center */
+      display: flex;
+      justify-content: center;
+  }
+
+  .modal {
+    background-color: white;
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.24);
+    height: 200px;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -100px;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    width: 400px;
+  }
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  top: 0%;
+
+  background-color: black;
+  opacity: 0.7;
+  position: absolute;
+}
+
+.title {
+  text-align: center;
+}
+
+.center{
+  width: 380px;
+  height: 60px;
+  /* height: 100px; */
+  /* flex-wrap: wrap; */
+}
+
+.ChooseButton{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+    
+  /* border:1px solid #888888;
+  padding:2pt;
+  background-color: #ffffff;
+  filter:alpha(opacity=85);
+  -moz-opacity:0.85;
+  -khtml-opacity: 0.85;
+  opacity:0.85;
+      
+  text-shadow: 0 -1px 1px #FFF, -1px 0 1px #FFF, 1px 0 1px #aaa;   */
+}
+  
+/*  .IconButton:focus {
+    background-color: var(--focus-background);
+  }
+  
+  .IconRect {
+    position: relative;
+    display: block;
+    width: 28px;
+    height: 28px;
+  }
+  
+  .SearchIcon:before,
+  .SearchIcon:after {
+    position: absolute;
+    top: 5.5px;
+    left: 5.5px;
+    display: block;
+    height: 8px;
+    content: "";
+  }
+  
+  .SearchIcon:before {
+    width: 8px;
+    border: 2px #333 solid;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+  }
+  
+  .SearchIcon:after {
+    top: 15px;
+    left: 18px;
+    width: 2px;
+    height: 7px;
+    background: #333;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+  
+  /* 以下カスタム */
+  /* .DefaultSearchBoxColor::before {
+    border: 2px #b4b4b4 solid;
+  }
+  
+  .DefaultSearchBoxColor::after {
+    background: #b4b4b4;
+  } */
+  
