@@ -1,36 +1,23 @@
 import { reducerWithInitialState } from "typescript-fsa-reducers";
-import {
-  resetKeywordTag,
-  changeKeywordTag,
-  KeywordTags
-} from "../actions/tagselector";
+import fetchBookLists, { SavedBooks } from "../actions/resultlists";
 
-const keywords: string[] = [
-  "深層学習",
-  "機械学習",
-  "進化計算",
-  "強化学習",
-  "プログラミング",
-  "教養",
-  "経済学",
-  "統計学",
-  "就職活動"
-];
-
-const initialState: KeywordTags = keywords.map((tag, index) => ({
-  id: index,
-  keyword: tag,
-  isSelected: false
-}));
+const initialState: SavedBooks = { statusCode: 200, isLoading: false };
 
 export const resultListsReducer = reducerWithInitialState(initialState)
-  .case(resetKeywordTag, () => initialState)
-  .case(changeKeywordTag, (state, id) =>
-    state.map(keywordTag =>
-      keywordTag.id === id
-        ? { ...keywordTag, isSelected: !keywordTag.isSelected }
-        : keywordTag
-    )
-  );
+  .case(fetchBookLists.started, state => ({
+    ...state,
+    isLoading: true
+  }))
+  .case(fetchBookLists.done, (state, payload) => ({
+    ...state,
+    ...payload.result,
+    statusCode: 200,
+    isLoading: false
+  }))
+  .case(fetchBookLists.failed, (state, payload) => ({
+    ...state,
+    ...payload.error,
+    isLoading: false
+  }));
 
 export default resultListsReducer;

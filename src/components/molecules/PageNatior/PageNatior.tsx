@@ -14,7 +14,7 @@ export const PageNatior = (props: PageNatiorProps) => {
   const innerPage = () => {
     const items = [];
     for (let idx = 0; idx < totalPage; idx += 1) {
-      console.log();
+      console.log("Hello");
     }
   };
 
