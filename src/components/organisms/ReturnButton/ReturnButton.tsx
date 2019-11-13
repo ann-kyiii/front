@@ -10,11 +10,11 @@ type ReturnButtonProps = AppProps & {
   className?: string[];
   buttonName: string;
   bookTitle: string;
-  borrower: string;
+  Returner: string;
 };
 
 export const ReturnButton = (props: ReturnButtonProps) => {
-  const { className, buttonName, bookTitle, borrower } = props;
+  const { className, buttonName, bookTitle, Returner } = props;
   const dispatch = useDispatch();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -31,7 +31,7 @@ export const ReturnButton = (props: ReturnButtonProps) => {
         <div className={styles.title}>確認</div>
         <div className={styles.center}>
           <p>Book Title: {bookTitle}</p>
-          <p>Borrower: {borrower}</p>
+          <p>Returner: {Returner}</p>
         </div>
         <div className={styles.ChooseButton}>
           <button onClick={hideModal}>DISAGREE</button>
@@ -40,7 +40,7 @@ export const ReturnButton = (props: ReturnButtonProps) => {
       </div>
     </div>
   ), 
-  [bookTitle, borrower]);
+  [bookTitle, Returner]);
 
   return (
     <div className={styles.ReturnButtonWrapper}> 

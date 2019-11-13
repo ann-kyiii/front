@@ -1,69 +1,37 @@
-import React, {useState, useCallback} from "react";
+import React, {useState, useCallback, useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { AppProps } from "../../App";
+import { RootState } from "../../reducers";
 import Header from "../organisms/Header";
-import SearchBox from "../atoms/SearchBox";
 // import BookName from "../molecules/BookName"
-// import PopupWindow from "../molecules/PopupWindow"
-import SearchIcon from "../atoms/SearchIcon"
-import ReturnButton from "../molecules/ReturnButton"
-// import ReturnUserNameInput from "../molecules/ReturnUserNameInput"
+import ReturnButton from "../organisms/ReturnButton"
 
 import { ModalProvider, useModal } from "react-modal-hook";
-// import Dialog from "../molecules/Dialog"
 
 export const Return = ({ history }: AppProps) =>  {
-  const [borrower, setBorrower] = useState<string>("");
-  const bookTitle = "Book A"  //TODO:booklistからもらう必要
-  const list = ["hanako", "taro"];
+  // const bookTitle = "Book A"  //TODO:booklistからもらう必要
+  const dispatch = useDispatch();
+  const test: string = "test";
+  // dispatch(test);
+  const bookTitle = useSelector((state: RootState) => state.str).toString();
+  const list = ["hanako", "taro", "ynu"];
 
-  // const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //   // console.log("test");
-  //   console.log(inputValue);
-  //   console.log("window表示");
-    
-  //   // return (
-  //   // <ModalProvider>
-  //   //   <Dialog />
-  //   // </ModalProvider>
-  //   // );
-  // };
-
-  const handleOnChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setBorrower(e.target.value);
-    },
-    []
+  const item = list.map((name, index) => 
+  <ReturnButton key={index} history={history} buttonName={name} bookTitle={bookTitle} Returner={name}/>
   );
 
-  const item = list.map((name) => 
-  <ReturnButton history={history} buttonName={name} bookTitle={bookTitle} borrower={name}/>
-  );
+  useEffect(() => {
+    console.log("useEffect");
+  }, []);
 
   return (
     <>
       <Header history={history} backLink="/" />
-      {/* <div>BorrowBookName</div> */}
-      {/* <BookName>{bookTitle}</BookName> */}
-      <div>{bookTitle}</div>
-      {/* <div>Username form</div> */}
-      {/* <PopupWindow></PopupWindow> */}
-      {/* <SearchBox></SearchBox> */}
-      {/* <input  placeholder="UserName" /> */}
-      <div>Borrower</div>
-      {/* <button onClick={handleClick}>Borrow</button> */}
+      <div style={{textAlign: "center", height: "70px", fontSize: "18px"}}>{bookTitle}</div>
+      <div style={{textAlign: "center", fontSize: "larger"}}>Borrower</div>
       <ModalProvider>
-        {/* list.map((name) => 
-          <ReturnButton history={history} buttonName="Return" bookTitle={bookTitle} borrower={name}/>
-        ); */}
-        {/* <div style={{display: "flex", justifyContent: "center", margin: 20}}> */}
           {item}
-        {/* </div> */}
       </ModalProvider>
-      {/* <SearchIcon handleClick={handleClick} /> */}
-      {/* <div>Return Button</div> */}
-      {/* <ModalProvider>
-        <Dialog />
-      </ModalProvider> */}
     </>
   );
 };
