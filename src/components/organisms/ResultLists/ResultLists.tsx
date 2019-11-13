@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash";
+import { normalize, schema } from "normalizr";
 import { AppProps } from "../../../App";
 import { RootState } from "../../../reducers";
+import fetchBookLists, {
+  BookLists,
+  SavedBooks
+} from "../../../actions/resultlists";
 import PageNatior from "../../molecules/PageNatior";
+import fetchSearch from "../../../apis/fetchSearch";
 
 type ResultListsProps = AppProps & {};
 
@@ -13,10 +19,10 @@ export const ResultLists = (props: ResultListsProps) => {
   ).slice(1);
   const decode: string = decodeURI(search);
   const urlParams: string[] = decode.split(/&/g);
-  const keyWords: string = urlParams
+  const keyWords: string[] = urlParams
     .filter(param => param.startsWith("key="))
-    .map(param => param.replace(/^key=/g, ""))
-    .join(" ");
+    .map(param => param.replace(/^key=/g, ""));
+
   const pageIndex: number =
     parseInt(
       urlParams
@@ -27,22 +33,49 @@ export const ResultLists = (props: ResultListsProps) => {
       10
     ) || 0;
 
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
-  const getBookLists = async () => {};
+  const normalizeData = (data: BookLists): SavedBooks => {
+    const booksSchema = new schema.Entity("books", {}, { idAttribute: "id" });
+    return get(normalize(data, [booksSchema]), ["entities", "books"]);
+  };
+
+  const getBookLists = async (page: number) => {
+    const limit = 10;
+    const offset = page * limit;
+    const payload = {
+      keywords: keyWords,
+      offset: offset.toString(),
+      limit: limit.toString()
+    };
+    try {
+      const response = await fetchSearch(payload);
+      if (!response.ok) {
+        dispatch(
+          fetchBookLists.failed({ error: { statusCode: response.status } })
+        );
+        return;
+      }
+      const json = await response.json();
+      // APIのreturnが books: {} なので.
+      const newData = normalizeData(json.books);
+      dispatch(fetchBookLists.done({ result: newData }));
+    } catch (error) {
+      console.log(`Error fetcing in getBookLists: ${error}`);
+    }
+  };
 
   useEffect(() => {
-    console.log(keyWords);
-    console.log(pageIndex);
-  }, []);
+    getBookLists(pageIndex);
+  }, [keyWords, pageIndex]);
 
   return (
     <>
-      <PageNatior
+      {/* <PageNatior
         totalPage={100}
         currentPage={0}
         handleClick={() => console.log("Hello")}
-      />
+      /> */}
     </>
   );
 };

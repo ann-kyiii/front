@@ -10,5 +10,5 @@ type KeywordTag = {
 
 export type KeywordTags = KeywordTag[];
 
-export const resetKeywordTag = actionCreator("RESET_keywordTag");
-export const changeKeywordTag = actionCreator<number>("CHANGE_keywordTag");
+export const resetKeywordTag = actionCreator("RESET_KEYWORD_TAG");
+export const changeKeywordTag = actionCreator<number>("CHANGE_KEYWORD_TAG");
