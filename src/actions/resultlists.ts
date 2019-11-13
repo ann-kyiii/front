@@ -14,7 +14,7 @@ type BookInfo = {
   publisher: string;
   pubdate: string;
   exist: string;
-  locateAt4F: boolean;
+  locateAt4F?: boolean;
   withDisc: string;
   other: string;
   borrower: string[];
