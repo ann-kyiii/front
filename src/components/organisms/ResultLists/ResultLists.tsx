@@ -75,7 +75,7 @@ export const ResultLists = (props: ResultListsProps) => {
 
   useEffect(() => {
     getBookLists(pageIndex);
-  }, [keyWords, pageIndex]);
+  }, []);
 
   const { isLoading, booksTable, booksIdList } = useSelector(
     (state: SavedBooks) => get(state, ["bookLists"])
