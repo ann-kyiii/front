@@ -14,6 +14,7 @@ import fetchSearch from "../../../apis/fetchSearch";
 type ResultListsProps = AppProps & {};
 
 export const ResultLists = (props: ResultListsProps) => {
+  // init: ページ情報取得
   const search: string = useSelector((state: RootState) =>
     get(state, ["router", "location", "search"])
   ).slice(1);
@@ -33,11 +34,17 @@ export const ResultLists = (props: ResultListsProps) => {
       10
     ) || 0;
 
+  // process: データ関係の処理
   const dispatch = useDispatch();
 
   const normalizeData = (data: BookLists): SavedBooks => {
     const booksSchema = new schema.Entity("books", {}, { idAttribute: "id" });
-    return get(normalize(data, [booksSchema]), ["entities", "books"]);
+    const booksTable = get(normalize(data, [booksSchema]), [
+      "entities",
+      "books"
+    ]);
+    const booksIdList = get(normalize(data, [booksSchema]), ["result"]);
+    return { booksTable, booksIdList };
   };
 
   const getBookLists = async (page: number) => {
@@ -49,6 +56,7 @@ export const ResultLists = (props: ResultListsProps) => {
       limit: limit.toString()
     };
     try {
+      dispatch(fetchBookLists.started());
       const response = await fetchSearch(payload);
       if (!response.ok) {
         dispatch(
@@ -68,6 +76,10 @@ export const ResultLists = (props: ResultListsProps) => {
   useEffect(() => {
     getBookLists(pageIndex);
   }, [keyWords, pageIndex]);
+
+  const { isLoading, booksTable, booksIdList } = useSelector(
+    (state: SavedBooks) => get(state, ["bookLists"])
+  );
 
   return (
     <>
