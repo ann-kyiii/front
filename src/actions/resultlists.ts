@@ -3,27 +3,32 @@ import actionCreatorFactory from "typescript-fsa";
 const actionCreator = actionCreatorFactory();
 
 type BookInfo = {
-  isbn: number;
-  title: string;
-  sumbnail: string;
-  author: string[];
+  id: number;
+  bookName: string;
+  genre: string;
+  subGenre: string;
+  ISBN: string;
+  find: number;
+  sum: number;
+  author: string;
   publisher: string;
-  contents: string;
-  tag: string[];
+  pubdate: string;
+  exist: string;
+  locateAt4F: boolean;
+  withDisc: string;
+  other: string;
   borrower: string[];
+  location: string;
 };
 
 // 類似度でソートされた物が返却されるので配列
 export type BookLists = BookInfo[];
-
-export const fetchTotalBookNum = actionCreator.async<
-  void,
-  number, // payload: { result: number }
-  { statusCode: number }
->("FETCH_TOTAL_BOOK_NUM");
+export type SavedBooks = {};
 
 export const fetchBookLists = actionCreator.async<
-  { page: number }, // payload, payload: { params }
-  BookLists, // payload: { result: { BookLists } }
+  void,
+  SavedBooks, // payload: { result: { BookLists } }
   { statusCode: number } // payload: { error: { statusCode: number } }
 >("FETCH_BOOK_LISTS");
+
+export default fetchBookLists;
