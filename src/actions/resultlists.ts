@@ -23,12 +23,19 @@ type BookInfo = {
 
 // 類似度でソートされた物が返却されるので配列
 export type BookLists = BookInfo[];
-export type SavedBooks = {};
+export type BooksState = {
+  statusCode: number;
+  isLoading: boolean;
+  booksTable: object;
+  booksIdList: number[];
+  successedPageIndex: number[];
+  maxBooks: number;
+};
 
 export const fetchBookLists = actionCreator.async<
-  void,
-  SavedBooks, // payload: { result: { BookLists } }
-  { statusCode: number } // payload: { error: { statusCode: number } }
+  { pageIndex: number }, // payload: { pageIndex: number }
+  Pick<BooksState, "booksTable" | "booksIdList" | "maxBooks">, // payload: { params: { pageIndex: number }, result: { BooksState: {...} } }
+  { statusCode: number } // payload: { params: { pageIndex: number }, error: { statusCode: number } }
 >("FETCH_BOOK_LISTS");
 
 export default fetchBookLists;

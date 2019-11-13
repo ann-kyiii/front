@@ -1,7 +1,14 @@
 import { reducerWithInitialState } from "typescript-fsa-reducers";
-import fetchBookLists, { SavedBooks } from "../actions/resultlists";
+import fetchBookLists, { BooksState } from "../actions/resultlists";
 
-const initialState: SavedBooks = { statusCode: 200, isLoading: false };
+const initialState: BooksState = {
+  statusCode: 200,
+  isLoading: false,
+  successedPageIndex: [],
+  booksTable: {},
+  booksIdList: [],
+  maxBooks: 0
+};
 
 export const resultListsReducer = reducerWithInitialState(initialState)
   .case(fetchBookLists.started, state => ({
@@ -10,13 +17,22 @@ export const resultListsReducer = reducerWithInitialState(initialState)
   }))
   .case(fetchBookLists.done, (state, payload) => ({
     ...state,
-    ...payload.result,
     statusCode: 200,
-    isLoading: false
+    isLoading: false,
+    booksTable: {
+      ...state.booksTable,
+      ...payload.result.booksTable
+    },
+    booksIdList: [...state.booksIdList, ...payload.result.booksIdList],
+    successedPageIndex: [
+      ...state.successedPageIndex!,
+      payload.params.pageIndex
+    ],
+    maxBooks: payload.result.maxBooks
   }))
   .case(fetchBookLists.failed, (state, payload) => ({
     ...state,
-    ...payload.error,
+    statusCode: payload.error.statusCode,
     isLoading: false
   }));
 

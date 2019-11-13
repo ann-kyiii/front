@@ -6,19 +6,19 @@ import tagSelectorReducer from "./tagselector";
 import resultListsReducer from "./resultlists";
 
 import { KeywordTags } from "../actions/tagselector";
-import { BookLists } from "../actions/resultlists";
+import { BooksState } from "../actions/resultlists";
 
 export interface RootState {
   router: RouterState;
   tagSelector: KeywordTags;
-  bookLists: BookLists;
+  books: BooksState;
 }
 
 const rootReducer = (history: History) =>
   combineReducers({
     router: connectRouter(history),
     tagSelector: tagSelectorReducer,
-    bookLists: resultListsReducer
+    books: resultListsReducer
   });
 
 export default rootReducer;
