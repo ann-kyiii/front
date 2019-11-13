@@ -17,6 +17,45 @@ export const BorrowButton = (props: BorrowButtonProps) => {
   const { className, buttonName, bookTitle, borrower } = props;
   const dispatch = useDispatch();
 
+  const testJson = { books: [
+    {
+    ISBN:"9784061529014",
+    author:"杉山将／著",
+    bookName:"機械学習のための確率と統計",
+    borrower: [],
+    exist:"一部発見",
+    find:3,
+    genre:"研究(理論)",
+    id:278,
+    location:"unidentified",
+    other:"なし",
+    pubdate:"20150408",
+    publisher:"講談社サイエンティフィク",
+    subGenre:"統計・機械学習",
+    sum:6,
+    withDisc:"なし",
+    },
+    {
+    ISBN:"9784061529021",
+    author:"岡谷貴之／著",
+    bookName:"深層学習",
+    borrower: [],
+    exist:"一部発見",
+    find:1,
+    genre:"研究(理論)",
+    id:279,
+    location:"unidentified",
+    other:"なし",
+    pubdate:"20150408",
+    publisher:"講談社サイエンティフィク",
+    subGenre:"ニューラルネットワーク",
+    sum:2,
+    withDisc:"なし",
+    },
+    ] }
+
+    
+
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const encode = encodeURI(`/book-lists`);
     dispatch(push(encode));
