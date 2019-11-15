@@ -6,10 +6,11 @@ import { AppProps } from "../../../App";
 import { RootState } from "../../../reducers";
 import fetchBookLists, {
   BookLists,
-  SavedBooks
+  BooksState
 } from "../../../actions/resultlists";
 import PageNatior from "../../molecules/PageNatior";
 import fetchSearch from "../../../apis/fetchSearch";
+import { push } from "connected-react-router";
 
 type ResultListsProps = AppProps & {};
 
@@ -35,9 +36,20 @@ export const ResultLists = (props: ResultListsProps) => {
     ) || 0;
 
   // process: データ関係の処理
+
+  // ページに関わる変数をReduxから取得
+  const {
+    isLoading,
+    booksTable,
+    booksIdList,
+    statusCode,
+    successedPageIndex
+  } = useSelector((state: BooksState) => get(state, ["books"]));
   const dispatch = useDispatch();
 
-  const normalizeData = (data: BookLists): SavedBooks => {
+  const normalizeData = (
+    data: BookLists
+  ): Pick<BooksState, "booksTable" | "booksIdList"> => {
     const booksSchema = new schema.Entity("books", {}, { idAttribute: "id" });
     const booksTable = get(normalize(data, [booksSchema]), [
       "entities",
@@ -48,6 +60,10 @@ export const ResultLists = (props: ResultListsProps) => {
   };
 
   const getBookLists = async (page: number) => {
+    if (successedPageIndex.includes(page)) {
+      return;
+    }
+
     const limit = 10;
     const offset = page * limit;
     const payload = {
@@ -56,18 +72,23 @@ export const ResultLists = (props: ResultListsProps) => {
       limit: limit.toString()
     };
     try {
-      dispatch(fetchBookLists.started());
-      const response = await fetchSearch(payload);
+      dispatch(fetchBookLists.started({ pageIndex: page }));
+      // const response = await fetchSearch(payload);
+      const response = await fetch("dummyData.json");
       if (!response.ok) {
         dispatch(
-          fetchBookLists.failed({ error: { statusCode: response.status } })
+          fetchBookLists.failed({
+            params: { pageIndex: page },
+            error: { statusCode: response.status }
+          })
         );
         return;
       }
       const json = await response.json();
       // APIのreturnが books: {} なので.
       const newData = normalizeData(json.books);
-      dispatch(fetchBookLists.done({ result: newData }));
+      const result = { ...newData, maxBooks: json.max_books };
+      dispatch(fetchBookLists.done({ params: { pageIndex: page }, result }));
     } catch (error) {
       console.log(`Error fetcing in getBookLists: ${error}`);
     }
@@ -75,11 +96,14 @@ export const ResultLists = (props: ResultListsProps) => {
 
   useEffect(() => {
     getBookLists(pageIndex);
-  }, [keyWords, pageIndex]);
+  }, [pageIndex]);
 
-  const { isLoading, booksTable, booksIdList } = useSelector(
-    (state: SavedBooks) => get(state, ["bookLists"])
-  );
+  const handleClick = (pageIndex: any) => {
+    const encode = `book-lists?key=%E6%B7%B1%E5%B1%A4%E5%AD%A6%E7%BF%92&key=%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92&page=${pageIndex +
+      1}`;
+    dispatch(push(encode));
+    props.history.push(encode);
+  };
 
   return (
     <>
@@ -88,6 +112,7 @@ export const ResultLists = (props: ResultListsProps) => {
         currentPage={0}
         handleClick={() => console.log("Hello")}
       /> */}
+      <button onClick={() => handleClick(pageIndex)}>BUTTON</button>
     </>
   );
 };
