@@ -4,21 +4,69 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { useModal } from "react-modal-hook";
 import { AppProps } from "../../../App";
+import { get } from "lodash";
+import { normalize, schema } from "normalizr";
+import fetchBookLists, {
+  BookLists,
+  BooksState
+} from "../../../actions/resultlists";
 import styles from "./ReturnButton.module.css";
+import fetchReturn from "../../../apis/fetchReturn";
 
 type ReturnButtonProps = AppProps & {
   className?: string[];
   buttonName: string;
   bookTitle: string;
-  Returner: string;
+  returner: string;
+  bookId: number;
 };
 
 export const ReturnButton = (props: ReturnButtonProps) => {
-  const { className, buttonName, bookTitle, Returner } = props;
+  const { className, buttonName, bookTitle, returner, bookId } = props;
   const dispatch = useDispatch();
 
+  const normalizeData = (
+    data: BookLists
+  ): Pick<BooksState, "booksTable" | "booksIdList"> => {
+    const booksSchema = new schema.Entity("books", {}, { idAttribute: "id" });
+    const booksTable = get(normalize(data, [booksSchema]), [
+      "entities",
+      "books"
+    ]);
+    const booksIdList = get(normalize(data, [booksSchema]), ["result"]);
+    return { booksTable, booksIdList };
+  };
+  // サーバにidと名前を送り，redux更新
+  const sendReturnerName = async () => {  
+    const payload = {
+      id: bookId,
+      name: returner,
+    };
+    try {
+      dispatch(fetchBookLists.started({ pageIndex: 0 }));
+      const response = await fetchReturn(payload);
+      // const response = await fetch("dummyData.json");
+      // if (!response.ok) {
+      //   dispatch(
+      //     fetchBookLists.failed({
+      //       params: { pageIndex: page },
+      //       error: { statusCode: response.status }
+      //     })
+      //   );
+      //   return;
+      // }
+      const json = await response.json();
+      // APIのreturnが books: {} なので.
+      const newData = normalizeData(json.books);
+      const result = { ...newData, maxBooks: json.max_books };
+      dispatch(fetchBookLists.done({ params: { pageIndex: 0 }, result }));
+    } catch (error) {
+      console.log(`Error fetcing in getBookLists: ${error}`);
+    }
+  };
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const encode = encodeURI(`/book-lists`);
+    sendReturnerName();
+    const encode = encodeURI(`/book-detail/` + bookId);
     dispatch(push(encode));
     props.history.push(encode);
   }
@@ -31,7 +79,7 @@ export const ReturnButton = (props: ReturnButtonProps) => {
         <div className={styles.title}>確認</div>
         <div className={styles.center}>
           <p>Book Title: {bookTitle}</p>
-          <p>Returner  : {Returner}</p>
+          <p>Returner  : {returner}</p>
         </div>
         <div className={styles.ChooseButton}>
           <button onClick={hideModal}>DISAGREE</button>
@@ -40,7 +88,7 @@ export const ReturnButton = (props: ReturnButtonProps) => {
       </div>
     </div>
   ), 
-  [bookTitle, Returner]);
+  [bookTitle, returner]);
 
   return (
     <div className={styles.ReturnButtonWrapper}> 

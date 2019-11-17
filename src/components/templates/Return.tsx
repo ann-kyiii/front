@@ -130,7 +130,7 @@ export const Return = ({ history }: AppProps) =>  {
   );
 
   const item = list != undefined ? list.map((name, index) => 
-    <ReturnButton key={index} history={history} buttonName={name} bookTitle={bookTitle} Returner={name}/>
+    <ReturnButton key={index} history={history} buttonName={name} bookTitle={bookTitle} returner={name} bookId={bookId}/>
   ) : undefined;
   
   useEffect(() => {
