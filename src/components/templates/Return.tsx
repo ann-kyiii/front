@@ -9,11 +9,11 @@ import ReturnButton from "../organisms/ReturnButton"
 import { ModalProvider, useModal } from "react-modal-hook";
 
 export const Return = ({ history }: AppProps) =>  {
-  // const bookTitle = "Book A"  //TODO:booklistからもらう必要
+  const bookTitle = "Book A"  //TODO:booklistからもらう必要
   const dispatch = useDispatch();
   const test: string = "test";
   // dispatch(test);
-  const bookTitle = useSelector((state: RootState) => state.str).toString();
+  // const bookTitle = useSelector((state: RootState) => state.str).toString();
   const list = ["hanako", "taro", "ynu"];
 
   const item = list.map((name, index) => 

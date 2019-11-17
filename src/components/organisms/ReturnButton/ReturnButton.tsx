@@ -31,7 +31,7 @@ export const ReturnButton = (props: ReturnButtonProps) => {
         <div className={styles.title}>確認</div>
         <div className={styles.center}>
           <p>Book Title: {bookTitle}</p>
-          <p>Returner: {Returner}</p>
+          <p>Returner  : {Returner}</p>
         </div>
         <div className={styles.ChooseButton}>
           <button onClick={hideModal}>DISAGREE</button>
