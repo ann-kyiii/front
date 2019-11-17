@@ -139,7 +139,7 @@ export const Borrow = ({ history }: AppProps) =>  {
           <BorrowButton history={history} buttonName="Borrow" bookTitle={bookTitle} borrower={borrower} bookId={bookId}/>
         </ModalProvider>
 
-        <button onClick={handleClick}>get 280</button>
+        {/* <button onClick={handleClick}>get 280</button> */}
       </>
       );
     }else{

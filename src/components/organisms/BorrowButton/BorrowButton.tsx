@@ -105,7 +105,7 @@ export const BorrowButton = (props: BorrowButtonProps) => {
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     sendBorrowerName();
-    const encode = encodeURI(`/book-lists/` + bookId);
+    const encode = encodeURI(`/book-detail/` + bookId);
     dispatch(push(encode));
     props.history.push(encode);
   }
