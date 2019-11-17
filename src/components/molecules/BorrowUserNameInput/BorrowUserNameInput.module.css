@@ -3,8 +3,11 @@
   display: flex;
   justify-content: space-between;
   width: 85vw;
+  height: 30px;
   padding-right: 0.4em;
   margin: 20px auto;
-  border: solid 5px var(--app-default-blue);
+  border: none;
+  border-bottom: solid 5px var(--app-default-blue);
   border-radius: 3px;
+  font-size: 20px;
 }
