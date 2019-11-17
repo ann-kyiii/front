@@ -116,7 +116,7 @@ export const BorrowButton = (props: BorrowButtonProps) => {
         <div className={styles.title}>確認</div>
         <div className={styles.center}>
           <p>Book Title: {bookTitle}</p>
-          <p>Borrower: {borrower}</p>
+          <p>Borrower  : {borrower}</p>
         </div>
         <div className={styles.ChooseButton}>
           <button onClick={hideModal}>DISAGREE</button>

@@ -36,8 +36,9 @@
   height: 100%;
   top: 0%;
 
-  background-color: black;
-  opacity: 0.7;
+  /* background-color: black; */
+  background-color: rgba(0, 0, 0, 0.7);
+  /* opacity: 0.7; */
   position: absolute;
 }
 
@@ -46,9 +47,11 @@
 }
 
 .center{
-  width: 70vw;
-  height: 60px;
+  /* width: 55vw; */
+  /* height: 60px; */
   padding-top: 10px;
+  margin-left: 5em;
+  text-indent: -5em;
   /* height: 100px; */
   /* flex-wrap: wrap; */
 }
