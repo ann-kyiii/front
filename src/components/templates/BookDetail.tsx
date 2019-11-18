@@ -18,7 +18,6 @@ import cx from "classnames";
 
 import  imgError  from "../organisms/rena/noImageAvailable.svg";
 
-
 export const BookDetail = ({history}: AppProps) => {
   // var 
   let [bookID, setBookID] = useState(-1);

@@ -90,6 +90,13 @@ export const LoadData = (props: Props) => {
     const result = { ...newData, maxBooks: 2 };
     // const result = { ...newData, maxBooks: json.max_books };
     dispatch(fetchBookLists.done({ params: { pageIndex: page }, result }));
+  }else{
+    // ↓　あとで考える
+    // const data = fetch(`${process.env.REACT_APP_API_HOST}/bookId/1`, {
+    //   method: "GET",
+    // });
+    // console.log("=== api test ===");
+    // console.log(data);
   }
 
   return true;
