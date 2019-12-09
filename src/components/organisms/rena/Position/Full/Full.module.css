@@ -17,3 +17,10 @@
   background-position: right bottom;
   background-size: 40% auto;
 }
+
+@media only screen and (min-width: 800px) {
+
+  .back {
+    background-size: 320px auto;
+  }
+}
