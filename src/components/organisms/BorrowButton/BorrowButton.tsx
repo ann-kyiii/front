@@ -25,6 +25,15 @@ export const BorrowButton = (props: BorrowButtonProps) => {
   const { className, buttonName, bookTitle, borrower, bookId } = props;
   const dispatch = useDispatch();
 
+  const {
+    isLoading,
+    booksTable,
+    booksIdList,
+    statusCode,
+    successedPageIndex, 
+    maxBooks
+  } = useSelector((state: BooksState) => get(state, ["books"]));
+
   // const testJson = { books: [
   //   {
   //   ISBN:"9784061529014",
@@ -70,6 +79,7 @@ export const BorrowButton = (props: BorrowButtonProps) => {
       "entities",
       "books"
     ]);
+    console.log("booksTable", booksTable);
     const booksIdList = get(normalize(data, [booksSchema]), ["result"]);
     return { booksTable, booksIdList };
   };
@@ -77,26 +87,50 @@ export const BorrowButton = (props: BorrowButtonProps) => {
   // サーバにidと名前を送り，redux更新
   const sendBorrowerName = async () => {  
     const payload = {
-      id: bookId,
+      id: bookId.toString(),
       name: borrower,
     };
     try {
       dispatch(fetchBookLists.started({ pageIndex: 0 }));
-      const response = await fetchBorrow(payload);
-      // const response = await fetch("dummyData.json");
-      // if (!response.ok) {
-      //   dispatch(
-      //     fetchBookLists.failed({
-      //       params: { pageIndex: page },
-      //       error: { statusCode: response.status }
-      //     })
-      //   );
-      //   return;
-      // }
+      // const response = await fetchBorrow(payload);
+      const response = await fetch("http://localhost:3000/dummyData.json");
+      if (!response.ok) {
+        dispatch(
+          fetchBookLists.failed({
+            params: { pageIndex: 0 },
+            error: { statusCode: response.status }
+          })
+        );
+        return;
+      }
       const json = await response.json();
-      // APIのreturnが books: {} なので.
-      const newData = normalizeData(json.books);
-      const result = { ...newData, maxBooks: json.max_books };
+      // デバッグ用
+      const testjson = {
+        "book": [
+          {
+            "ISBN": "9784431100317",
+            "author": "Bishop,ChristopherM／著 元田浩／翻訳 村田昇／著 松本裕治／著 ほか",
+            "bookName": "パターン認識と機械学習 下",
+            "borrower": ["testjson"],
+            "exist": "一部発見",
+            "find": 3,
+            "genre": "研究(理論)",
+            "id": 330,
+            "imgURL": "https://cover.openbd.jp/9784431100317.jpg",
+            "locateAt4F": false,
+            "location": "unidentified",
+            "other": "なし",
+            "pubdate": "2008-07",
+            "publisher": "シュプリンガー・ジャパン",
+            "subGenre": "統計・機械学習",
+            "sum": 1,
+            "withDisc": "なし"
+          }
+        ],
+      }
+      // APIのreturnが book: {} なので.
+      const newData = normalizeData(testjson.book);
+      const result = { ...newData, maxBooks: maxBooks };
       dispatch(fetchBookLists.done({ params: { pageIndex: 0 }, result }));
     } catch (error) {
       console.log(`Error fetcing in getBookLists: ${error}`);
@@ -130,18 +164,10 @@ export const BorrowButton = (props: BorrowButtonProps) => {
   return (
     <div className={styles.BorrowButtonWrapper}> 
       <button
-      type="button"
-      aria-label="Submit"
-      //   onKeyDown={e => (e.key === "Enter" ? handleClick : null)}
-      onClick={borrower != "" ? showModal: undefined }
-      className={styles.BorrowButton}
-      //   className={cx(
-      //     styles.IconRect,
-      //     styles.SearchIcon,
-      //     styles.IconButton,
-      //     styles.DefaultSearchBoxColor,
-      //     className!.map(c => styles[c])
-      //   )}
+        type="button"
+        aria-label="Submit"
+        onClick={borrower != "" ? showModal: undefined }
+        className={styles.BorrowButton}
       >{buttonName}</button>
     </div>
   );
