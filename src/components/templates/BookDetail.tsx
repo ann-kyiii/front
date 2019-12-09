@@ -9,14 +9,19 @@ import LoadData from "../../components/organisms/rena/Function/LoadData";
 import style from "./BookDetail.module.css";
 import { RootState } from "../../reducers";
 import { isEmpty, get } from "lodash";
-import { normalize, schema } from "normalizr";
-import fetchBookLists, {
-  BookLists,
-  BooksState
-} from "../../actions/resultlists";
 import cx from "classnames";
 
 import  imgError  from "../organisms/rena/noImageAvailable.svg";
+
+const ButtonAbleDisable = (props: any) => {
+  const {abled, classname, onclick, text, nextLink} = props;
+
+  if (abled){
+    return (<><button  className={classname} onClick={(e)=>onclick(e, nextLink)}>{text}</button> </>);
+  }else{
+    return (<><button  className={classname} onClick={(e)=>onclick(e, nextLink)} disabled>{text}</button> </>);
+  }
+}
 
 export const BookDetail = ({history}: AppProps) => {
   // var 
@@ -24,33 +29,11 @@ export const BookDetail = ({history}: AppProps) => {
   let [imgURL, setImgURL] = useState(undefined); 
 
   // function
-  const handleClickBorrow = useCallback((e: React.MouseEvent<HTMLButtonElement>, id: number) => {
-    var nextLink = ("/Borrow/"+id);
+  const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>, nextLink:string) => {
     // dispatch(push(nextLink));
     history.push(nextLink);
   }, []);
   
-  // function
-  const handleClickReturn = useCallback((e: React.MouseEvent<HTMLButtonElement>, id: number) => {
-    var nextLink = ("/Return/"+id);
-    // dispatch(push(nextLink));
-    history.push(nextLink);
-  }, []);
-  
-  // function
-  const handleClickReview = useCallback((e: React.MouseEvent<HTMLButtonElement>, id: number) => {
-    var nextLink = ("/Review/"+id);
-    // dispatch(push(nextLink));
-    history.push(nextLink);
-  }, []);
-
-  // function
-  const handleClickHome = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    var nextLink = ("/");
-    // dispatch(push(nextLink));
-    history.push(nextLink);
-  }, []);
-   
   const dispatch = useDispatch();
   
   const path = useSelector((state: RootState) =>
@@ -92,7 +75,17 @@ export const BookDetail = ({history}: AppProps) => {
 
     // borrowr計算
     const stockN = data.find - (data.borrower).length;
-    
+    // const stockN=0;
+    let borrow_abled = false;
+    let return_abled = false;
+    if (stockN>0){
+      borrow_abled = true;
+    }
+    // if ((data.find - stockN)>0){
+    if ((data.borrower).length>0){
+      return_abled = true;
+    }
+        
     if (!imgURL){
       setImgURL(data.imgURL);
     }
@@ -119,20 +112,26 @@ export const BookDetail = ({history}: AppProps) => {
           </div>
             
           <div className={style.buttonsBlock} >
-            <div className={style.borrow} >
-              <button  className={cx(
-                style.button,
-                style.buttonColor1)} onClick={(e) => handleClickBorrow(e, bookID)}>Borrow</button>
+            <div className={style.borrow} >                
+              <ButtonAbleDisable abled={borrow_abled} 
+                nextLink={"/Borrow/"+bookID}
+                classname={cx(style.button, style.buttonColor1)} 
+                onclick={handleClick} 
+                text="Borrow"></ButtonAbleDisable>  
             </div>
             <div className={style.return}>
-              <button  className={cx(
-                style.button,
-                style.buttonColor2)} onClick={(e) => handleClickReturn(e, bookID)}>Return</button>
+              <ButtonAbleDisable abled={return_abled} 
+                nextLink={"/Return/"+bookID}
+                classname={cx(style.button, style.buttonColor2)} 
+                onclick={handleClick} 
+                text="Return"></ButtonAbleDisable> 
             </div>
-            <div className={style.review}>
-              <button  className={cx(
-                style.button,
-                style.buttonColor3)} onClick={(e) => handleClickReview(e, bookID)}>Review</button>
+            <div className={style.review}>      
+              <ButtonAbleDisable abled={false} 
+                nextLink={"/Review/"+bookID}
+                classname={cx(style.button, style.buttonColor3)} 
+                onclick={handleClick} 
+                text="Review"></ButtonAbleDisable>                
             </div>
           </div>          
           

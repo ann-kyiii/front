@@ -9,6 +9,7 @@ import fetchBookLists, {
   BookLists,
   BooksState
 } from "../../../../actions/resultlists";
+import { type } from "os";
 
 type Props = AppProps&{
   bookID: number;
@@ -34,69 +35,31 @@ export const LoadData = (props: Props) => {
 
   const dispatch = useDispatch();
         
-  
-  // dummy data を reduxに
   if (dummy){
-
-    const page = 1; 
-    dispatch(fetchBookLists.started({ pageIndex: page }));
-    
-    // ダミーデータ追加分
-    const json = { books: [
-      {
-        "ISBN": "9784274218026",
-        "author": "伊庭斉志／著",
-        "bookName": "進化計算と深層学習 創発する知能",
-        "borrower": [],
-        "exist": "〇",
-        "find": 3,
-        "genre": "研究(理論)",
-        "id": 309,
-        "imgURL": "unidentified",
-        "locateAt4F": false,
-        "location": "unidentified",
-        "other": "なし",
-        "pubdate": "20151021",
-        "publisher": "株式会社オーム社",
-        "subGenre": "ニューラルネットワーク",
-        "sum": 3,
-        "withDisc": "なし"
-      },
-      {
-        "ISBN": "9784061529243",
-        "author": "坪井祐太／著 海野裕也／著 鈴木潤／著",
-        "bookName": "深層学習による自然言語処理",
-        "borrower": [],
-        "exist": "一部発見",
-        "find": 1,
-        "genre": "研究(応用)",
-        "id": 395,
-        "imgURL": "https:\\/\\/cover.openbd.jp\\/9784061529243.jpg",
-        "locateAt4F": false,
-        "location": "unidentified",
-        "other": "なし",
-        "pubdate": "20170525",
-        "publisher": "講談社サイエンティフィク",
-        "subGenre": "自然言語処理",
-        "sum": 2,
-        "withDisc": "なし"
-      }
-    ], }
-
-    
-    // storeに格納
-    const newData = normalizeData(json.books);
-    // dispatch(fetchBookLists.done({ result: newData }));
-    const result = { ...newData, maxBooks: 2 };
-    // const result = { ...newData, maxBooks: json.max_books };
-    dispatch(fetchBookLists.done({ params: { pageIndex: page }, result }));
+    // fetch('http://localhost:3000/dummyData.json')
+    fetch(process.env.REACT_APP_DEV_HOST+"/dummyData.json")
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(json) {
+      const page = 0;
+      dispatch(fetchBookLists.started({ pageIndex: page }));
+      const newData = normalizeData(json.books);     
+      const result = { ...newData, maxBooks: json.max_books };
+      dispatch(fetchBookLists.done({ params: { pageIndex: page }, result }));
+    });
   }else{
-    // ↓　あとで考える
-    // const data = fetch(`${process.env.REACT_APP_API_HOST}/bookId/1`, {
-    //   method: "GET",
+    console.log("not dummy 後で考える");
+
+    // console.log(process.env.REACT_APP_API_HOST);
+    // fetch(`http://34.82.110.129:1313/api/v1/bookID/1`, {method: "GET"})
+    // .then(function(response) {
+    //   console.log(response.json());
     // });
-    // console.log("=== api test ===");
-    // console.log(data);
+  
+    // const data = ; 
+    // console.log(fetch(`http://34.82.110.129:1313/api/v1/bookID/30`, {method: "GET"}));
+
   }
 
   return true;
