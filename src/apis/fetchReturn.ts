@@ -1,10 +1,10 @@
 type FetchReturnPayload = {
-    id: number;
+    id: string;
     name: string;
   };
   
   export const fetchReturn = (payload: FetchReturnPayload) => {
-    return fetch(`${process.env.REACT_APP_API_HOST}/return/`, {
+    return fetch(`${process.env.REACT_APP_API_HOST}/return`, {
       method: "POST",
       mode: "cors",
       headers: {
