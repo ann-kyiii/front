@@ -38,46 +38,22 @@ export const Return = ({ history }: AppProps) =>  {
     return { booksTable, booksIdList };
   };
 
+  //Debug
   const getBookLists = async (page: number) => {
     try {
       dispatch(fetchBookLists.started({ pageIndex: page }));
       // const response = await fetchSearch(payload);
-      const testJson = {
-        "books": [
-          {
-            "ISBN": "9784274218026",
-            "author": "伊庭斉志／著",
-            "bookName": "進化計算と深層学習 創発する知能",
-            "borrower": ["taro", "hanako"],
-            "exist": "〇",
-            "find": 3,
-            "genre": "研究(理論)",
-            "id": 309,
-            "imgURL": "unidentified",
-            "locateAt4F": false,
-            "location": "unidentified",
-            "other": "なし",
-            "pubdate": "20151021",
-            "publisher": "株式会社オーム社",
-            "subGenre": "ニューラルネットワーク",
-            "sum": 3,
-            "withDisc": "なし"
-          }
-        ],
-        "max_books": 1
+      const response = await fetch("http://localhost:3000/dummyData.json");
+      if (!response.ok) {
+        dispatch(
+          fetchBookLists.failed({
+            params: { pageIndex: page },
+            error: { statusCode: response.status }
+          })
+        );
+        return;
       }
-      // const response = await fetch("http://localhost:3000/dummyData.json");
-      // if (!response.ok) {
-      //   dispatch(
-      //     fetchBookLists.failed({
-      //       params: { pageIndex: page },
-      //       error: { statusCode: response.status }
-      //     })
-      //   );
-      //   return;
-      // }
-      // const json = await response.json();
-      const json = testJson;
+      const json = await response.json();
       // APIのreturnが books: {} なので.
       const newData = normalizeData(json.books);
       const result = { ...newData, maxBooks: json.max_books };
@@ -87,11 +63,10 @@ export const Return = ({ history }: AppProps) =>  {
     }
   };
 
-  const id = 280;
   //1冊の情報だけ取得する
   const getOneBook = async () => {
     const payload = {
-      id: id,
+      id: bookId,
     };
     try {
       dispatch(fetchBookLists.started({ pageIndex: 0 }));
@@ -106,12 +81,35 @@ export const Return = ({ history }: AppProps) =>  {
         );
         return;
       }
-      const json = await response.json();
+      // const json = await response.json();
+      const json = {
+        "book": [
+          {
+            "ISBN": "9784431100317",
+            "author": "Bishop,ChristopherM／著 元田浩／翻訳 村田昇／著 松本裕治／著 ほか",
+            "bookName": "パターン認識と機械学習 下",
+            "borrower": ["testjson"],
+            "exist": "一部発見",
+            "find": 3,
+            "genre": "研究(理論)",
+            "id": 330,
+            "imgURL": "https://cover.openbd.jp/9784431100317.jpg",
+            "locateAt4F": false,
+            "location": "unidentified",
+            "other": "なし",
+            "pubdate": "2008-07",
+            "publisher": "シュプリンガー・ジャパン",
+            "subGenre": "統計・機械学習",
+            "sum": 1,
+            "withDisc": "なし"
+          }
+        ],
+      }
 
       // APIのreturnが books: {} なので.
-      const newData = normalizeData(json.books);
+      const newData = normalizeData(json.book);
       console.log(newData);
-      const result = { ...newData, maxBooks: json.max_books };
+      const result = { ...newData, maxBooks: maxBooks };
       dispatch(fetchBookLists.done({ params: { pageIndex: 0 }, result }));
     } catch (error) {
       console.log(`Error fetcing in getBookLists: ${error}`);
@@ -135,12 +133,12 @@ export const Return = ({ history }: AppProps) =>  {
   
   useEffect(() => {
     if(maxBooks == 0){
-      getBookLists(0);
+      // getBookLists(0);
       console.log("maxBooks == 0");
 
-    // getOneBook();
+      getOneBook();
     }else{
-      console.log("booksTable is not undefined");
+      console.log("booksTable is defined");
     }
   }, []);
 
