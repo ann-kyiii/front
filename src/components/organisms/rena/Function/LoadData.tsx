@@ -7,7 +7,7 @@ import { isEmpty, get } from "lodash";
 import { normalize, schema } from "normalizr";
 import fetchBookLists, {
   BookLists,
-  BooksState
+  BooksState,
 } from "../../../../actions/resultlists";
 import { type } from "os";
 
@@ -42,23 +42,47 @@ export const LoadData = (props: Props) => {
       return response.json();
     })
     .then(function(json) {
-      const page = 0;
+      console.log(json);
+      const page = 1;
       dispatch(fetchBookLists.started({ pageIndex: page }));
-      const newData = normalizeData(json.books);     
+      const newData = normalizeData(json.books);   
+      console.log(newData);  
       const result = { ...newData, maxBooks: json.max_books };
       dispatch(fetchBookLists.done({ params: { pageIndex: page }, result }));
     });
   }else{
-    console.log("not dummy 後で考える");
-
-    // console.log(process.env.REACT_APP_API_HOST);
-    // fetch(`http://34.82.110.129:1313/api/v1/bookID/1`, {method: "GET"})
-    // .then(function(response) {
-    //   console.log(response.json());
-    // });
-  
-    // const data = ; 
-    // console.log(fetch(`http://34.82.110.129:1313/api/v1/bookID/30`, {method: "GET"}));
+    // fetch("http://34.82.110.129:1313/api/v1/bookId/"+bookID)
+    fetch(process.env.REACT_APP_API_HOST+"/bookId/"+bookID)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(pre_json) {      
+      type BookInfo = {
+        id: number;
+        bookName: string;
+        genre: string;
+        subGenre: string;
+        ISBN: string;
+        find: number;
+        sum: number;
+        author: string;
+        publisher: string;
+        pubdate: string;
+        exist: string;
+        locateAt4F?: boolean;
+        withDisc: string;
+        other: string;
+        borrower: string[];
+        location: string;
+      };
+      const pre_json2 : BookInfo[] = [pre_json];
+      const json = {books:pre_json2, max_books:1};
+      const page = 0;
+      dispatch(fetchBookLists.started({ pageIndex: page }));
+      const newData = normalizeData(json.books);   
+      const result = { ...newData, maxBooks: json.max_books };
+      dispatch(fetchBookLists.done({ params: { pageIndex: page }, result }));
+    });
 
   }
 
