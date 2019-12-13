@@ -13,6 +13,8 @@ import cx from "classnames";
 
 import  imgError  from "../organisms/rena/noImageAvailable.svg";
 
+const dummy: boolean = true;
+
 const ButtonAbleDisable = (props: any) => {
   const {abled, classname, onclick, text, nextLink} = props;
 
@@ -59,8 +61,6 @@ export const BookDetail = ({history}: AppProps) => {
   
   // 対象の本の情報がreduxにない ⇒ 対象の本だけ取得 (getでid指定で)
   if (!storeBookData){
-
-    const dummy: boolean = true;
     
     LoadData({history, bookID, dummy});
 
