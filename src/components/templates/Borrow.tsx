@@ -42,53 +42,53 @@ export const Borrow = ({ history }: AppProps) =>  {
   };
 
   //Debug
-  const getBookLists = async (page: number) => {
-    try {
-      dispatch(fetchBookLists.started({ pageIndex: page }));
-      // const response = await fetchSearch(payload);
-      const response = await fetch("http://localhost:3000/dummyData.json");
-      if (!response.ok) {
-        dispatch(
-          fetchBookLists.failed({
-            params: { pageIndex: page },
-            error: { statusCode: response.status }
-          })
-        );
-        return;
-      }
-      const json = await response.json();
-      const testjson = {
-        "book": [
-          {
-            "ISBN": "9784274218026",
-            "author": "伊庭斉志／著",
-            "bookName": "進化計算と深層学習 創発する知能",
-            "borrower": ["testJson"],
-            "exist": "〇",
-            "find": 3,
-            "genre": "研究(理論)",
-            "id": 309,
-            "imgURL": "unidentified",
-            "locateAt4F": false,
-            "location": "unidentified",
-            "other": "なし",
-            "pubdate": "20151021",
-            "publisher": "株式会社オーム社",
-            "subGenre": "ニューラルネットワーク",
-            "sum": 3,
-            "withDisc": "なし"
-          }
-        ],
-      }
-      // APIのreturnが books: {} なので.
-      const newData = normalizeData(json.books);
-      console.log(newData);
-      const result = { ...newData, maxBooks: json.max_books };
-      dispatch(fetchBookLists.done({ params: { pageIndex: page }, result }));
-    } catch (error) {
-      console.log(`Error fetcing in getBookLists: ${error}`);
-    }
-  };
+  // const getBookLists = async (page: number) => {
+  //   try {
+  //     dispatch(fetchBookLists.started({ pageIndex: page }));
+  //     // const response = await fetchSearch(payload);
+  //     const response = await fetch("http://localhost:3000/dummyData.json");
+  //     if (!response.ok) {
+  //       dispatch(
+  //         fetchBookLists.failed({
+  //           params: { pageIndex: page },
+  //           error: { statusCode: response.status }
+  //         })
+  //       );
+  //       return;
+  //     }
+  //     const json = await response.json();
+  //     const testjson = {
+  //       "book": [
+  //         {
+  //           "ISBN": "9784274218026",
+  //           "author": "伊庭斉志／著",
+  //           "bookName": "進化計算と深層学習 創発する知能",
+  //           "borrower": ["testJson"],
+  //           "exist": "〇",
+  //           "find": 3,
+  //           "genre": "研究(理論)",
+  //           "id": 309,
+  //           "imgURL": "unidentified",
+  //           "locateAt4F": false,
+  //           "location": "unidentified",
+  //           "other": "なし",
+  //           "pubdate": "20151021",
+  //           "publisher": "株式会社オーム社",
+  //           "subGenre": "ニューラルネットワーク",
+  //           "sum": 3,
+  //           "withDisc": "なし"
+  //         }
+  //       ],
+  //     }
+  //     // APIのreturnが books: {} なので.
+  //     const newData = normalizeData(json.books);
+  //     console.log(newData);
+  //     const result = { ...newData, maxBooks: json.max_books };
+  //     dispatch(fetchBookLists.done({ params: { pageIndex: page }, result }));
+  //   } catch (error) {
+  //     console.log(`Error fetcing in getBookLists: ${error}`);
+  //   }
+  // };
 
   //1冊の情報だけ取得する
   const getOneBook = async () => {
@@ -97,8 +97,8 @@ export const Borrow = ({ history }: AppProps) =>  {
     };
     try {
       dispatch(fetchBookLists.started({ pageIndex: 0 }));
-      // const response = await fetchBookId(payload);
-      const response = await fetch("http://localhost:3000/dummyData.json");
+      const response = await fetchBookId(payload);
+      // const response = await fetch("http://localhost:3000/dummyData.json");
       if (!response.ok) {
         dispatch(
           fetchBookLists.failed({
@@ -108,34 +108,59 @@ export const Borrow = ({ history }: AppProps) =>  {
         );
         return;
       }
-      // const json = await response.json();
-      const json = {
-        "book": [
-          {
-            "ISBN": "9784431100317",
-            "author": "Bishop,ChristopherM／著 元田浩／翻訳 村田昇／著 松本裕治／著 ほか",
-            "bookName": "パターン認識と機械学習 下",
-            "borrower": ["testjson"],
-            "exist": "一部発見",
-            "find": 3,
-            "genre": "研究(理論)",
-            "id": 330,
-            "imgURL": "https://cover.openbd.jp/9784431100317.jpg",
-            "locateAt4F": false,
-            "location": "unidentified",
-            "other": "なし",
-            "pubdate": "2008-07",
-            "publisher": "シュプリンガー・ジャパン",
-            "subGenre": "統計・機械学習",
-            "sum": 1,
-            "withDisc": "なし"
-          }
-        ],
-      }
+      const json = await response.json();
+      // const json = {
+      //   "book": [
+      //     {
+      //       "ISBN": "9784431100317",
+      //       "author": "Bishop,ChristopherM／著 元田浩／翻訳 村田昇／著 松本裕治／著 ほか",
+      //       "bookName": "パターン認識と機械学習 下",
+      //       "borrower": ["testjson"],
+      //       "exist": "一部発見",
+      //       "find": 3,
+      //       "genre": "研究(理論)",
+      //       "id": 330,
+      //       "imgURL": "https://cover.openbd.jp/9784431100317.jpg",
+      //       "locateAt4F": false,
+      //       "location": "unidentified",
+      //       "other": "なし",
+      //       "pubdate": "2008-07",
+      //       "publisher": "シュプリンガー・ジャパン",
+      //       "subGenre": "統計・機械学習",
+      //       "sum": 1,
+      //       "withDisc": "なし"
+      //     }
+      //   ],
+      // }
+      // const json = {
+      //   ISBN: "9784431100317",
+      //   author:
+      //     "Bishop,ChristopherM／著 元田浩／翻訳 村田昇／著 松本裕治／著 ほか",
+      //   bookName: "パターン認識と機械学習 下",
+      //   borrower: ["testjson"],
+      //   exist: "一部発見",
+      //   find: 3,
+      //   genre: "研究(理論)",
+      //   id: 330,
+      //   imgURL: "https://cover.openbd.jp/9784431100317.jpg",
+      //   locateAt4F: false,
+      //   location: "unidentified",
+      //   other: "なし",
+      //   pubdate: "2008-07",
+      //   publisher: "シュプリンガー・ジャパン",
+      //   subGenre: "統計・機械学習",
+      //   sum: 1,
+      //   withDisc: "なし"
+      // };
       console.log(json);
 
       // APIのreturnが books: {} なので.
-      const newData = normalizeData(json.book);
+      // const newData = normalizeData(json.book);
+      const newData = {
+        booksTable: { [json.id]: json },
+        booksIdList: [json.id]
+      };
+      console.log("#######################");
       console.log(newData);
       const result = { ...newData, maxBooks: maxBooks };
       dispatch(fetchBookLists.done({ params: { pageIndex: 0 }, result }));

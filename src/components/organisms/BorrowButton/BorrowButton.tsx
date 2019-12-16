@@ -92,8 +92,8 @@ export const BorrowButton = (props: BorrowButtonProps) => {
     };
     try {
       dispatch(fetchBookLists.started({ pageIndex: 0 }));
-      // const response = await fetchBorrow(payload);
-      const response = await fetch("http://localhost:3000/dummyData.json");
+      const response = await fetchBorrow(payload);
+      // const response = await fetch("http://localhost:3000/dummyData.json");
       if (!response.ok) {
         dispatch(
           fetchBookLists.failed({
@@ -105,31 +105,37 @@ export const BorrowButton = (props: BorrowButtonProps) => {
       }
       const json = await response.json();
       // デバッグ用
-      const testjson = {
-        "book": [
-          {
-            "ISBN": "9784431100317",
-            "author": "Bishop,ChristopherM／著 元田浩／翻訳 村田昇／著 松本裕治／著 ほか",
-            "bookName": "パターン認識と機械学習 下",
-            "borrower": ["testjson"],
-            "exist": "一部発見",
-            "find": 3,
-            "genre": "研究(理論)",
-            "id": 330,
-            "imgURL": "https://cover.openbd.jp/9784431100317.jpg",
-            "locateAt4F": false,
-            "location": "unidentified",
-            "other": "なし",
-            "pubdate": "2008-07",
-            "publisher": "シュプリンガー・ジャパン",
-            "subGenre": "統計・機械学習",
-            "sum": 1,
-            "withDisc": "なし"
-          }
-        ],
-      }
+      // const testjson = {
+      //   "book": [
+      //     {
+      //       "ISBN": "9784431100317",
+      //       "author": "Bishop,ChristopherM／著 元田浩／翻訳 村田昇／著 松本裕治／著 ほか",
+      //       "bookName": "パターン認識と機械学習 下",
+      //       "borrower": ["testjson"],
+      //       "exist": "一部発見",
+      //       "find": 3,
+      //       "genre": "研究(理論)",
+      //       "id": 330,
+      //       "imgURL": "https://cover.openbd.jp/9784431100317.jpg",
+      //       "locateAt4F": false,
+      //       "location": "unidentified",
+      //       "other": "なし",
+      //       "pubdate": "2008-07",
+      //       "publisher": "シュプリンガー・ジャパン",
+      //       "subGenre": "統計・機械学習",
+      //       "sum": 1,
+      //       "withDisc": "なし"
+      //     }
+      //   ],
+      // }
       // APIのreturnが book: {} なので.
-      const newData = normalizeData(testjson.book);
+      // const newData = normalizeData(json.book);
+      const newData = {
+        booksTable: { [json.id]: json },
+        booksIdList: [] //ここでjson.idを追加してしまうと同じidが存在してしまう
+      };
+      console.log("#######################");
+      console.log(newData);
       const result = { ...newData, maxBooks: maxBooks };
       dispatch(fetchBookLists.done({ params: { pageIndex: 0 }, result }));
     } catch (error) {
