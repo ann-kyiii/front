@@ -34,6 +34,12 @@ export const LoadData = (props: Props) => {
   };
 
   const dispatch = useDispatch();
+
+  if (bookID<0){
+    return;
+  }
+
+  console.log(process.env.REACT_APP_DEV_HOST);
         
   if (dummy){
     // fetch('http://localhost:3000/dummyData.json')
@@ -56,7 +62,7 @@ export const LoadData = (props: Props) => {
     .then(function(response) {
       return response.json();
     })
-    .then(function(pre_json) {      
+    .then(function(pre_json) {    
       type BookInfo = {
         id: number;
         bookName: string;
@@ -75,11 +81,11 @@ export const LoadData = (props: Props) => {
         borrower: string[];
         location: string;
       };
-      const pre_json2 : BookInfo[] = [pre_json];
+      const pre_json2 : BookInfo = pre_json;
       const json = {books:pre_json2, max_books:1};
       const page = 0;
-      dispatch(fetchBookLists.started({ pageIndex: page }));
-      const newData = normalizeData(json.books);   
+      dispatch(fetchBookLists.started({ pageIndex: page })); 
+      const newData = normalizeData([json.books]);   
       const result = { ...newData, maxBooks: json.max_books };
       dispatch(fetchBookLists.done({ params: { pageIndex: page }, result }));
     });
