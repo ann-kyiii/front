@@ -1,10 +1,8 @@
 import React, { Children } from "react";
-import cx from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { useModal } from "react-modal-hook";
 import { get } from "lodash";
-import { normalize, schema } from "normalizr";
 import { AppProps } from "../../../App";
 import styles from "./BorrowButton.module.css";
 import fetchBookLists, {
@@ -34,56 +32,6 @@ export const BorrowButton = (props: BorrowButtonProps) => {
     maxBooks
   } = useSelector((state: BooksState) => get(state, ["books"]));
 
-  // const testJson = { books: [
-  //   {
-  //   ISBN:"9784061529014",
-  //   author:"杉山将／著",
-  //   bookName:"機械学習のための確率と統計",
-  //   borrower: [],
-  //   exist:"一部発見",
-  //   find:3,
-  //   genre:"研究(理論)",
-  //   id:278,
-  //   location:"unidentified",
-  //   other:"なし",
-  //   pubdate:"20150408",
-  //   publisher:"講談社サイエンティフィク",
-  //   subGenre:"統計・機械学習",
-  //   sum:6,
-  //   withDisc:"なし",
-  //   },
-  //   {
-  //   ISBN:"9784061529021",
-  //   author:"岡谷貴之／著",
-  //   bookName:"深層学習",
-  //   borrower: [],
-  //   exist:"一部発見",
-  //   find:1,
-  //   genre:"研究(理論)",
-  //   id:279,
-  //   location:"unidentified",
-  //   other:"なし",
-  //   pubdate:"20150408",
-  //   publisher:"講談社サイエンティフィク",
-  //   subGenre:"ニューラルネットワーク",
-  //   sum:2,
-  //   withDisc:"なし",
-  //   },
-  //   ] }
-
-  const normalizeData = (
-    data: BookLists
-  ): Pick<BooksState, "booksTable" | "booksIdList"> => {
-    const booksSchema = new schema.Entity("books", {}, { idAttribute: "id" });
-    const booksTable = get(normalize(data, [booksSchema]), [
-      "entities",
-      "books"
-    ]);
-    console.log("booksTable", booksTable);
-    const booksIdList = get(normalize(data, [booksSchema]), ["result"]);
-    return { booksTable, booksIdList };
-  };
-
   // サーバにidと名前を送り，redux更新
   const sendBorrowerName = async () => {  
     const payload = {
@@ -104,32 +52,6 @@ export const BorrowButton = (props: BorrowButtonProps) => {
         return;
       }
       const json = await response.json();
-      // デバッグ用
-      // const testjson = {
-      //   "book": [
-      //     {
-      //       "ISBN": "9784431100317",
-      //       "author": "Bishop,ChristopherM／著 元田浩／翻訳 村田昇／著 松本裕治／著 ほか",
-      //       "bookName": "パターン認識と機械学習 下",
-      //       "borrower": ["testjson"],
-      //       "exist": "一部発見",
-      //       "find": 3,
-      //       "genre": "研究(理論)",
-      //       "id": 330,
-      //       "imgURL": "https://cover.openbd.jp/9784431100317.jpg",
-      //       "locateAt4F": false,
-      //       "location": "unidentified",
-      //       "other": "なし",
-      //       "pubdate": "2008-07",
-      //       "publisher": "シュプリンガー・ジャパン",
-      //       "subGenre": "統計・機械学習",
-      //       "sum": 1,
-      //       "withDisc": "なし"
-      //     }
-      //   ],
-      // }
-      // APIのreturnが book: {} なので.
-      // const newData = normalizeData(json.book);
       const newData = {
         booksTable: { [json.id]: json },
         booksIdList: [] //ここでjson.idを追加してしまうと同じidが存在してしまう
@@ -178,9 +100,5 @@ export const BorrowButton = (props: BorrowButtonProps) => {
     </div>
   );
 };
-
-// BorrowButton.defaultProps = {
-//   className: [""]
-// };
 
 export default BorrowButton;
