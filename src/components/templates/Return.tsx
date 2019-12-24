@@ -12,6 +12,7 @@ import fetchBookLists, {
 // import BookName from "../molecules/BookName"
 import ReturnButton from "../organisms/ReturnButton"
 import fetchBookId from "../../apis/fetchBookId";
+import Full from "../../components/organisms/rena/Position/Full";
 
 import { ModalProvider, useModal } from "react-modal-hook";
 
@@ -161,7 +162,7 @@ export const Return = ({ history }: AppProps) =>  {
     );
   }else{
     return (
-      <div>error</div>
+      <Full history={history} objKey="loadError"  backLink="/" text="Failed to find the book" buttonName="Home"/>
     );
   }
 };

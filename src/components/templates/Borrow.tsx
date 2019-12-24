@@ -15,6 +15,7 @@ import fetchBookLists, {
 } from "../../actions/resultlists";
 import fetchBookId from "../../apis/fetchBookId";
 import { ModalProvider, useModal } from "react-modal-hook";
+import Full from "../../components/organisms/rena/Position/Full";
 
 export const Borrow = ({ history }: AppProps) =>  {
   const [borrower, setBorrower] = useState<string>("");
@@ -220,7 +221,7 @@ export const Borrow = ({ history }: AppProps) =>  {
       );
     }else{
       return (
-        <div>error</div>
+        <Full history={history} objKey="loadError"  backLink="/" text="Failed to find the book" buttonName="Home"/>
       );
   }
 };
