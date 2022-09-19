@@ -1,0 +1,6 @@
+.ResultCount {
+    margin: 10px;
+    width: 90vw;
+    display: flex;
+    justify-content: flex-end;
+}

@@ -1,0 +1,34 @@
+.PageNatiorWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.PageNatiorULWrapper {
+    display: flex;
+}
+
+.ListButton {
+    /* margin: 5px; */
+    padding: 0 0.7em;
+    margin: 0.3em 0.3em;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--font-color-gray);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    transition: 0.3s ease-in;
+    transition-property: background-color;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.ListButton:hover:not(.isSelected),
+.ListButton:focus:not(.isSelected) {
+    background-color: var(--focus-background);
+}
+
+.isSelected {
+    color: black;
+}
