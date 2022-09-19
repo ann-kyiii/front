@@ -4,7 +4,7 @@ import { AppProps } from "../../../../../App";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import Arrow from "../../../../atoms/Arrow";
-import { Module } from "history";
+// import { Module } from "history";
 
 // padding(15px,10px,0) = headerに置きたいobjectは wh(15,10)から配置される
 
@@ -14,7 +14,7 @@ type HeaderProps = AppProps & {
 };
 
 export const Header = (props: HeaderProps) => {
-  
+
   const { history, backLink, backButton } = props;
   const dispatch = useDispatch();
 
@@ -22,11 +22,12 @@ export const Header = (props: HeaderProps) => {
   const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(push(backLink));
     history.push(backLink);
+  // eslint-disable-next-line
   }, []);
 
   // バックボタン付き
-  if (backButton){   
-    
+  if (backButton){
+
     return (
       <header className={style.Heading}>
         <Arrow handleClick={handleClick} />

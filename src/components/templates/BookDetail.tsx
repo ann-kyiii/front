@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { push } from "connected-react-router";
+import {
+  // useDispatch,
+  useSelector
+} from "react-redux";
+// import { push } from "connected-react-router";
 import { AppProps } from "../../App";
 // import Header from "../organisms/Header";
 import Header from "../../components/organisms/rena/Position/Header";
@@ -8,12 +11,15 @@ import Full from "../../components/organisms/rena/Position/Full";
 import LoadData from "../../components/organisms/rena/Function/LoadData";
 import style from "./BookDetail.module.css";
 import { RootState } from "../../reducers";
-import { isEmpty, get } from "lodash";
+import {
+  // isEmpty,
+  get
+} from "lodash";
 import cx from "classnames";
 
 import  imgError  from "../organisms/rena/noImageAvailable.svg";
 
-const dummy: boolean = false;
+const dummy: boolean = true;
 
 const ButtonAbleDisable = (props: any) => {
   const {abled, classname, onclick, text, nextLink} = props;
@@ -26,51 +32,54 @@ const ButtonAbleDisable = (props: any) => {
 }
 
 export const BookDetail = ({history}: AppProps) => {
-  // var 
+  console.dir(history);
+  // var
   let [bookID, setBookID] = useState(-1);
-  let [imgURL, setImgURL] = useState(undefined); 
+  let [imgURL, setImgURL] = useState(undefined);
 
   // function
   const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>, nextLink:string) => {
     // dispatch(push(nextLink));
     history.push(nextLink);
+  // eslint-disable-next-line
   }, []);
-  
-  const dispatch = useDispatch();
-  
+
+  // const dispatch = useDispatch();
+
   const path = useSelector((state: RootState) =>
     get(state, ["router", "location", "pathname"])
-  );  
-    
+  );
+
   // storeのデータ取得
   const storeBookData = useSelector((state: RootState) =>
     get(state, ["books","booksTable",bookID])
   );
-  
+
   const arg =  (path.split("/")).slice(-1)[0];
 
   // book-detail/id になっているか
-  if (!(new RegExp(/^[0-9]+$/)).test(arg)){  
+  if (!(new RegExp(/^[0-9]+$/)).test(arg)){
     return (
         <Full history={history} objKey="loadError"  backLink="/" text="Failed to read BookID" buttonName="Home"/>
-      ); 
+      );
   }
   if (bookID<0){
     setBookID(parseInt(arg));
   }
-  
+
   // 対象の本の情報がreduxにない ⇒ 対象の本だけ取得 (getでid指定で)
   if (!storeBookData){
-    
-    LoadData({history, bookID, dummy});
 
-    // 一回目のrenderはこっち    
+    // LoadData({history, bookID, dummy});
+    LoadData({bookID, dummy});
+
+    // 一回目のrenderはこっち
     return (
       <Full history={history} objKey="loadError"  backLink="/" text="Failed to find the book" buttonName="Home"/>
-      ); 
-  
+      );
+
   }else{
-    
+
     const data = storeBookData;
 
     // borrowr計算
@@ -85,7 +94,7 @@ export const BookDetail = ({history}: AppProps) => {
     if ((data.borrower).length>0){
       return_abled = true;
     }
-        
+
     if (!imgURL){
       setImgURL(data.imgURL);
     }
@@ -98,9 +107,13 @@ export const BookDetail = ({history}: AppProps) => {
 
           <div className={style.main} >
             <div className={style.bookTytle}>{data.bookName}</div>
-            <div className={style.bookImageBrock}><img src={imgURL} 
-              className={cx(style.image,{[style.image_error]: imgURL!=data.imgURL,
-            })} onError={(e) => setImgURL(imgError)}/></div>
+            <div className={style.bookImageBrock}>
+              <img src={imgURL}
+                className={cx(style.image,{[style.image_error]: imgURL !== data.imgURL,
+                })} onError={(e) => setImgURL(imgError)}
+                alt="book title"
+              />
+            </div>
             <div className={style.contents}>
               <p className={style.itemName}>著者：</p><p className={style.item}>{data.author}</p>
               <p className={style.itemName}>出版社：</p><p className={style.item}>{data.publisher} ({data.pubdate})</p>
@@ -110,38 +123,38 @@ export const BookDetail = ({history}: AppProps) => {
               <p className={style.itemName}>在庫数：</p><p className={style.item}>{stockN} / {data.find}</p>
             </div>
           </div>
-            
+
           <div className={style.buttonsBlock} >
-            <div className={style.borrow} >                
-              <ButtonAbleDisable abled={borrow_abled} 
+            <div className={style.borrow} >
+              <ButtonAbleDisable abled={borrow_abled}
                 nextLink={"/Borrow/"+bookID}
-                classname={cx(style.button, style.buttonColor1)} 
-                onclick={handleClick} 
-                text="Borrow"></ButtonAbleDisable>  
+                classname={cx(style.button, style.buttonColor1)}
+                onclick={handleClick}
+                text="Borrow"></ButtonAbleDisable>
             </div>
             <div className={style.return}>
-              <ButtonAbleDisable abled={return_abled} 
+              <ButtonAbleDisable abled={return_abled}
                 nextLink={"/Return/"+bookID}
-                classname={cx(style.button, style.buttonColor2)} 
-                onclick={handleClick} 
-                text="Return"></ButtonAbleDisable> 
+                classname={cx(style.button, style.buttonColor2)}
+                onclick={handleClick}
+                text="Return"></ButtonAbleDisable>
             </div>
-            <div className={style.review}>      
-              <ButtonAbleDisable abled={false} 
+            <div className={style.review}>
+              <ButtonAbleDisable abled={false}
                 nextLink={"/Review/"+bookID}
-                classname={cx(style.button, style.buttonColor3)} 
-                onclick={handleClick} 
-                text="Review"></ButtonAbleDisable>                
+                classname={cx(style.button, style.buttonColor3)}
+                onclick={handleClick}
+                text="Review"></ButtonAbleDisable>
             </div>
-          </div>          
-          
+          </div>
+
         </div>
       </>
     )
-      
+
 
   }
-  
+
 
 };
 

@@ -1,11 +1,11 @@
-import React, { Children } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { useModal } from "react-modal-hook";
 import { AppProps } from "../../../App";
 import { get } from "lodash";
 import fetchBookLists, {
-  BookLists,
+  // BookLists,
   BooksState
 } from "../../../actions/resultlists";
 import styles from "./ReturnButton.module.css";
@@ -28,12 +28,14 @@ export const ReturnButton = (props: ReturnButtonProps) => {
     booksTable,
     booksIdList,
     statusCode,
-    successedPageIndex, 
+    successedPageIndex,
     maxBooks
   } = useSelector((state: BooksState) => get(state, ["books"]));
+    // warningもみ消し
+  console.log(className, isLoading, booksTable, booksTable, booksIdList, statusCode, successedPageIndex);
 
   // サーバにidと名前を送り，redux更新
-  const sendReturnerName = async () => {  
+  const sendReturnerName = async () => {
     const payload = {
       id: bookId.toString(),
       name: returner,
@@ -85,11 +87,11 @@ export const ReturnButton = (props: ReturnButtonProps) => {
         </div>
       </div>
     </div>
-  ), 
+  ),
   [bookTitle, returner]);
 
   return (
-    <div className={styles.ReturnButtonWrapper}> 
+    <div className={styles.ReturnButtonWrapper}>
       <button
       type="button"
       aria-label="Submit"

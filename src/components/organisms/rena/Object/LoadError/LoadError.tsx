@@ -1,5 +1,7 @@
-import React, { useCallback } from "react";
-import cx from "classnames";
+import React, {
+  // useCallback
+} from "react";
+// import cx from "classnames";
 import style from "./LoadError.module.css";
 
 type Props = {
@@ -18,7 +20,7 @@ export const LoadError = (props: Props) => {
     <div className={style.text}>{text}</div>
     <button
       type="button"
-      onClick={handleClick} 
+      onClick={handleClick}
       className={style.button}
       >{buttonName}</button>
     </>

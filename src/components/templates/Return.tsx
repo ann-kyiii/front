@@ -1,19 +1,29 @@
-import React, {useState, useCallback, useEffect} from "react";
+import React, {
+  // useState,
+  // useCallback,
+  useEffect
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppProps } from "../../App";
 import { RootState } from "../../reducers";
-import { isEmpty, get } from "lodash";
-import { normalize, schema } from "normalizr";
+import {
+  // isEmpty,
+  get
+} from "lodash";
+// import { normalize, schema } from "normalizr";
 import Header from "../organisms/Header";
 import fetchBookLists, {
-  BookLists,
+  // BookLists,
   BooksState
 } from "../../actions/resultlists";
 import ReturnButton from "../organisms/ReturnButton"
 import fetchBookId from "../../apis/fetchBookId";
 import Full from "../../components/organisms/rena/Position/Full";
 
-import { ModalProvider, useModal } from "react-modal-hook";
+import {
+  ModalProvider,
+  // useModal
+} from "react-modal-hook";
 
 export const Return = ({ history }: AppProps) =>  {
   const dispatch = useDispatch();
@@ -88,20 +98,21 @@ export const Return = ({ history }: AppProps) =>  {
     get(state, ["books", "booksTable", bookId, "borrower"])
   );
 
-  const item = list != undefined ? list.map((name, index) => 
+  const item = list !== undefined ? list.map((name, index) =>
     <ReturnButton key={index} history={history} buttonName={name} bookTitle={bookTitle} returner={name} bookId={bookId}/>
   ) : undefined;
-  
+
   useEffect(() => {
-    if(maxBooks == 0){
+    if(maxBooks === 0){
       getOneBook();
-      console.log("maxBooks == 0");
+      console.log("maxBooks === 0");
     }else{
       console.log("booksTable is defined");
     }
+  // eslint-disable-next-line
   }, []);
 
-  if(bookTitle != undefined){
+  if(bookTitle !== undefined){
     return (
       <>
         <Header history={history} backLink="/" />

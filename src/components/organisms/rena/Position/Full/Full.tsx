@@ -4,8 +4,8 @@ import { AppProps } from "../../../../../App";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import LoadError from "../../Object/LoadError";
-import { Module } from "history";
-import { url } from "inspector";
+// import { Module } from "history";
+// import { url } from "inspector";
 
 import bookImg from "../../../rena/book.svg";
 
@@ -19,7 +19,7 @@ type FullProps = AppProps & {
 };
 
 export const Full = (props: FullProps) => {
-  
+
   const { objKey, text, backLink, history, buttonName } = props;
   const dispatch = useDispatch();
 
@@ -27,6 +27,7 @@ export const Full = (props: FullProps) => {
   const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(push(backLink));
     history.push(backLink);
+  // eslint-disable-next-line
   }, []);
 
 
@@ -44,8 +45,8 @@ export const Full = (props: FullProps) => {
           </header>
         </div>
       );
-      break;
-    default:
+    //   break;
+    // default:
 
 
   }
