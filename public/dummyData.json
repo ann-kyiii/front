@@ -723,25 +723,6 @@
       "withDisc": "なし"
     },
     {
-      "ISBN": "9784893622471",
-      "author": "平野廣美／著",
-      "bookName": "C++とJavaでつくるニューラルネットワーク",
-      "borrower": [],
-      "exist": "〇",
-      "find": 1,
-      "genre": "研究(理論)",
-      "id": 385,
-      "imgURL": "https:\\/\\/cover.openbd.jp\\/9784893622471.jpg",
-      "locateAt4F": false,
-      "location": "unidentified",
-      "other": "なし",
-      "pubdate": "2008-06",
-      "publisher": "パーソナルメディア",
-      "subGenre": "ニューラルネットワーク",
-      "sum": 1,
-      "withDisc": "CD"
-    },
-    {
       "ISBN": "9784883375349",
       "author": "日向俊二／著",
       "bookName": "速効解決!逆引きハンドブック「Visual C++」 : 2005対応",
