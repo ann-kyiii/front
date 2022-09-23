@@ -1,16 +1,28 @@
  .BorrowButton {
     cursor: pointer;
-    color: #ffffff;
-    background-color: #0b413c;
-    width: 85vw;
-    height: 30px;
+    color: black;
+    /* background-color: #0b413c; */
+    background-color: transparent;
+    /* width: 85vw;
+    height: 30px; */
     font-size: 20px;
+    margin: 10px auto;
+    padding: 10px 20px;
     border: none;
     outline: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    border: solid 5px var(--app-default-blue);
+    border-radius: 3px;
+    transition: 0.3s ease-in;
+    transition-property: background-color;
   }
+
+.BorrowButton:hover,
+.BorrowButton:focus {
+  background-color: var(--focus-background);
+}
 
   .BorrowButtonWrapper {
       /* text-align: center */
@@ -22,13 +34,19 @@
     background-color: white;
     box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.24);
     height: 120px;
-    left: 10%;
+    /* left: 10%; */
     /* margin-left: -200px; */
-    margin-top: -100px;
+    /* margin-top: -100px; */
     padding: 20px;
     position: absolute;
-    top: 50%;
-    width: 70vw;
+    /* top: 50%;
+    width: 70vw; */
+    width: 350px;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 
 .wrapper {
@@ -56,11 +74,11 @@
   /* flex-wrap: wrap; */
 }
 
-.ChooseButton{
-  position: absolute;
+.ChooseButtonWrapper {
+  /* position: absolute;
   bottom: 10px;
-  right: 10px;
-    
+  right: 10px; */
+
   /* border:1px solid #888888;
   padding:2pt;
   background-color: #ffffff;
@@ -68,6 +86,34 @@
   -moz-opacity:0.85;
   -khtml-opacity: 0.85;
   opacity:0.85;
-      
+
   text-shadow: 0 -1px 1px #FFF, -1px 0 1px #FFF, 1px 0 1px #aaa;   */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  /* margin: 10px; */
+}
+
+.ChooseButton {
+  cursor: pointer;
+  color: black;
+  background-color: transparent;
+  /* font-size: 20px; */
+  /* margin: 10px 0; */
+  margin-top: 40px;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* border: solid 5px var(--app-default-blue); */
+  /* border-radius: 3px; */
+  transition: 0.3s ease-in;
+  transition-property: background-color;
+}
+
+.ChooseButton:hover,
+.ChooseButton:focus {
+  background-color: var(--focus-background);
 }

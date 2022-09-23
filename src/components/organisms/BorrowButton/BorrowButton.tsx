@@ -28,12 +28,12 @@ export const BorrowButton = (props: BorrowButtonProps) => {
     booksTable,
     booksIdList,
     statusCode,
-    successedPageIndex, 
+    successedPageIndex,
     maxBooks
   } = useSelector((state: BooksState) => get(state, ["books"]));
 
   // サーバにidと名前を送り，redux更新
-  const sendBorrowerName = async () => {  
+  const sendBorrowerName = async () => {
     const payload = {
       id: bookId.toString(),
       name: borrower,
@@ -80,17 +80,17 @@ export const BorrowButton = (props: BorrowButtonProps) => {
           <p>Book Title: {bookTitle}</p>
           <p>Borrower  : {borrower}</p>
         </div>
-        <div className={styles.ChooseButton}>
-          <button onClick={hideModal}>DISAGREE</button>
-          <button onClick={handleClick}>AGREE</button>
+        <div className={styles.ChooseButtonWrapper}>
+          <button className={styles.ChooseButton} onClick={hideModal}>DISAGREE</button>
+          <button className={styles.ChooseButton} onClick={handleClick}>AGREE</button>
         </div>
       </div>
     </div>
-  ), 
+  ),
   [bookTitle, borrower]);
 
   return (
-    <div className={styles.BorrowButtonWrapper}> 
+    <div className={styles.BorrowButtonWrapper}>
       <button
         type="button"
         aria-label="Submit"

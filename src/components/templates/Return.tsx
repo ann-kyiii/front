@@ -19,11 +19,13 @@ import fetchBookLists, {
 import ReturnButton from "../organisms/ReturnButton"
 import fetchBookId from "../../apis/fetchBookId";
 import Full from "../../components/organisms/rena/Position/Full";
+import styles from "./Return.module.css";
 
 import {
   ModalProvider,
   // useModal
 } from "react-modal-hook";
+import BookName from "../molecules/BookName";
 
 export const Return = ({ history }: AppProps) =>  {
   const dispatch = useDispatch();
@@ -116,10 +118,13 @@ export const Return = ({ history }: AppProps) =>  {
     return (
       <>
         <Header history={history} backLink="/" />
-        <div style={{textAlign: "center", height: "70px", fontSize: "18px"}}>{bookTitle}</div>
-        <div style={{textAlign: "center", fontSize: "larger"}}>Borrower</div>
+        {/* <div style={{textAlign: "center", height: "70px", fontSize: "18px"}}>{bookTitle}</div> */}
+        <BookName>{bookTitle}</BookName>
+        <div className={styles.BorrowerWrapper}>Borrower</div>
         <ModalProvider>
-            {item}
+            <div className={styles.ReturnButtonWrapper}>
+              {item}
+            </div>
         </ModalProvider>
       </>
     );

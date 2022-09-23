@@ -81,9 +81,9 @@ export const ReturnButton = (props: ReturnButtonProps) => {
           <p>Book Title: {bookTitle}</p>
           <p>Returner  : {returner}</p>
         </div>
-        <div className={styles.ChooseButton}>
-          <button onClick={hideModal}>DISAGREE</button>
-          <button onClick={handleClick}>AGREE</button>
+        <div className={styles.ChooseButtonWrapper}>
+          <button className={styles.ChooseButton} onClick={hideModal}>DISAGREE</button>
+          <button className={styles.ChooseButton} onClick={handleClick}>AGREE</button>
         </div>
       </div>
     </div>
@@ -91,14 +91,14 @@ export const ReturnButton = (props: ReturnButtonProps) => {
   [bookTitle, returner]);
 
   return (
-    <div className={styles.ReturnButtonWrapper}>
+    // <div className={styles.ReturnButtonWrapper}>
       <button
       type="button"
       aria-label="Submit"
       onClick={showModal}
       className={styles.ReturnButton}
       >{buttonName}</button>
-    </div>
+    // </div>
   );
 };
 

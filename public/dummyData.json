@@ -4,7 +4,7 @@
       "ISBN": "9784061529038",
       "author": "海野裕也／著 岡野原大輔／著 得居誠也／著 徳永拓之／著",
       "bookName": "オンライン機械学習",
-      "borrower": [],
+      "borrower": ["test borrower1", "test", "kato"],
       "exist": "〇",
       "find": 2,
       "genre": "研究(理論)",

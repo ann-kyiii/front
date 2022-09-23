@@ -11,3 +11,7 @@
   border-radius: 3px;
   font-size: 20px;
 }
+
+.BorrowUserNameInput:focus {
+  outline: none;
+}
