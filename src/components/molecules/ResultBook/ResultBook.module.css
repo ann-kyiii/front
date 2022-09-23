@@ -6,8 +6,9 @@
       /* 100%-button-header */
     /* height: var(--main); */
     /* overflow: auto; */
-    background-color: whitesmoke;
+    background-color: var(--focus-background);
     margin: 10px auto;
+    cursor: pointer;
 }
 
 .content {
