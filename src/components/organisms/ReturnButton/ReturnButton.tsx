@@ -10,6 +10,7 @@ import fetchBookLists, {
 } from "../../../actions/resultlists";
 import styles from "./ReturnButton.module.css";
 import fetchReturn from "../../../apis/fetchReturn";
+import ModalWindow from "../../molecules/ModalWindow";
 
 type ReturnButtonProps = AppProps & {
   className?: string[];
@@ -74,19 +75,20 @@ export const ReturnButton = (props: ReturnButtonProps) => {
   }
 
   const [showModal, hideModal] = useModal(() => (
-    <div className={styles.wrapper}>
-      <div role="dialog" className={styles.modal}>
-        <div className={styles.title}>確認</div>
-        <div className={styles.center}>
-          <p>Book Title: {bookTitle}</p>
-          <p>Returner  : {returner}</p>
-        </div>
-        <div className={styles.ChooseButtonWrapper}>
-          <button className={styles.ChooseButton} onClick={hideModal}>DISAGREE</button>
-          <button className={styles.ChooseButton} onClick={handleClick}>AGREE</button>
-        </div>
-      </div>
-    </div>
+    // <div className={styles.wrapper}>
+    //   <div role="dialog" className={styles.modal}>
+    //     <div className={styles.title}>確認</div>
+    //     <div className={styles.center}>
+    //       <p>Book Title: {bookTitle}</p>
+    //       <p>Returner  : {returner}</p>
+    //     </div>
+    //     <div className={styles.ChooseButtonWrapper}>
+    //       <button className={styles.ChooseButton} onClick={hideModal}>DISAGREE</button>
+    //       <button className={styles.ChooseButton} onClick={handleClick}>AGREE</button>
+    //     </div>
+    //   </div>
+    // </div>
+    <ModalWindow bookTitle={bookTitle} userType="Returner" user={returner} hideModal={hideModal} handleClick={handleClick} />
   ),
   [bookTitle, returner]);
 

@@ -10,6 +10,7 @@ import fetchBookLists, {
   BooksState
 } from "../../../actions/resultlists";
 import fetchBorrow from "../../../apis/fetchBorrow";
+import ModalWindow from "../../molecules/ModalWindow";
 
 type BorrowButtonProps = AppProps & {
   className?: string[];
@@ -73,19 +74,20 @@ export const BorrowButton = (props: BorrowButtonProps) => {
   }
 
   const [showModal, hideModal] = useModal(() => (
-    <div className={styles.wrapper}>
-      <div role="dialog" className={styles.modal}>
-        <div className={styles.title}>確認</div>
-        <div className={styles.center}>
-          <p>Book Title: {bookTitle}</p>
-          <p>Borrower  : {borrower}</p>
-        </div>
-        <div className={styles.ChooseButtonWrapper}>
-          <button className={styles.ChooseButton} onClick={hideModal}>DISAGREE</button>
-          <button className={styles.ChooseButton} onClick={handleClick}>AGREE</button>
-        </div>
-      </div>
-    </div>
+    // <div className={styles.wrapper}>
+    //   <div role="dialog" className={styles.modal}>
+    //     <div className={styles.title}>確認</div>
+    //     <div className={styles.center}>
+    //       <p>Book Title: {bookTitle}</p>
+    //       <p>Borrower  : {borrower}</p>
+    //     </div>
+    //     <div className={styles.ChooseButtonWrapper}>
+    //       <button className={styles.ChooseButton} onClick={hideModal}>DISAGREE</button>
+    //       <button className={styles.ChooseButton} onClick={handleClick}>AGREE</button>
+    //     </div>
+    //   </div>
+    // </div>
+    <ModalWindow bookTitle={bookTitle} userType="Borrower" user={borrower} hideModal={hideModal} handleClick={handleClick} />
   ),
   [bookTitle, borrower]);
 
