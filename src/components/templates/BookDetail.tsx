@@ -127,21 +127,21 @@ export const BookDetail = ({history}: AppProps) => {
           <div className={style.buttonsBlock} >
             <div className={style.borrow} >
               <ButtonAbleDisable abled={borrow_abled}
-                nextLink={"/Borrow/"+bookID}
+                nextLink={"/borrow/"+bookID}
                 classname={cx(style.button, style.buttonColor1)}
                 onclick={handleClick}
                 text="Borrow"></ButtonAbleDisable>
             </div>
             <div className={style.return}>
               <ButtonAbleDisable abled={return_abled}
-                nextLink={"/Return/"+bookID}
+                nextLink={"/return/"+bookID}
                 classname={cx(style.button, style.buttonColor2)}
                 onclick={handleClick}
                 text="Return"></ButtonAbleDisable>
             </div>
             <div className={style.review}>
               <ButtonAbleDisable abled={false}
-                nextLink={"/Review/"+bookID}
+                nextLink={"/review/"+bookID}
                 classname={cx(style.button, style.buttonColor3)}
                 onclick={handleClick}
                 text="Review"></ButtonAbleDisable>
