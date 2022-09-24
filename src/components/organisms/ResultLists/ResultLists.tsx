@@ -83,8 +83,11 @@ export const ResultLists = (props: ResultListsProps) => {
     // if (successedPageIndex.includes(page)) {
     //   return;
     // }
+    if (pageIndex <= 0) {
+      return
+    }
 
-    const offset = page * limit;
+    const offset = (page - 1) * limit;
     const payload = {
       keywords: keyWords,
       offset: offset.toString(),
@@ -165,7 +168,7 @@ export const ResultLists = (props: ResultListsProps) => {
   // console.log(booksTable[booksIdList[0]]);  //undefined確認
 
   // if (booksIdList !== undefined && booksTable !== undefined) {
-  if (books.booksIdList !== undefined && books.booksTable !== undefined) {
+  if (books.booksIdList !== undefined && books.booksTable !== undefined && pageIndex > 0) {
     console.log(`not undefined page:${pageIndex}`);
     // console.dir(booksIdList);
     // console.log(`maxBooks:${maxBooks}`);

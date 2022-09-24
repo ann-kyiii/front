@@ -35,7 +35,7 @@ export const BookSearcher = (props: BookSearchProps) => {
       .split(/\s+/)
       .map(key => `key=${key}`)
       .join("&");
-    const encode = encodeURI(`/book-lists?${keys}&page=0`);
+    const encode = encodeURI(`/book-lists?${keys}&page=1`);
     dispatch(push(encode));
     props.history.push(encode);
   };
