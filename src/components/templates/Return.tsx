@@ -117,7 +117,7 @@ export const Return = ({ history }: AppProps) =>  {
   if(bookTitle !== undefined){
     return (
       <>
-        <Header history={history} backLink="/" />
+        <Header history={history} backLink={"/book-detail/" + bookId} />
         {/* <div style={{textAlign: "center", height: "70px", fontSize: "18px"}}>{bookTitle}</div> */}
         <BookName>{bookTitle}</BookName>
         <div className={styles.BorrowerWrapper}>Borrower</div>

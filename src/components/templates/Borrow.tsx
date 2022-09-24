@@ -126,7 +126,7 @@ export const Borrow = ({ history }: AppProps) =>  {
   if(bookTitle !== undefined){
     return (
       <>
-        <Header history={history} backLink="/" />
+        <Header history={history} backLink={"/book-detail/" + bookId} />
         <BookName>{bookTitle}</BookName>
         <BorrowUserNameInput placeValue="UserName" handleOnChange={handleOnChange}/>
         <ModalProvider>
