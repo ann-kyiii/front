@@ -1,19 +1,15 @@
-import React, { Children } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { useModal } from "react-modal-hook";
 import { get } from "lodash";
 import { AppProps } from "../../../App";
 import styles from "./BorrowButton.module.css";
-import fetchBookLists, {
-  BookLists,
-  BooksState
-} from "../../../actions/resultlists";
+import fetchBookLists, { BooksState } from "../../../actions/resultlists";
 import fetchBorrow from "../../../apis/fetchBorrow";
 import ModalWindow from "../../molecules/ModalWindow";
 
 type BorrowButtonProps = AppProps & {
-  className?: string[];
   buttonName: string;
   bookTitle: string;
   borrower: string;
@@ -21,17 +17,10 @@ type BorrowButtonProps = AppProps & {
 };
 
 export const BorrowButton = (props: BorrowButtonProps) => {
-  const { className, buttonName, bookTitle, borrower, bookId } = props;
+  const { buttonName, bookTitle, borrower, bookId } = props;
   const dispatch = useDispatch();
 
-  const {
-    isLoading,
-    booksTable,
-    booksIdList,
-    statusCode,
-    successedPageIndex,
-    maxBooks
-  } = useSelector((state: BooksState) => get(state, ["books"]));
+  const maxBooks = useSelector((state: BooksState) => get(state, ["books", "maxBooks"]));
 
   // サーバにidと名前を送り，redux更新
   const sendBorrowerName = async () => {
@@ -74,29 +63,15 @@ export const BorrowButton = (props: BorrowButtonProps) => {
   }
 
   const [showModal, hideModal] = useModal(() => (
-    // <div className={styles.wrapper}>
-    //   <div role="dialog" className={styles.modal}>
-    //     <div className={styles.title}>確認</div>
-    //     <div className={styles.center}>
-    //       <p>Book Title: {bookTitle}</p>
-    //       <p>Borrower  : {borrower}</p>
-    //     </div>
-    //     <div className={styles.ChooseButtonWrapper}>
-    //       <button className={styles.ChooseButton} onClick={hideModal}>DISAGREE</button>
-    //       <button className={styles.ChooseButton} onClick={handleClick}>AGREE</button>
-    //     </div>
-    //   </div>
-    // </div>
     <ModalWindow bookTitle={bookTitle} userType="Borrower" user={borrower} hideModal={hideModal} handleClick={handleClick} />
-  ),
-  [bookTitle, borrower]);
+  ), [bookTitle, borrower]);
 
   return (
     <div className={styles.BorrowButtonWrapper}>
       <button
         type="button"
         aria-label="Submit"
-        onClick={borrower != "" ? showModal: undefined }
+        onClick={borrower !== "" ? showModal: undefined }
         className={styles.BorrowButton}
       >{buttonName}</button>
     </div>

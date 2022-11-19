@@ -4,16 +4,12 @@ import { push } from "connected-react-router";
 import { useModal } from "react-modal-hook";
 import { AppProps } from "../../../App";
 import { get } from "lodash";
-import fetchBookLists, {
-  // BookLists,
-  BooksState
-} from "../../../actions/resultlists";
+import fetchBookLists, { BooksState } from "../../../actions/resultlists";
 import styles from "./ReturnButton.module.css";
 import fetchReturn from "../../../apis/fetchReturn";
 import ModalWindow from "../../molecules/ModalWindow";
 
 type ReturnButtonProps = AppProps & {
-  className?: string[];
   buttonName: string;
   bookTitle: string;
   returner: string;
@@ -21,19 +17,10 @@ type ReturnButtonProps = AppProps & {
 };
 
 export const ReturnButton = (props: ReturnButtonProps) => {
-  const { className, buttonName, bookTitle, returner, bookId } = props;
+  const { buttonName, bookTitle, returner, bookId } = props;
   const dispatch = useDispatch();
 
-  const {
-    isLoading,
-    booksTable,
-    booksIdList,
-    statusCode,
-    successedPageIndex,
-    maxBooks
-  } = useSelector((state: BooksState) => get(state, ["books"]));
-    // warningもみ消し
-  console.log(className, isLoading, booksTable, booksTable, booksIdList, statusCode, successedPageIndex);
+  const maxBooks = useSelector((state: BooksState) => get(state, ["books", "maxBooks"]));
 
   // サーバにidと名前を送り，redux更新
   const sendReturnerName = async () => {
@@ -75,22 +62,8 @@ export const ReturnButton = (props: ReturnButtonProps) => {
   }
 
   const [showModal, hideModal] = useModal(() => (
-    // <div className={styles.wrapper}>
-    //   <div role="dialog" className={styles.modal}>
-    //     <div className={styles.title}>確認</div>
-    //     <div className={styles.center}>
-    //       <p>Book Title: {bookTitle}</p>
-    //       <p>Returner  : {returner}</p>
-    //     </div>
-    //     <div className={styles.ChooseButtonWrapper}>
-    //       <button className={styles.ChooseButton} onClick={hideModal}>DISAGREE</button>
-    //       <button className={styles.ChooseButton} onClick={handleClick}>AGREE</button>
-    //     </div>
-    //   </div>
-    // </div>
     <ModalWindow bookTitle={bookTitle} userType="Returner" user={returner} hideModal={hideModal} handleClick={handleClick} />
-  ),
-  [bookTitle, returner]);
+  ), [bookTitle, returner]);
 
   return (
     // <div className={styles.ReturnButtonWrapper}>

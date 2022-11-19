@@ -6,20 +6,10 @@ import BookName from "../molecules/BookName"
 import BorrowButton from "../organisms/BorrowButton"
 import BorrowUserNameInput from "../molecules/BorrowUserNameInput"
 import { RootState } from "../../reducers";
-import {
-  // isEmpty,
-  get
-} from "lodash";
-// import { normalize, schema } from "normalizr";
-import fetchBookLists, {
-  // BookLists,
-  BooksState
-} from "../../actions/resultlists";
+import { get } from "lodash";
+import fetchBookLists, { BooksState } from "../../actions/resultlists";
 import fetchBookId from "../../apis/fetchBookId";
-import {
-  ModalProvider,
-  // useModal
-} from "react-modal-hook";
+import { ModalProvider } from "react-modal-hook";
 import Full from "../../components/organisms/rena/Position/Full";
 
 export const Borrow = ({ history }: AppProps) =>  {
@@ -33,19 +23,6 @@ export const Borrow = ({ history }: AppProps) =>  {
   const bookId = parseInt(urlParams[1]);
   const maxBooks = useSelector((state: BooksState) => get(state, ["books", "maxBooks"]));
   const dispatch = useDispatch();
-
-
-  // const normalizeData = (
-  //   data: BookLists
-  // ): Pick<BooksState, "booksTable" | "booksIdList"> => {
-  //   const booksSchema = new schema.Entity("books", {}, { idAttribute: "id" });
-  //   const booksTable = get(normalize(data, [booksSchema]), [
-  //     "entities",
-  //     "books"
-  //   ]);
-  //   const booksIdList = get(normalize(data, [booksSchema]), ["result"]);
-  //   return { booksTable, booksIdList };
-  // };
 
   //1冊の情報だけ取得する
   const getOneBook = async () => {
@@ -66,26 +43,6 @@ export const Borrow = ({ history }: AppProps) =>  {
         return;
       }
       const json = await response.json();
-      // const json = {
-      //   ISBN: "9784431100317",
-      //   author:
-      //     "Bishop,ChristopherM／著 元田浩／翻訳 村田昇／著 松本裕治／著 ほか",
-      //   bookName: "パターン認識と機械学習 下",
-      //   borrower: ["testjson"],
-      //   exist: "一部発見",
-      //   find: 3,
-      //   genre: "研究(理論)",
-      //   id: 330,
-      //   imgURL: "https://cover.openbd.jp/9784431100317.jpg",
-      //   locateAt4F: false,
-      //   location: "unidentified",
-      //   other: "なし",
-      //   pubdate: "2008-07",
-      //   publisher: "シュプリンガー・ジャパン",
-      //   subGenre: "統計・機械学習",
-      //   sum: 1,
-      //   withDisc: "なし"
-      // };
       console.log(json);
 
       const newData = {

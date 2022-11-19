@@ -1,30 +1,15 @@
-import React, {
-  // useState,
-  // useCallback,
-  useEffect
-} from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppProps } from "../../App";
 import { RootState } from "../../reducers";
-import {
-  // isEmpty,
-  get
-} from "lodash";
-// import { normalize, schema } from "normalizr";
+import { get } from "lodash";
 import Header from "../organisms/Header";
-import fetchBookLists, {
-  // BookLists,
-  BooksState
-} from "../../actions/resultlists";
+import fetchBookLists, { BooksState } from "../../actions/resultlists";
 import ReturnButton from "../organisms/ReturnButton"
 import fetchBookId from "../../apis/fetchBookId";
 import Full from "../../components/organisms/rena/Position/Full";
 import styles from "./Return.module.css";
-
-import {
-  ModalProvider,
-  // useModal
-} from "react-modal-hook";
+import { ModalProvider } from "react-modal-hook";
 import BookName from "../molecules/BookName";
 
 export const Return = ({ history }: AppProps) =>  {
@@ -57,26 +42,8 @@ export const Return = ({ history }: AppProps) =>  {
         return;
       }
       const json = await response.json();
-      // const json = {
-      //   ISBN: "9784431100317",
-      //   author:
-      //     "Bishop,ChristopherM／著 元田浩／翻訳 村田昇／著 松本裕治／著 ほか",
-      //   bookName: "パターン認識と機械学習 下",
-      //   borrower: ["testjson"],
-      //   exist: "一部発見",
-      //   find: 3,
-      //   genre: "研究(理論)",
-      //   id: 330,
-      //   imgURL: "https://cover.openbd.jp/9784431100317.jpg",
-      //   locateAt4F: false,
-      //   location: "unidentified",
-      //   other: "なし",
-      //   pubdate: "2008-07",
-      //   publisher: "シュプリンガー・ジャパン",
-      //   subGenre: "統計・機械学習",
-      //   sum: 1,
-      //   withDisc: "なし"
-      // };
+      console.log(json);
+
       const newData = {
         booksTable: { [json.id]: json },
         booksIdList: [json.id]
@@ -95,7 +62,6 @@ export const Return = ({ history }: AppProps) =>  {
     get(state, ["books", "booksTable", bookId, "bookName"])
   );
 
-  // const list: string[] = ["hanako", "taro", "ynu"];
   const list: string[] = useSelector((state: RootState) =>
     get(state, ["books", "booksTable", bookId, "borrower"])
   );
@@ -118,7 +84,6 @@ export const Return = ({ history }: AppProps) =>  {
     return (
       <>
         <Header history={history} backLink={"/book-detail/" + bookId} />
-        {/* <div style={{textAlign: "center", height: "70px", fontSize: "18px"}}>{bookTitle}</div> */}
         <BookName>{bookTitle}</BookName>
         <div className={styles.BorrowerWrapper}>Borrower</div>
         <ModalProvider>
