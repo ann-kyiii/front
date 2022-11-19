@@ -24,6 +24,11 @@
   background-color: var(--focus-background);
 }
 
+.BorrowButton:disabled {
+  cursor:not-allowed;
+  background-color: transparent;
+}
+
   .BorrowButtonWrapper {
       /* text-align: center */
       display: flex;

@@ -71,7 +71,8 @@ export const BorrowButton = (props: BorrowButtonProps) => {
       <button
         type="button"
         aria-label="Submit"
-        onClick={borrower !== "" ? showModal: undefined }
+        onClick={showModal}
+        disabled={borrower === "" ? true: false}
         className={styles.BorrowButton}
       >{buttonName}</button>
     </div>
