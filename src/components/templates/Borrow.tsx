@@ -15,7 +15,7 @@ import fetchBookLists, {
   // BookLists,
   BooksState
 } from "../../actions/resultlists";
-// import fetchBookId from "../../apis/fetchBookId";
+import fetchBookId from "../../apis/fetchBookId";
 import {
   ModalProvider,
   // useModal
@@ -54,8 +54,8 @@ export const Borrow = ({ history }: AppProps) =>  {
     };
     try {
       dispatch(fetchBookLists.started({ pageIndex: 0 }));
-      // const response = await fetchBookId(payload);
-      const response = await fetch("http://localhost:3000/dummyData.json");
+      const response = await fetchBookId(payload);
+      // const response = await fetch("http://localhost:3000/dummyData.json");
       if (!response.ok) {
         dispatch(
           fetchBookLists.failed({

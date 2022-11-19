@@ -19,7 +19,7 @@ import cx from "classnames";
 
 import  imgError  from "../organisms/rena/noImageAvailable.svg";
 
-const dummy: boolean = true;
+const dummy: boolean = false;
 
 const ButtonAbleDisable = (props: any) => {
   const {abled, classname, onclick, text, nextLink} = props;
