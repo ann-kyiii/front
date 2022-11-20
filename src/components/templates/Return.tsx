@@ -50,7 +50,7 @@ export const Return = ({ history }: AppProps) =>  {
       };
       console.log("#######################");
       console.log(newData);
-      const result = { ...newData, maxBooks: maxBooks };
+      const result = { ...newData, maxBooks: 1 };
       dispatch(fetchBookLists.done({ params: { pageIndex: 0 }, result }));
     } catch (error) {
       console.log(`Error fetcing in getBookLists: ${error}`);
