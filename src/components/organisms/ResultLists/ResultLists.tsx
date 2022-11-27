@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash";
 import { normalize, schema } from "normalizr";
@@ -41,6 +41,8 @@ export const ResultLists = (props: ResultListsProps) => {
   // ページに関わる変数をReduxから取得
   const storedBooksTable = useSelector((state: BooksState) => get(state, ["books", "booksTable"]))
   const storedBooksIdList = useSelector((state: BooksState) => get(state, ["books", "booksIdList"]));
+  const isLoading = useSelector((state: BooksState) => get(state, ["books", "isLoading"]));
+  const statusCode = useSelector((state: BooksState) => get(state, ["books", "statusCode"]));
   const maxBooks = useSelector((state: BooksState) => get(state, ["books", "maxBooks"]));
   const dispatch = useDispatch();
 
@@ -87,6 +89,12 @@ export const ResultLists = (props: ResultListsProps) => {
       const result = { ...newData, maxBooks: json.max_books };
       dispatch(fetchBookLists.done({ params: { pageIndex: page }, result }));
     } catch (error) {
+      dispatch(
+        fetchBookLists.failed({
+          params: { pageIndex: page },
+          error: { statusCode: 500 }  // TODO: サーバに接続できないときのため暫定で設定
+        })
+      );
       console.log(`Error fetcing in getBookLists: ${error}`);
     }
   };
@@ -104,39 +112,50 @@ export const ResultLists = (props: ResultListsProps) => {
     window.scrollTo(0, 0);
   };
 
-  if (storedBooksIdList !== undefined && storedBooksTable !== undefined && pageIndex > 0) {
+  if (statusCode !== 200) {
+    console.log(`ERROR: ${statusCode}`);
     return (
-      <>
-        <div className={styles.ResultCount}>
-          <p>{maxBooks}冊ヒットしました</p>
-        </div>
-        {storedBooksIdList.map((bookId: number) => {
-          return (
-            <ResultBook
-              history={props.history}
-              data={
-                {
-                  bookId: bookId,
-                  bookName: storedBooksTable[bookId].bookName,
-                  author: storedBooksTable[bookId].author,
-                  imgURL: storedBooksTable[bookId].imgURL
-                }
-              }
-              key={bookId}
-            />
-          );
-        })}
-        <PageNatior
-          totalPage={Math.ceil(maxBooks / limit)}
-          currentPage={pageIndex}
-          handleClick={(e) => handleClick(e, pageIndex)}
-        />
-      </>
-    );
-  } else {
-    console.log(`undefined page:${pageIndex}`);
-    return <><p>Loading...</p></>
+      <div className={styles.ResultCount}>
+        <p>Server Error</p>
+      </div>
+    )
   }
+  if (isLoading && storedBooksIdList.length === 0) {
+    return (
+      <div className={styles.ResultCount}>
+        <p>Loading...</p>
+      </div>
+    )
+  }
+
+  return (
+    <>
+      <div className={styles.ResultCount}>
+        <p>{maxBooks}冊ヒットしました</p>
+      </div>
+      {storedBooksIdList.map((bookId: number) => {
+        return (
+          <ResultBook
+            history={props.history}
+            data={
+              {
+                bookId: bookId,
+                bookName: storedBooksTable[bookId].bookName,
+                author: storedBooksTable[bookId].author,
+                imgURL: storedBooksTable[bookId].imgURL
+              }
+            }
+            key={bookId}
+          />
+        );
+      })}
+      <PageNatior
+        totalPage={Math.ceil(maxBooks / limit)}
+        currentPage={pageIndex}
+        handleClick={(e) => handleClick(e, pageIndex)}
+      />
+    </>
+  );
 };
 
 export default ResultLists;
