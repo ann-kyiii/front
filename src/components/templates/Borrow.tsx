@@ -2,9 +2,9 @@ import React, {useState, useCallback, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppProps } from "../../App";
 import Header from "../organisms/Header";
-import BookName from "../molecules/BookName"
-import BorrowButton from "../organisms/BorrowButton"
-import BorrowUserNameInput from "../molecules/BorrowUserNameInput"
+import BookName from "../molecules/BookName";
+import BorrowButton from "../organisms/BorrowButton";
+import BorrowUserNameInput from "../molecules/BorrowUserNameInput";
 import { RootState } from "../../reducers";
 import { get } from "lodash";
 import fetchBookLists, { BooksState } from "../../actions/resultlists";
@@ -14,15 +14,15 @@ import Full from "../../components/organisms/rena/Position/Full";
 
 export const Borrow = ({ history }: AppProps) =>  {
   const [borrower, setBorrower] = useState<string>("");
+  const dispatch = useDispatch();
     // URLからid取得
-  const search: string = useSelector((state: RootState) =>
+  const path: string = useSelector((state: RootState) =>
     get(state, ["router", "location", "pathname"])
   ).slice(1);
-  const decode: string = decodeURI(search);
+  const decode: string = decodeURI(path);
   const urlParams: string[] = decode.split("/");
   const bookId = parseInt(urlParams[1]);
   const maxBooks = useSelector((state: BooksState) => get(state, ["books", "maxBooks"]));
-  const dispatch = useDispatch();
 
   //1冊の情報だけ取得する
   const getOneBook = async () => {

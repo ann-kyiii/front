@@ -1,24 +1,24 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppProps } from "../../App";
+import Header from "../organisms/Header";
+import BookName from "../molecules/BookName";
+import ReturnButton from "../organisms/ReturnButton";
 import { RootState } from "../../reducers";
 import { get } from "lodash";
-import Header from "../organisms/Header";
 import fetchBookLists, { BooksState } from "../../actions/resultlists";
-import ReturnButton from "../organisms/ReturnButton"
 import fetchBookId from "../../apis/fetchBookId";
+import { ModalProvider } from "react-modal-hook";
 import Full from "../../components/organisms/rena/Position/Full";
 import styles from "./Return.module.css";
-import { ModalProvider } from "react-modal-hook";
-import BookName from "../molecules/BookName";
 
 export const Return = ({ history }: AppProps) =>  {
   const dispatch = useDispatch();
   // URLからid取得
-  const search: string = useSelector((state: RootState) =>
+  const path: string = useSelector((state: RootState) =>
     get(state, ["router", "location", "pathname"])
   ).slice(1);
-  const decode: string = decodeURI(search);
+  const decode: string = decodeURI(path);
   const urlParams: string[] = decode.split("/");
   const bookId = parseInt(urlParams[1]);
   const maxBooks = useSelector((state: BooksState) => get(state, ["books", "maxBooks"]));
@@ -62,11 +62,11 @@ export const Return = ({ history }: AppProps) =>  {
     get(state, ["books", "booksTable", bookId, "bookName"])
   );
 
-  const list: string[] = useSelector((state: RootState) =>
+  const borrowerList: string[] = useSelector((state: RootState) =>
     get(state, ["books", "booksTable", bookId, "borrower"])
   );
 
-  const item = list !== undefined ? list.map((name, index) =>
+  const item = borrowerList !== undefined ? borrowerList.map((name, index) =>
     <ReturnButton key={index} history={history} buttonName={name} bookTitle={bookTitle} returner={name} bookId={bookId}/>
   ) : undefined;
 
