@@ -1,6 +1,4 @@
-import React, {
-  // ReactNode
-} from "react";
+import React from "react";
 import cx from "classnames";
 import styles from "./PageNatior.module.css";
 
@@ -16,7 +14,6 @@ export const PageNatior = (props: PageNatiorProps) => {
   const innerPage = () => {
     const items = [];
     for (let idx = 1; idx <= totalPage; idx += 1) {
-      // console.log("Hello");
       items.push(
         <li key={idx}>
           <button
@@ -28,7 +25,6 @@ export const PageNatior = (props: PageNatiorProps) => {
             })}
             value={idx}
             disabled={(() => idx === currentPage ? true : false)()}
-            // key={idx}
           >
             {idx}
           </button>
@@ -38,29 +34,8 @@ export const PageNatior = (props: PageNatiorProps) => {
     return <ul className={styles.PageNatiorULWrapper}>{ items }</ul>;
   };
 
-  const emptyArray: number[] = [1, 2, 3]; // エラー消すための仮
-
   return (
-    // <div>PageNatior</div>
     <div className={styles.PageNatiorWrapper}>
-      {/* <ul className={styles.PageNatiorULWrapper}>
-        {emptyArray.map((un, index) => (
-          // <li key={index} className={styles.TagListWraper}>
-            // <button
-            //   type="button"
-            //   tabIndex={0}
-            //   onClick={handleClick}
-            //   className={cx(styles.ListButton, {
-            //     [styles.isSelected]: index === currentPage
-            //   })}
-            //   key={index}
-            // >
-            //   {index}
-            // </button>
-          // </li>
-
-        ))}
-      </ul> */}
       {innerPage()}
     </div>
   );
