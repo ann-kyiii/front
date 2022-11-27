@@ -1,27 +1,16 @@
 import React, { useCallback, useState } from "react";
-import {
-  useDispatch,
-  useSelector
-} from "react-redux";
-// import { push } from "connected-react-router";
+import { useDispatch, useSelector } from "react-redux";
 import { AppProps } from "../../App";
-// import Header from "../organisms/Header";
-import Header from "../../components/organisms/rena/Position/Header";
+import Header from "../organisms/Header";
 import Full from "../../components/organisms/rena/Position/Full";
-import LoadData from "../../components/organisms/rena/Function/LoadData";
 import style from "./BookDetail.module.css";
 import { RootState } from "../../reducers";
-import {
-  // isEmpty,
-  get
-} from "lodash";
+import { get } from "lodash";
 import cx from "classnames";
 
 import  imgError  from "../organisms/rena/noImageAvailable.svg";
 import fetchBookLists from "../../actions/resultlists";
 import fetchBookId from "../../apis/fetchBookId";
-
-const dummy: boolean = false;
 
 const ButtonAbleDisable = (props: any) => {
   const {abled, classname, onclick, text, nextLink} = props;
@@ -139,7 +128,7 @@ export const BookDetail = ({history}: AppProps) => {
       <>
         <div id={style.book_detail}>
 
-          <Header history={history} backButton={true}  backLink="/" />
+          <Header history={history} backLink="/" />
 
           <div className={style.main} >
             <div className={style.bookTytle}>{data.bookName}</div>

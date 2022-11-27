@@ -5,7 +5,7 @@ import {
 } from "react-redux";
 // import { push } from "connected-react-router";
 import { AppProps } from "../../App";
-import Header from "../../components/organisms/rena/Position/Header";
+import Header from "../organisms/Header";
 import Full from "../../components/organisms/rena/Position/Full";
 import style from "./Review.module.css";
 // import { string } from "prop-types";
@@ -81,7 +81,7 @@ export const Review =  ({history}: AppProps)  => {
     <>
       <div id={style.book_review}>
 
-        <Header history={history} backButton={true}  backLink={backLink} />
+        <Header history={history}  backLink={backLink} />
 
           <div className={style.reviewListBrock}>
             <ul className={style.reviewList} >
