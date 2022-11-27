@@ -39,18 +39,10 @@ export const ResultLists = (props: ResultListsProps) => {
 
   // process: データ関係の処理
   // ページに関わる変数をReduxから取得
-  const {
-    isLoading,
-    storedBooksTable,
-    storedBooksIdList,
-    statusCode,
-    successedPageIndex
-  } = useSelector((state: BooksState) => get(state, ["books"]));
-  // 使うものだけ取ってくる形だとundefinedではなく[]とかになる
-  // const storedBooksTable = useSelector((state: BooksState) => get(state, ["books", "booksTable"]))
-  // const storedBooksIdList = useSelector((state: BooksState) => get(state, ["books", "booksIdList"]));
+  const storedBooksTable = useSelector((state: BooksState) => get(state, ["books", "booksTable"]))
+  const storedBooksIdList = useSelector((state: BooksState) => get(state, ["books", "booksIdList"]));
+  const maxBooks = useSelector((state: BooksState) => get(state, ["books", "maxBooks"]));
   const dispatch = useDispatch();
-  const [books, setBooks] = useState({booksTable: storedBooksTable, booksIdList: storedBooksIdList, maxBooks: 0});
 
   const normalizeData = (
     data: BookLists
@@ -93,7 +85,6 @@ export const ResultLists = (props: ResultListsProps) => {
       // APIのreturnが books: {} なので.
       const newData = normalizeData(json.books);
       const result = { ...newData, maxBooks: json.max_books };
-      setBooks({booksTable: result.booksTable, booksIdList: result.booksIdList, maxBooks: result.maxBooks});
       dispatch(fetchBookLists.done({ params: { pageIndex: page }, result }));
     } catch (error) {
       console.log(`Error fetcing in getBookLists: ${error}`);
@@ -103,7 +94,7 @@ export const ResultLists = (props: ResultListsProps) => {
   useEffect(() => {
     getBookLists(pageIndex);
   // eslint-disable-next-line
-  }, [pageIndex]);
+  }, [pageIndex, search]);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>, pageIndex: any) => {
     const encode = `book-lists?${search.replace(`page=${pageIndex}`, `page=${e.currentTarget.value}`)}`;
@@ -113,24 +104,22 @@ export const ResultLists = (props: ResultListsProps) => {
     window.scrollTo(0, 0);
   };
 
-  if (books.booksIdList !== undefined && books.booksTable !== undefined && pageIndex > 0) {
-    console.dir(books.booksIdList);
-    console.dir(books.booksTable);
+  if (storedBooksIdList !== undefined && storedBooksTable !== undefined && pageIndex > 0) {
     return (
       <>
         <div className={styles.ResultCount}>
-          <p>{books.maxBooks}冊ヒットしました</p>
+          <p>{maxBooks}冊ヒットしました</p>
         </div>
-        {books.booksIdList.map((bookId: number) => {
+        {storedBooksIdList.map((bookId: number) => {
           return (
             <ResultBook
               history={props.history}
               data={
                 {
                   bookId: bookId,
-                  bookName: books.booksTable[bookId].bookName,
-                  author: books.booksTable[bookId].author,
-                  imgURL: books.booksTable[bookId].imgURL
+                  bookName: storedBooksTable[bookId].bookName,
+                  author: storedBooksTable[bookId].author,
+                  imgURL: storedBooksTable[bookId].imgURL
                 }
               }
               key={bookId}
@@ -138,7 +127,7 @@ export const ResultLists = (props: ResultListsProps) => {
           );
         })}
         <PageNatior
-          totalPage={Math.ceil(books.maxBooks / limit)}
+          totalPage={Math.ceil(maxBooks / limit)}
           currentPage={pageIndex}
           handleClick={(e) => handleClick(e, pageIndex)}
         />

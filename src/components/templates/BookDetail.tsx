@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import {
-  // useDispatch,
+  useDispatch,
   useSelector
 } from "react-redux";
 // import { push } from "connected-react-router";
@@ -18,6 +18,8 @@ import {
 import cx from "classnames";
 
 import  imgError  from "../organisms/rena/noImageAvailable.svg";
+import fetchBookLists from "../../actions/resultlists";
+import fetchBookId from "../../apis/fetchBookId";
 
 const dummy: boolean = false;
 
@@ -32,7 +34,6 @@ const ButtonAbleDisable = (props: any) => {
 }
 
 export const BookDetail = ({history}: AppProps) => {
-  console.dir(history);
   // var
   let [bookID, setBookID] = useState(-1);
   let [imgURL, setImgURL] = useState(undefined);
@@ -44,7 +45,41 @@ export const BookDetail = ({history}: AppProps) => {
   // eslint-disable-next-line
   }, []);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
+  //1冊の情報だけ取得する
+  const getOneBook = async (bookId: number) => {
+    const payload = {
+      id: bookId,
+    };
+    try {
+      dispatch(fetchBookLists.started({ pageIndex: 0 }));
+      const response = await fetchBookId(payload);
+      // const response = await fetch("http://localhost:3000/dummyData.json");
+      if (!response.ok) {
+        dispatch(
+          fetchBookLists.failed({
+            params: { pageIndex: 0 },
+            error: { statusCode: response.status }
+          })
+        );
+        return;
+      }
+      const json = await response.json();
+      console.log(json);
+
+      const newData = {
+        booksTable: { [json.id]: json },
+        booksIdList: [json.id]
+      };
+      console.log("#######################");
+      console.log(newData);
+      const result = { ...newData, maxBooks: 1 };
+      dispatch(fetchBookLists.done({ params: { pageIndex: 0 }, result }));
+    } catch (error) {
+      console.log(`Error fetcing in getBookLists: ${error}`);
+    }
+  };
 
   const path = useSelector((state: RootState) =>
     get(state, ["router", "location", "pathname"])
@@ -71,7 +106,8 @@ export const BookDetail = ({history}: AppProps) => {
   if (!storeBookData){
 
     // LoadData({history, bookID, dummy});
-    LoadData({bookID, dummy});
+    // LoadData({bookID, dummy});
+    getOneBook(bookID);
 
     // 一回目のrenderはこっち
     return (
