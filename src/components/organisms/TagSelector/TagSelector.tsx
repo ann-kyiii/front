@@ -1,4 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {
+  // useState,
+  useEffect,
+  useCallback
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import cx from "classnames";
 import { RootState } from "../../../reducers";
@@ -18,6 +22,7 @@ export const TagSelector = (props: TagSelectorProps) => {
     (id: number, e: React.MouseEvent<HTMLElement>): void => {
       dispatch(changeKeywordTag(id));
     },
+    // eslint-disable-next-line
     []
   );
 
@@ -26,6 +31,7 @@ export const TagSelector = (props: TagSelectorProps) => {
     return () => {
       dispatch(resetKeywordTag());
     };
+  // eslint-disable-next-line
   }, []);
 
   return (

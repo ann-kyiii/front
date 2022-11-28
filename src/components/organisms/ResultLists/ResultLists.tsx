@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash";
 import { normalize, schema } from "normalizr";
@@ -11,6 +11,8 @@ import fetchBookLists, {
 import PageNatior from "../../molecules/PageNatior";
 import fetchSearch from "../../../apis/fetchSearch";
 import { push } from "connected-react-router";
+import ResultBook from "../../molecules/ResultBook";
+import styles from "./ResultLists.module.css";
 
 type ResultListsProps = AppProps & {};
 
@@ -33,18 +35,15 @@ export const ResultLists = (props: ResultListsProps) => {
         .slice(-1)
         .toString(),
       10
-    ) || 0;
+    ) || 1;
 
   // process: データ関係の処理
-
   // ページに関わる変数をReduxから取得
-  const {
-    isLoading,
-    booksTable,
-    booksIdList,
-    statusCode,
-    successedPageIndex
-  } = useSelector((state: BooksState) => get(state, ["books"]));
+  const storedBooksTable = useSelector((state: BooksState) => get(state, ["books", "booksTable"]))
+  const storedBooksIdList = useSelector((state: BooksState) => get(state, ["books", "booksIdList"]));
+  const isLoading = useSelector((state: BooksState) => get(state, ["books", "isLoading"]));
+  const statusCode = useSelector((state: BooksState) => get(state, ["books", "statusCode"]));
+  const maxBooks = useSelector((state: BooksState) => get(state, ["books", "maxBooks"]));
   const dispatch = useDispatch();
 
   const normalizeData = (
@@ -59,13 +58,13 @@ export const ResultLists = (props: ResultListsProps) => {
     return { booksTable, booksIdList };
   };
 
+  const limit = 10;
   const getBookLists = async (page: number) => {
-    if (successedPageIndex.includes(page)) {
-      return;
+    if (pageIndex <= 0) {
+      return
     }
 
-    const limit = 10;
-    const offset = page * limit;
+    const offset = (page - 1) * limit;
     const payload = {
       keywords: keyWords,
       offset: offset.toString(),
@@ -73,8 +72,8 @@ export const ResultLists = (props: ResultListsProps) => {
     };
     try {
       dispatch(fetchBookLists.started({ pageIndex: page }));
-      // const response = await fetchSearch(payload);
-      const response = await fetch("dummyData.json");
+      const response = await fetchSearch(payload);
+      // const response = await fetch("dummyData.json");
       if (!response.ok) {
         dispatch(
           fetchBookLists.failed({
@@ -90,29 +89,71 @@ export const ResultLists = (props: ResultListsProps) => {
       const result = { ...newData, maxBooks: json.max_books };
       dispatch(fetchBookLists.done({ params: { pageIndex: page }, result }));
     } catch (error) {
+      dispatch(
+        fetchBookLists.failed({
+          params: { pageIndex: page },
+          error: { statusCode: 500 }  // TODO: サーバに接続できないときのため暫定で設定
+        })
+      );
       console.log(`Error fetcing in getBookLists: ${error}`);
     }
   };
 
   useEffect(() => {
     getBookLists(pageIndex);
-  }, [pageIndex]);
+  // eslint-disable-next-line
+  }, [pageIndex, search]);
 
-  const handleClick = (pageIndex: any) => {
-    const encode = `book-lists?key=%E6%B7%B1%E5%B1%A4%E5%AD%A6%E7%BF%92&key=%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92&page=${pageIndex +
-      1}`;
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>, pageIndex: any) => {
+    const encode = `book-lists?${search.replace(`page=${pageIndex}`, `page=${e.currentTarget.value}`)}`;
     dispatch(push(encode));
     props.history.push(encode);
+    // ページ上部に戻す
+    window.scrollTo(0, 0);
   };
+
+  if (statusCode !== 200) {
+    console.log(`ERROR: ${statusCode}`);
+    return (
+      <div className={styles.ResultCount}>
+        <p>Server Error</p>
+      </div>
+    )
+  }
+  if (isLoading && storedBooksIdList.length === 0) {
+    return (
+      <div className={styles.ResultCount}>
+        <p>Loading...</p>
+      </div>
+    )
+  }
 
   return (
     <>
-      {/* <PageNatior
-        totalPage={100}
-        currentPage={0}
-        handleClick={() => console.log("Hello")}
-      /> */}
-      <button onClick={() => handleClick(pageIndex)}>BUTTON</button>
+      <div className={styles.ResultCount}>
+        <p>{maxBooks}冊ヒットしました</p>
+      </div>
+      {storedBooksIdList.map((bookId: number) => {
+        return (
+          <ResultBook
+            history={props.history}
+            data={
+              {
+                bookId: bookId,
+                bookName: storedBooksTable[bookId].bookName,
+                author: storedBooksTable[bookId].author,
+                imgURL: storedBooksTable[bookId].imgURL
+              }
+            }
+            key={bookId}
+          />
+        );
+      })}
+      <PageNatior
+        totalPage={Math.ceil(maxBooks / limit)}
+        currentPage={pageIndex}
+        handleClick={(e) => handleClick(e, pageIndex)}
+      />
     </>
   );
 };

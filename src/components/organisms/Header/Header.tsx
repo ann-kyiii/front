@@ -16,6 +16,7 @@ export const Header = (props: HeaderProps) => {
   const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(push(backLink));
     history.push(backLink);
+  // eslint-disable-next-line
   }, []);
 
   return (

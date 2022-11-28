@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import cx from "classnames";
 import styles from "./PageNatior.module.css";
 
@@ -13,31 +13,31 @@ export const PageNatior = (props: PageNatiorProps) => {
 
   const innerPage = () => {
     const items = [];
-    for (let idx = 0; idx < totalPage; idx += 1) {
-      console.log("Hello");
+    for (let idx = 1; idx <= totalPage; idx += 1) {
+      items.push(
+        <li key={idx}>
+          <button
+            type="button"
+            tabIndex={0}
+            onClick={handleClick}
+            className={cx(styles.ListButton, {
+              [styles.isSelected]: idx === currentPage
+            })}
+            value={idx}
+            disabled={(() => idx === currentPage ? true : false)()}
+          >
+            {idx}
+          </button>
+        </li>
+      )
     }
+    return <ul className={styles.PageNatiorULWrapper}>{ items }</ul>;
   };
 
   return (
-    <div>PageNatior</div>
-    // <div className={styles.PageNatiorWraper}>
-    //   <ul className={styles.PageNatiorULWraper}>
-    //     {emptyArray.map((un, index) => (
-    //       <li key={index} className={styles.TagListWraper}>
-    //         <button
-    //           type="button"
-    //           tabIndex={0}
-    //           onClick={handleClick}
-    //           className={cx(styles.ListButton, {
-    //             [styles.isSelected]: index === currentPage
-    //           })}
-    //         >
-    //           {index}
-    //         </button>
-    //       </li>
-    //     ))}
-    //   </ul>
-    // </div>
+    <div className={styles.PageNatiorWrapper}>
+      {innerPage()}
+    </div>
   );
 };
 

@@ -1,0 +1,60 @@
+.modal {
+    background-color: white;
+    box-shadow: 10px 10px 15px -10px;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 20px;
+    position: absolute;
+    width: 350px;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  top: 0%;
+
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+}
+
+.title {
+  text-align: center;
+}
+
+.center{
+  padding-top: 10px;
+  margin-left: 5em;
+  text-indent: -5em;
+}
+
+.ChooseButtonWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: -10px;
+}
+
+.ChooseButton {
+  cursor: pointer;
+  color: black;
+  background-color: transparent;
+  margin-top: 40px;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: 0.3s ease-in;
+  transition-property: background-color;
+}
+
+.ChooseButton:hover,
+.ChooseButton:focus {
+  background-color: var(--focus-background);
+}

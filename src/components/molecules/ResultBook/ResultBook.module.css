@@ -1,0 +1,60 @@
+.main {
+    display: flex;
+    /* justify-content: space-between; */
+    width: 85vw;
+    /* height: calc(100% - 100vh / 7 - 60px); */
+      /* 100%-button-header */
+    /* height: var(--main); */
+    /* overflow: auto; */
+    background-color: var(--focus-background);
+    margin: 10px auto;
+    cursor: pointer;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    /* width: 90vm; */
+}
+
+.bookTitle{
+    font-size: 18px;
+    text-align: left;
+    /* padding-top: 15px;
+    padding-left: 20px;
+    padding-bottom: 10px; */
+    padding: 5px 0;
+
+    /* background-color: blueviolet; */
+    float:left;
+    /* width: calc(100% - 135px - 20px); 100% - image - pad_left */
+    /* font-weight: bold; */
+}
+
+.bookAuthor{
+    font-size: 14px;
+    text-align: left;
+    padding: 5px 0;
+    float:left;
+}
+
+.bookImageBrock {
+    text-align: center;
+    float: right;
+    /*width: calc(135px - 10px); /* -padR -padL */
+    /* min-height: 100px; */
+    /* width: 100%; */
+    height: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-left: auto;
+}
+
+.image {
+    /* max-width: 100%; */
+}
+
+.image_error {
+    /* width: 80%; */
+    /* max-width: 100%; */
+}

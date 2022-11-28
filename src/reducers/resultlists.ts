@@ -20,10 +20,12 @@ export const resultListsReducer = reducerWithInitialState(initialState)
     statusCode: 200,
     isLoading: false,
     booksTable: {
-      ...state.booksTable,
+      // ...state.booksTable,
       ...payload.result.booksTable
     },
-    booksIdList: [...state.booksIdList, ...payload.result.booksIdList],
+    // 重複排除
+    // booksIdList: Array.from(new Set([...state.booksIdList, ...payload.result.booksIdList])),
+    booksIdList: [...payload.result.booksIdList],
     successedPageIndex: [
       ...state.successedPageIndex!,
       payload.params.pageIndex
