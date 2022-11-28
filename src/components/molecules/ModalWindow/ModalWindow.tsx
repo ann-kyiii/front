@@ -26,10 +26,18 @@ export const ModalWindow = (props: ModalWindowProps) => {
           </p>
         </div>
         <div className={styles.ChooseButtonWrapper}>
-          <button className={styles.ChooseButton} onClick={hideModal}>
+          <button
+            type="button"
+            className={styles.ChooseButton}
+            onClick={hideModal}
+          >
             DISAGREE
           </button>
-          <button className={styles.ChooseButton} onClick={handleClick}>
+          <button
+            type="button"
+            className={styles.ChooseButton}
+            onClick={handleClick}
+          >
             AGREE
           </button>
         </div>

@@ -18,7 +18,11 @@ const ButtonAbleDisable = (props: any) => {
   if (abled) {
     return (
       <>
-        <button className={classname} onClick={e => onclick(e, nextLink)}>
+        <button
+          type="button"
+          className={classname}
+          onClick={e => onclick(e, nextLink)}
+        >
           {text}
         </button>
       </>
@@ -27,6 +31,7 @@ const ButtonAbleDisable = (props: any) => {
   return (
     <>
       <button
+        type="button"
         className={classname}
         onClick={e => onclick(e, nextLink)}
         disabled
