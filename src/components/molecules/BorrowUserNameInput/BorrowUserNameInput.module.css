@@ -6,10 +6,10 @@
   height: 30px;
   padding-right: 0.4em;
   margin: 20px auto;
+  font-size: 20px;
   border: none;
   border-bottom: solid 5px var(--app-default-blue);
   border-radius: 3px;
-  font-size: 20px;
 }
 
 .BorrowUserNameInput:focus {

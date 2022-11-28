@@ -1,12 +1,12 @@
 .ReturnButtonWrapper {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .BorrowerWrapper {
-    text-align: center;
-    font-size: 26px;
-    font-weight: bold;
-    margin: 40px 0;
+  margin: 40px 0;
+  font-size: 26px;
+  font-weight: bold;
+  text-align: center;
 }

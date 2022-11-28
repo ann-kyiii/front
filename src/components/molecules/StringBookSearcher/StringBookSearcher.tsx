@@ -1,6 +1,4 @@
-import React, {
-  // RefObject
-} from "react";
+import React from "react";
 import cx from "classnames";
 import SearchBox from "../../atoms/SearchBox";
 import SearchIcon from "../../atoms/SearchIcon";

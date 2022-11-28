@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { get } from "lodash";
+import { ModalProvider } from "react-modal-hook";
 import { AppProps } from "../../App";
 import Header from "../organisms/Header";
 import BookName from "../molecules/BookName";
 import ReturnButton from "../organisms/ReturnButton";
 import { RootState } from "../../reducers";
-import { get } from "lodash";
 import fetchBookLists, { BooksState } from "../../actions/resultlists";
 import fetchBookId from "../../apis/fetchBookId";
-import { ModalProvider } from "react-modal-hook";
-import Full from "../../components/organisms/rena/Position/Full";
+import Full from "../organisms/rena/Position/Full";
 import styles from "./Return.module.css";
 
-export const Return = ({ history }: AppProps) =>  {
+export const Return = ({ history }: AppProps) => {
   const dispatch = useDispatch();
   // URLからid取得
   const path: string = useSelector((state: RootState) =>
@@ -20,13 +20,15 @@ export const Return = ({ history }: AppProps) =>  {
   ).slice(1);
   const decode: string = decodeURI(path);
   const urlParams: string[] = decode.split("/");
-  const bookId = parseInt(urlParams[1]);
-  const maxBooks = useSelector((state: BooksState) => get(state, ["books", "maxBooks"]));
+  const bookId = parseInt(urlParams[1], 10);
+  const maxBooks = useSelector((state: BooksState) =>
+    get(state, ["books", "maxBooks"])
+  );
 
-  //1冊の情報だけ取得する
+  // 1冊の情報だけ取得する
   const getOneBook = async () => {
     const payload = {
-      id: bookId,
+      id: bookId
     };
     try {
       dispatch(fetchBookLists.started({ pageIndex: 0 }));
@@ -57,7 +59,6 @@ export const Return = ({ history }: AppProps) =>  {
     }
   };
 
-
   const bookTitle = useSelector((state: RootState) =>
     get(state, ["books", "booksTable", bookId, "bookName"])
   );
@@ -66,38 +67,51 @@ export const Return = ({ history }: AppProps) =>  {
     get(state, ["books", "booksTable", bookId, "borrower"])
   );
 
-  const item = borrowerList !== undefined ? borrowerList.map((name, index) =>
-    <ReturnButton key={index} history={history} buttonName={name} bookTitle={bookTitle} returner={name} bookId={bookId}/>
-  ) : undefined;
+  const item =
+    borrowerList !== undefined
+      ? borrowerList.map((name, index) => (
+        <ReturnButton
+          key={index}
+          history={history}
+          buttonName={name}
+          bookTitle={bookTitle}
+          returner={name}
+          bookId={bookId}
+        />
+        ))
+      : undefined;
 
   useEffect(() => {
-    if(maxBooks === 0){
+    if (maxBooks === 0) {
       getOneBook();
       console.log("maxBooks === 0");
-    }else{
+    } else {
       console.log("booksTable is defined");
     }
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
-  if(bookTitle !== undefined){
+  if (bookTitle !== undefined) {
     return (
       <>
-        <Header history={history} backLink={"/book-detail/" + bookId} />
+        <Header history={history} backLink={`/book-detail/${bookId}`} />
         <BookName>{bookTitle}</BookName>
         <div className={styles.BorrowerWrapper}>Borrower</div>
         <ModalProvider>
-            <div className={styles.ReturnButtonWrapper}>
-              {item}
-            </div>
+          <div className={styles.ReturnButtonWrapper}>{item}</div>
         </ModalProvider>
       </>
     );
-  }else{
-    return (
-      <Full history={history} objKey="loadError"  backLink="/" text="Failed to find the book" buttonName="Home"/>
-    );
   }
+  return (
+    <Full
+      history={history}
+      objKey="loadError"
+      backLink="/"
+      text="Failed to find the book"
+      buttonName="Home"
+    />
+  );
 };
 
 export default Return;

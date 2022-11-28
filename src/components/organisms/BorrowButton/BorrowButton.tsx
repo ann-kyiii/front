@@ -20,13 +20,15 @@ export const BorrowButton = (props: BorrowButtonProps) => {
   const { buttonName, bookTitle, borrower, bookId } = props;
   const dispatch = useDispatch();
 
-  const maxBooks = useSelector((state: BooksState) => get(state, ["books", "maxBooks"]));
+  const maxBooks = useSelector((state: BooksState) =>
+    get(state, ["books", "maxBooks"])
+  );
 
   // サーバにidと名前を送り，redux更新
   const sendBorrowerName = async () => {
     const payload = {
       id: bookId.toString(),
-      name: borrower,
+      name: borrower
     };
     try {
       dispatch(fetchBookLists.started({ pageIndex: 0 }));
@@ -44,11 +46,11 @@ export const BorrowButton = (props: BorrowButtonProps) => {
       const json = await response.json();
       const newData = {
         booksTable: { [json.id]: json },
-        booksIdList: [] //ここでjson.idを追加してしまうと同じidが存在してしまう
+        booksIdList: [] // ここでjson.idを追加してしまうと同じidが存在してしまう
       };
       console.log("#######################");
       console.log(newData);
-      const result = { ...newData, maxBooks: maxBooks };
+      const result = { ...newData, maxBooks };
       dispatch(fetchBookLists.done({ params: { pageIndex: 0 }, result }));
     } catch (error) {
       console.log(`Error fetcing in getBookLists: ${error}`);
@@ -57,14 +59,23 @@ export const BorrowButton = (props: BorrowButtonProps) => {
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     sendBorrowerName();
-    const encode = encodeURI(`/book-detail/` + bookId);
+    const encode = encodeURI(`/book-detail/${bookId}`);
     dispatch(push(encode));
     props.history.push(encode);
-  }
+  };
 
-  const [showModal, hideModal] = useModal(() => (
-    <ModalWindow bookTitle={bookTitle} userType="Borrower" user={borrower} hideModal={hideModal} handleClick={handleClick} />
-  ), [bookTitle, borrower]);
+  const [showModal, hideModal] = useModal(
+    () => (
+      <ModalWindow
+        bookTitle={bookTitle}
+        userType="Borrower"
+        user={borrower}
+        hideModal={hideModal}
+        handleClick={handleClick}
+      />
+    ),
+    [bookTitle, borrower]
+  );
 
   return (
     <div className={styles.BorrowButtonWrapper}>
@@ -72,9 +83,11 @@ export const BorrowButton = (props: BorrowButtonProps) => {
         type="button"
         aria-label="Submit"
         onClick={showModal}
-        disabled={borrower === "" ? true: false}
+        disabled={borrower === ""}
         className={styles.BorrowButton}
-      >{buttonName}</button>
+      >
+        {buttonName}
+      </button>
     </div>
   );
 };

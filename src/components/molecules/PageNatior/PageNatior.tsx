@@ -24,21 +24,17 @@ export const PageNatior = (props: PageNatiorProps) => {
               [styles.isSelected]: idx === currentPage
             })}
             value={idx}
-            disabled={(() => idx === currentPage ? true : false)()}
+            disabled={(() => idx === currentPage)()}
           >
             {idx}
           </button>
         </li>
-      )
+      );
     }
-    return <ul className={styles.PageNatiorULWrapper}>{ items }</ul>;
+    return <ul className={styles.PageNatiorULWrapper}>{items}</ul>;
   };
 
-  return (
-    <div className={styles.PageNatiorWrapper}>
-      {innerPage()}
-    </div>
-  );
+  return <div className={styles.PageNatiorWrapper}>{innerPage()}</div>;
 };
 
 export default PageNatior;

@@ -1,1 +1,1 @@
-export { ResultBook as default} from "./ResultBook";
+export { ResultBook as default } from "./ResultBook";
