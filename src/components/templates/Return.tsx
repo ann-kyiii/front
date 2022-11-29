@@ -67,20 +67,6 @@ export const Return = ({ history }: AppProps) => {
     get(state, ["books", "booksTable", bookId, "borrower"])
   );
 
-  const item =
-    borrowerList !== undefined
-      ? borrowerList.map((name, index) => (
-        <ReturnButton
-          key={index}
-          history={history}
-          buttonName={name}
-          bookTitle={bookTitle}
-          returner={name}
-          bookId={bookId}
-        />
-        ))
-      : undefined;
-
   useEffect(() => {
     if (maxBooks === 0) {
       getOneBook();
@@ -98,7 +84,21 @@ export const Return = ({ history }: AppProps) => {
         <BookName>{bookTitle}</BookName>
         <div className={styles.BorrowerWrapper}>Borrower</div>
         <ModalProvider>
-          <div className={styles.ReturnButtonWrapper}>{item}</div>
+          <div className={styles.ReturnButtonWrapper}>
+            {borrowerList.map((name, index) => {
+              return (
+                <ReturnButton
+                  key={bookId}
+                  history={history}
+                  buttonName={name}
+                  bookTitle={bookTitle}
+                  returner={name}
+                  bookId={bookId}
+                />
+              );
+            })}
+            ;
+          </div>
         </ModalProvider>
       </>
     );
