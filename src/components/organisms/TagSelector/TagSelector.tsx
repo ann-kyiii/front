@@ -31,7 +31,7 @@ export const TagSelector = (props: TagSelectorProps) => {
     return () => {
       dispatch(resetKeywordTag());
     };
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   return (

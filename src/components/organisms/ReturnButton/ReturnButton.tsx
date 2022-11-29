@@ -2,8 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { useModal } from "react-modal-hook";
-import { AppProps } from "../../../App";
 import { get } from "lodash";
+import { AppProps } from "../../../App";
 import fetchBookLists, { BooksState } from "../../../actions/resultlists";
 import styles from "./ReturnButton.module.css";
 import fetchReturn from "../../../apis/fetchReturn";
@@ -20,13 +20,15 @@ export const ReturnButton = (props: ReturnButtonProps) => {
   const { buttonName, bookTitle, returner, bookId } = props;
   const dispatch = useDispatch();
 
-  const maxBooks = useSelector((state: BooksState) => get(state, ["books", "maxBooks"]));
+  const maxBooks = useSelector((state: BooksState) =>
+    get(state, ["books", "maxBooks"])
+  );
 
   // サーバにidと名前を送り，redux更新
   const sendReturnerName = async () => {
     const payload = {
       id: bookId.toString(),
-      name: returner,
+      name: returner
     };
     try {
       dispatch(fetchBookLists.started({ pageIndex: 0 }));
@@ -48,7 +50,7 @@ export const ReturnButton = (props: ReturnButtonProps) => {
       };
       console.log("#######################");
       console.log(newData);
-      const result = { ...newData, maxBooks: maxBooks };
+      const result = { ...newData, maxBooks };
       dispatch(fetchBookLists.done({ params: { pageIndex: 0 }, result }));
     } catch (error) {
       console.log(`Error fetcing in getBookLists: ${error}`);
@@ -56,23 +58,34 @@ export const ReturnButton = (props: ReturnButtonProps) => {
   };
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     sendReturnerName();
-    const encode = encodeURI(`/book-detail/` + bookId);
+    const encode = encodeURI(`/book-detail/${bookId}`);
     dispatch(push(encode));
     props.history.push(encode);
-  }
+  };
 
-  const [showModal, hideModal] = useModal(() => (
-    <ModalWindow bookTitle={bookTitle} userType="Returner" user={returner} hideModal={hideModal} handleClick={handleClick} />
-  ), [bookTitle, returner]);
+  const [showModal, hideModal] = useModal(
+    () => (
+      <ModalWindow
+        bookTitle={bookTitle}
+        userType="Returner"
+        user={returner}
+        hideModal={hideModal}
+        handleClick={handleClick}
+      />
+    ),
+    [bookTitle, returner]
+  );
 
   return (
     // <div className={styles.ReturnButtonWrapper}>
-      <button
+    <button
       type="button"
       aria-label="Submit"
       onClick={showModal}
       className={styles.ReturnButton}
-      >{buttonName}</button>
+    >
+      {buttonName}
+    </button>
     // </div>
   );
 };

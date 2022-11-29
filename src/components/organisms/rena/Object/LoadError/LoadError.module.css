@@ -1,16 +1,16 @@
-.text{
+.text {
+  height: 80px;
   font-size: 25px;
-  height: 80px;  
 }
 
 .button {
+  font-family: "Comic Sans MS";
   /* width: 150vw; */
   font-size: 25px;
-  font-family: 'Comic Sans MS';
   color: maroon;
+  background-color: rgba(0, 0, 0, 0);
 
   border-style: none;
-  background-color: rgba(0,0,0,0)
 }
 
 .button:hover {

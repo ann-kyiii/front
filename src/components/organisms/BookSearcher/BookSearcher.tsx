@@ -79,7 +79,7 @@ export const BookSearcher = (props: BookSearchProps) => {
     }
     const sessValue = sessionStorage.getItem("keyword") || "";
     setInputValue(sessValue);
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   const { className } = props;

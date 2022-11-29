@@ -1,14 +1,12 @@
 .FullCenter {
-  width: 100vw;
-  height: 100vh;
-    
-  justify-content: center;
-  align-items: center;
-
-
   display: flex;
   flex-direction: column;
   align-content: space-around;
+  align-items: center;
+
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
 }
 
 .back {
@@ -19,7 +17,6 @@
 }
 
 @media only screen and (min-width: 800px) {
-
   .back {
     background-size: 320px auto;
   }

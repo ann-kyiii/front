@@ -1,103 +1,98 @@
-#book_review{
-    width:850px;
-    height:calc(100vh);
-    margin: auto auto;
-    background-color: rosybrown;
-    position: relative;
+#book_review {
+  position: relative;
+  width: 850px;
+  height: calc(100vh);
+  margin: auto auto;
+  background-color: rosybrown;
 }
 
 /* スマホ用 */
 @media only screen and (max-width: 850px) {
-     
-    #book_review{
-        width: 100%;
-        height: 100vh;
-        margin: auto auto;
-    }
- 
+  #book_review {
+    width: 100%;
+    height: 100vh;
+    margin: auto auto;
+  }
 } /*デバイスの横幅が850以下の場合*/
 
-
 .notHeader {
-    height: calc(100% - 70px); /* 100%-header */
-    background-color: coral;
+  height: calc(100% - 70px); /* 100%-header */
+  background-color: coral;
 }
 
 /* divでもpでも　rifht,left=0, margin-right,margin-left=autoでcentering */
-.reviewListBrock{
-    overflow: auto;
-    width:95%;
-    height: calc(100% - 70px - 70px); /*100%-textBrock-header*/
-    /* height: calc(100% - 50% - 70px);  */
-    /* 100%-textBrock-header */
-    background-color: slategrey;
-    
-    right: 0;
-    left: 0;
-    margin-right: auto;
-    margin-left: auto;
+.reviewListBrock {
+  right: 0;
+  left: 0;
+  width: 95%;
+  height: calc(100% - 70px - 70px); /*100%-textBrock-header*/
+  margin-right: auto;
+  margin-left: auto;
+  overflow: auto;
+  /* height: calc(100% - 50% - 70px);  */
+  /* 100%-textBrock-header */
+  background-color: slategrey;
 }
 
-.reviewList{
-    font-size: 30px;
-    background-color: seagreen;
+.reviewList {
+  font-size: 30px;
+  background-color: seagreen;
 }
 
-.reviewLi{
-    padding-top: 15spx;
-    padding-bottom: 15px;
+.reviewLi {
+  padding-top: 15spx;
+  padding-bottom: 15px;
 }
-
 
 .textarea {
-    font-size: 28px;
-    width: calc(100% - 6px);/*なんか100%にすると親からはみ出る*/
-    height: calc(100% - 6px);
+  width: calc(100% - 6px); /*なんか100%にすると親からはみ出る*/
+  height: calc(100% - 6px);
+  font-size: 28px;
 }
 
-
-.textBlock{
-    width: calc(95%);
-    height: 70px;
-    position: absolute;
-    right: 0;
-    left: 0;
-    bottom: 10px;
-    margin-right: auto;
-    margin-left: auto;
+.textBlock {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  left: 0;
+  width: calc(95%);
+  height: 70px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-.textBlock_big{
-    width: calc(95%);
-    height: 50%;
-    position: absolute;
-    right: 0;
-    left: 0;
-    bottom: 10px;
-    margin-right: auto;
-    margin-left: auto;
+.textBlock_big {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  left: 0;
+  width: calc(95%);
+  height: 50%;
+  margin-right: auto;
+  margin-left: auto;
 }
-
 
 .button {
-    /* margin-top: -200px; */
-    font-size: 28px;
-    /* padding-left: 10px;
+  position: absolute;
+  top: -50px;
+  right: 0px;
+  z-index: 1;
+  /* padding-left: 10px;
      */
-    float: right;
-    color: #24d;
-    position:absolute; 
-    top:-50px; right:0px; z-index: 1; 
-    width: 60px;
-    height: 50px;
-    visibility: hidden;
+  float: right;
+  width: 60px;
+  height: 50px;
+  /* margin-top: -200px; */
+  font-size: 28px;
+  color: #24d;
+  visibility: hidden;
 }
 
 .button_visible {
-    visibility: visible;
+  visibility: visible;
 }
 
 .button:hover {
-    background-color: #24d;
-    color: #fff;
+  color: #fff;
+  background-color: #24d;
 }
