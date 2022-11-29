@@ -22,7 +22,9 @@ export const ModalWindow = (props: ModalWindowProps) => {
             {bookTitle}
           </p>
           <p>
-            {userType}：{user}
+            <>{userType}</>
+            <>：</>
+            <>{user}</>
           </p>
         </div>
         <div className={styles.ChooseButtonWrapper}>

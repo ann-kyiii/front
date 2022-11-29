@@ -177,7 +177,10 @@ export const BookDetail = ({ history }: AppProps) => {
             <p className={style.item}>{data.author}</p>
             <p className={style.itemName}>出版社：</p>
             <p className={style.item}>
-              {data.publisher} ({data.pubdate})
+              <>{data.publisher}</>
+              <> (</>
+              <>{data.pubdate}</>
+              <>)</>
             </p>
             <p className={style.itemName}>ISBN：</p>
             <p className={style.item}>{data.ISBN}</p>
@@ -187,7 +190,9 @@ export const BookDetail = ({ history }: AppProps) => {
             <p className={style.item}>{data.subGenre}</p>
             <p className={style.itemName}>在庫数：</p>
             <p className={style.item}>
-              {stockN} / {data.find}
+              <>{stockN}</>
+              <> / </>
+              <>{data.find}</>
             </p>
           </div>
         </div>
