@@ -24,7 +24,7 @@ export const ResultBook = (props: ResultBook) => {
   //   history.push(nextLink);
   // }, []);
   const handleClick = (
-    e: React.MouseEvent<HTMLDivElement>,
+    e: React.MouseEvent<HTMLButtonElement>,
     nextLink: string
   ) => {
     const encode = encodeURI(nextLink);
@@ -33,7 +33,8 @@ export const ResultBook = (props: ResultBook) => {
   };
 
   return (
-    <div
+    <button
+      type="button"
       className={style.main}
       onClick={e => handleClick(e, `book-detail/${data.bookId}`)}
     >
@@ -56,7 +57,7 @@ export const ResultBook = (props: ResultBook) => {
           alt="book title"
         />
       </div>
-    </div>
+    </button>
   );
 };
 

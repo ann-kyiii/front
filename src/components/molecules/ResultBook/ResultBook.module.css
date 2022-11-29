@@ -9,6 +9,7 @@
   /* height: var(--main); */
   /* overflow: auto; */
   background-color: var(--focus-background);
+  border: none;
 }
 
 .content {
