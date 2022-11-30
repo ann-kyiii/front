@@ -1,3 +1,22 @@
+.text {
+  height: 80px;
+  font-size: 25px;
+}
+
+.button {
+  font-family: "Comic Sans MS";
+  /* width: 150vw; */
+  font-size: 25px;
+  color: maroon;
+  background-color: rgba(0, 0, 0, 0);
+
+  border-style: none;
+}
+
+.button:hover {
+  color: darkgreen;
+}
+
 .FullCenter {
   display: flex;
   flex-direction: column;

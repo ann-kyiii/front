@@ -9,8 +9,8 @@ import ReturnButton from "../organisms/ReturnButton";
 import { RootState } from "../../reducers";
 import fetchBookLists, { BooksState } from "../../actions/resultlists";
 import fetchBookId from "../../apis/fetchBookId";
-import Full from "../organisms/rena/Position/Full";
 import styles from "./Return.module.css";
+import LoadError from "../organisms/LoadError";
 
 export const Return = ({ history }: AppProps) => {
   const dispatch = useDispatch();
@@ -67,20 +67,6 @@ export const Return = ({ history }: AppProps) => {
     get(state, ["books", "booksTable", bookId, "borrower"])
   );
 
-  const item =
-    borrowerList !== undefined
-      ? borrowerList.map((name, index) => (
-        <ReturnButton
-          key={index}
-          history={history}
-          buttonName={name}
-          bookTitle={bookTitle}
-          returner={name}
-          bookId={bookId}
-        />
-        ))
-      : undefined;
-
   useEffect(() => {
     if (maxBooks === 0) {
       getOneBook();
@@ -98,15 +84,28 @@ export const Return = ({ history }: AppProps) => {
         <BookName>{bookTitle}</BookName>
         <div className={styles.BorrowerWrapper}>Borrower</div>
         <ModalProvider>
-          <div className={styles.ReturnButtonWrapper}>{item}</div>
+          <div className={styles.ReturnButtonWrapper}>
+            {borrowerList.map((name, index) => {
+              return (
+                <ReturnButton
+                  key={bookId}
+                  history={history}
+                  buttonName={name}
+                  bookTitle={bookTitle}
+                  returner={name}
+                  bookId={bookId}
+                />
+              );
+            })}
+            ;
+          </div>
         </ModalProvider>
       </>
     );
   }
   return (
-    <Full
+    <LoadError
       history={history}
-      objKey="loadError"
       backLink="/"
       text="Failed to find the book"
       buttonName="Home"

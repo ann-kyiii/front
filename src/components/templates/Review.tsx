@@ -11,10 +11,10 @@ import {
 } from "lodash";
 import { AppProps } from "../../App";
 import Header from "../organisms/Header";
-import Full from "../organisms/rena/Position/Full";
 import style from "./Review.module.css";
 // import { string } from "prop-types";
 import { RootState } from "../../reducers";
+import LoadError from "../organisms/LoadError";
 
 export const Review = ({ history }: AppProps) => {
   const path = useSelector((state: RootState) =>
@@ -55,9 +55,8 @@ export const Review = ({ history }: AppProps) => {
   // book-detail/id になっているか
   if (!new RegExp(/^[0-9]+$/).test(arg)) {
     return (
-      <Full
+      <LoadError
         history={history}
-        objKey="loadError"
         backLink="/"
         text="Failed to read BookID"
         buttonName="Home"
