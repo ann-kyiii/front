@@ -10,7 +10,7 @@ import BorrowUserNameInput from "../molecules/BorrowUserNameInput";
 import { RootState } from "../../reducers";
 import fetchBookLists, { BooksState } from "../../actions/resultlists";
 import fetchBookId from "../../apis/fetchBookId";
-import Full from "../organisms/rena/Position/Full";
+import LoadError from "../organisms/LoadError";
 
 export const Borrow = ({ history }: AppProps) => {
   const [borrower, setBorrower] = useState<string>("");
@@ -103,9 +103,8 @@ export const Borrow = ({ history }: AppProps) => {
     );
   }
   return (
-    <Full
+    <LoadError
       history={history}
-      objKey="loadError"
       backLink="/"
       text="Failed to find the book"
       buttonName="Home"

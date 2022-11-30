@@ -4,13 +4,13 @@ import { get } from "lodash";
 import cx from "classnames";
 import { AppProps } from "../../App";
 import Header from "../organisms/Header";
-import Full from "../organisms/rena/Position/Full";
 import style from "./BookDetail.module.css";
 import { RootState } from "../../reducers";
 
 import imgError from "../organisms/rena/noImageAvailable.svg";
 import fetchBookLists from "../../actions/resultlists";
 import fetchBookId from "../../apis/fetchBookId";
+import LoadError from "../organisms/LoadError";
 
 const ButtonAbleDisable = (props: any) => {
   const { abled, classname, onclick, text, nextLink } = props;
@@ -105,9 +105,8 @@ export const BookDetail = ({ history }: AppProps) => {
   // book-detail/id になっているか
   if (!new RegExp(/^[0-9]+$/).test(arg)) {
     return (
-      <Full
+      <LoadError
         history={history}
-        objKey="loadError"
         backLink="/"
         text="Failed to read BookID"
         buttonName="Home"
@@ -115,7 +114,7 @@ export const BookDetail = ({ history }: AppProps) => {
     );
   }
   if (bookID < 0) {
-    setBookID(parseInt(arg));
+    setBookID(parseInt(arg, 10));
   }
 
   // 対象の本の情報がreduxにない ⇒ 対象の本だけ取得 (getでid指定で)
@@ -126,9 +125,8 @@ export const BookDetail = ({ history }: AppProps) => {
 
     // 一回目のrenderはこっち
     return (
-      <Full
+      <LoadError
         history={history}
-        objKey="loadError"
         backLink="/"
         text="Failed to find the book"
         buttonName="Home"

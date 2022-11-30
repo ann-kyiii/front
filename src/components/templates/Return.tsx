@@ -9,8 +9,8 @@ import ReturnButton from "../organisms/ReturnButton";
 import { RootState } from "../../reducers";
 import fetchBookLists, { BooksState } from "../../actions/resultlists";
 import fetchBookId from "../../apis/fetchBookId";
-import Full from "../organisms/rena/Position/Full";
 import styles from "./Return.module.css";
+import LoadError from "../organisms/LoadError";
 
 export const Return = ({ history }: AppProps) => {
   const dispatch = useDispatch();
@@ -104,9 +104,8 @@ export const Return = ({ history }: AppProps) => {
     );
   }
   return (
-    <Full
+    <LoadError
       history={history}
-      objKey="loadError"
       backLink="/"
       text="Failed to find the book"
       buttonName="Home"
