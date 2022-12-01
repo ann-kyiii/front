@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import style from "./ResultBook.module.css";
 
-import imgError from "../../organisms/rena/noImageAvailable.svg";
+import imgError from "../../../assets/images/noImageAvailable.svg";
 import { AppProps } from "../../../App";
 
 type ResultBook = AppProps & {
