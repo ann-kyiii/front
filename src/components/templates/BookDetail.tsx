@@ -7,7 +7,7 @@ import Header from "../organisms/Header";
 import style from "./BookDetail.module.css";
 import { RootState } from "../../reducers";
 
-import imgError from "../organisms/rena/noImageAvailable.svg";
+import imgError from "../../assets/images/noImageAvailable.svg";
 import fetchBookLists from "../../actions/resultlists";
 import fetchBookId from "../../apis/fetchBookId";
 import LoadError from "../organisms/LoadError";

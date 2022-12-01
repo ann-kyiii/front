@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import style from "./LoadError.module.css";
-import bookImg from "../rena/book.svg";
+import bookImg from "../../../assets/images/book.svg";
 import { AppProps } from "../../../App";
 
 type Props = AppProps & {
