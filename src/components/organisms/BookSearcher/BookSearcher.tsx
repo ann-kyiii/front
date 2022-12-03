@@ -37,7 +37,6 @@ export const BookSearcher = (props: BookSearchProps) => {
       .join("&");
     const encode = encodeURI(`/book-lists?${keys}&page=1`);
     dispatch(push(encode));
-    props.history.push(encode);
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {

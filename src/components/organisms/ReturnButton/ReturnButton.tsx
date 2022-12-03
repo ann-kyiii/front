@@ -60,7 +60,6 @@ export const ReturnButton = (props: ReturnButtonProps) => {
     sendReturnerName();
     const encode = encodeURI(`/book-detail/${bookId}`);
     dispatch(push(encode));
-    props.history.push(encode);
   };
 
   const [showModal, hideModal] = useModal(

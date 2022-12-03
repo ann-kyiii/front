@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 const Home = lazy(() => import("../templates/Home"));
 const BookLists = lazy(() => import("../templates/BookLists"));
@@ -11,20 +11,18 @@ const Camera = lazy(() => import("../templates/Camera"));
 const NotFound = lazy(() => import("../templates/NotFound"));
 
 const routes = (
-  <Router>
-    <Suspense fallback={null}>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/book-lists" component={BookLists} />
-        <Route path="/book-detail" component={BookDetail} />
-        <Route path="/borrow" component={Borrow} />
-        <Route path="/return" component={Return} />
-        <Route path="/review" component={Review} />
-        <Route path="/camera" component={Camera} />
-        <Route component={NotFound} />
-      </Switch>
-    </Suspense>
-  </Router>
+  <Suspense fallback={null}>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path="/book-lists" component={BookLists} />
+      <Route path="/book-detail" component={BookDetail} />
+      <Route path="/borrow" component={Borrow} />
+      <Route path="/return" component={Return} />
+      <Route path="/review" component={Review} />
+      <Route path="/camera" component={Camera} />
+      <Route component={NotFound} />
+    </Switch>
+  </Suspense>
 );
 
 export default routes;
