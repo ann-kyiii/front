@@ -29,7 +29,6 @@ export const ResultBook = (props: ResultBook) => {
   ) => {
     const encode = encodeURI(nextLink);
     dispatch(push(encode));
-    history.push(encode);
   };
 
   return (

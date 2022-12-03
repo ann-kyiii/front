@@ -123,7 +123,6 @@ export const ResultLists = (props: ResultListsProps) => {
       `page=${e.currentTarget.value}`
     )}`;
     dispatch(push(encode));
-    props.history.push(encode);
     // ページ上部に戻す
     window.scrollTo(0, 0);
   };

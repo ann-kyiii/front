@@ -61,7 +61,6 @@ export const BorrowButton = (props: BorrowButtonProps) => {
     sendBorrowerName();
     const encode = encodeURI(`/book-detail/${bookId}`);
     dispatch(push(encode));
-    props.history.push(encode);
   };
 
   const [showModal, hideModal] = useModal(
