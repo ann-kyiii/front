@@ -18,7 +18,6 @@ export const LoadError = (props: Props) => {
   // backLinkに遷移する関数
   const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(push(backLink));
-    history.push(backLink);
     // eslint-disable-next-line
   }, []);
 

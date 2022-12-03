@@ -1,14 +1,11 @@
 import React, { useCallback, useState } from "react";
-import {
-  // useDispatch,
-  useSelector
-} from "react-redux";
-// import { push } from "connected-react-router";
+import { useDispatch, useSelector } from "react-redux";
 import cx from "classnames";
 import {
   // isEmpty,
   get
 } from "lodash";
+import { push } from "connected-react-router";
 import { AppProps } from "../../App";
 import Header from "../organisms/Header";
 import style from "./Review.module.css";
@@ -24,6 +21,8 @@ export const Review = ({ history }: AppProps) => {
   // isFocus of textarea
   const [isFocus, setIsFocus] = useState(false);
 
+  const dispatch = useDispatch();
+
   const handleFocus = () => {
     setIsFocus(true);
   };
@@ -37,16 +36,14 @@ export const Review = ({ history }: AppProps) => {
     // APIをたたいて、新コメ送信
 
     const nextLink = path;
-    // dispatch(push(nextLink));
-    history.push(nextLink); // 遷移としてのリロード
+    dispatch(push(nextLink));
     // eslint-disable-next-line
   }, []);
 
   // eslint-disable-next-line
   const handleClickHome = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
       const nextLink = "/";
-      // dispatch(push(nextLink));
-      history.push(nextLink);
+      dispatch(push(nextLink));
       // eslint-disable-next-line
   }, []);
 

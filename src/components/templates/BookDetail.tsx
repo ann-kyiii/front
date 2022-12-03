@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash";
 import cx from "classnames";
+import { push } from "connected-react-router";
 import { AppProps } from "../../App";
 import Header from "../organisms/Header";
 import style from "./BookDetail.module.css";
@@ -46,16 +47,15 @@ export const BookDetail = ({ history }: AppProps) => {
   // var
   const [bookID, setBookID] = useState(-1);
   const [imgURL, setImgURL] = useState(undefined);
+  const dispatch = useDispatch();
 
   // function
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>, nextLink: string) => {
-      // dispatch(push(nextLink));
-      history.push(nextLink);
+      dispatch(push(nextLink));
       // eslint-disable-next-line
   }, []);
 
-  const dispatch = useDispatch();
 
   // 1冊の情報だけ取得する
   const getOneBook = async (bookId: number) => {
