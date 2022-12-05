@@ -129,16 +129,8 @@ export const BookDetail = () => {
 
   // borrowr計算
   const stockN = data.find - data.borrower.length;
-  // const stockN=0;
-  let borrowAbled = false;
-  let returnAbled = false;
-  if (stockN > 0) {
-    borrowAbled = true;
-  }
-  // if ((data.find - stockN)>0){
-  if (data.borrower.length > 0) {
-    returnAbled = true;
-  }
+  const borrowAbled = stockN > 0;
+  const returnAbled = data.borrower.length > 0;
 
   if (!imgURL) {
     setImgURL(data.imgURL);
