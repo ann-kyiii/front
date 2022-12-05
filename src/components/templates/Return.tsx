@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash";
 import { ModalProvider } from "react-modal-hook";
-import { AppProps } from "../../App";
 import Header from "../organisms/Header";
 import BookName from "../molecules/BookName";
 import ReturnButton from "../organisms/ReturnButton";
@@ -12,7 +11,7 @@ import fetchBookId from "../../apis/fetchBookId";
 import styles from "./Return.module.css";
 import LoadError from "../organisms/LoadError";
 
-export const Return = ({ history }: AppProps) => {
+export const Return = () => {
   const dispatch = useDispatch();
   // URLからid取得
   const path: string = useSelector((state: RootState) =>
@@ -80,7 +79,7 @@ export const Return = ({ history }: AppProps) => {
   if (bookTitle !== undefined) {
     return (
       <>
-        <Header history={history} backLink={`/book-detail/${bookId}`} />
+        <Header backLink={`/book-detail/${bookId}`} />
         <BookName>{bookTitle}</BookName>
         <div className={styles.BorrowerWrapper}>Borrower</div>
         <ModalProvider>
@@ -89,7 +88,6 @@ export const Return = ({ history }: AppProps) => {
               return (
                 <ReturnButton
                   key={bookId}
-                  history={history}
                   buttonName={name}
                   bookTitle={bookTitle}
                   returner={name}
@@ -104,12 +102,7 @@ export const Return = ({ history }: AppProps) => {
     );
   }
   return (
-    <LoadError
-      history={history}
-      backLink="/"
-      text="Failed to find the book"
-      buttonName="Home"
-    />
+    <LoadError backLink="/" text="Failed to find the book" buttonName="Home" />
   );
 };
 

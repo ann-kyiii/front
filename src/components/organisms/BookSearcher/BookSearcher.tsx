@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { isEmpty, get } from "lodash";
 import StringBookSearcher from "../../molecules/StringBookSearcher";
-import { AppProps } from "../../../App";
 import { RootState } from "../../../reducers";
 
-type BookSearchProps = AppProps & {
+type BookSearchProps = {
   className?: string[];
 };
 

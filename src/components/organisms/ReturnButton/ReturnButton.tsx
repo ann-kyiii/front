@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { useModal } from "react-modal-hook";
 import { get } from "lodash";
-import { AppProps } from "../../../App";
 import fetchBookLists, { BooksState } from "../../../actions/resultlists";
 import styles from "./ReturnButton.module.css";
 import fetchReturn from "../../../apis/fetchReturn";
 import ModalWindow from "../../molecules/ModalWindow";
 
-type ReturnButtonProps = AppProps & {
+type ReturnButtonProps = {
   buttonName: string;
   bookTitle: string;
   returner: string;

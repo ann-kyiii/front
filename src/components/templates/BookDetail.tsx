@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash";
 import cx from "classnames";
 import { push } from "connected-react-router";
-import { AppProps } from "../../App";
 import Header from "../organisms/Header";
 import style from "./BookDetail.module.css";
 import { RootState } from "../../reducers";
@@ -43,7 +42,7 @@ const ButtonAbleDisable = (props: any) => {
   );
 };
 
-export const BookDetail = ({ history }: AppProps) => {
+export const BookDetail = () => {
   // var
   const [bookID, setBookID] = useState(-1);
   const [imgURL, setImgURL] = useState(undefined);
@@ -105,12 +104,7 @@ export const BookDetail = ({ history }: AppProps) => {
   // book-detail/id になっているか
   if (!new RegExp(/^[0-9]+$/).test(arg)) {
     return (
-      <LoadError
-        history={history}
-        backLink="/"
-        text="Failed to read BookID"
-        buttonName="Home"
-      />
+      <LoadError backLink="/" text="Failed to read BookID" buttonName="Home" />
     );
   }
   if (bookID < 0) {
@@ -119,14 +113,11 @@ export const BookDetail = ({ history }: AppProps) => {
 
   // 対象の本の情報がreduxにない ⇒ 対象の本だけ取得 (getでid指定で)
   if (!storeBookData) {
-    // LoadData({history, bookID, dummy});
-    // LoadData({bookID, dummy});
     getOneBook(bookID);
 
     // 一回目のrenderはこっち
     return (
       <LoadError
-        history={history}
         backLink="/"
         text="Failed to find the book"
         buttonName="Home"
@@ -156,7 +147,7 @@ export const BookDetail = ({ history }: AppProps) => {
   return (
     <>
       <div id={style.book_detail}>
-        <Header history={history} backLink="/" />
+        <Header backLink="/" />
 
         <div className={style.main}>
           <div className={style.bookTytle}>{data.bookName}</div>

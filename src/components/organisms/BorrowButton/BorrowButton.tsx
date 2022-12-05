@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { useModal } from "react-modal-hook";
 import { get } from "lodash";
-import { AppProps } from "../../../App";
 import styles from "./BorrowButton.module.css";
 import fetchBookLists, { BooksState } from "../../../actions/resultlists";
 import fetchBorrow from "../../../apis/fetchBorrow";
 import ModalWindow from "../../molecules/ModalWindow";
 
-type BorrowButtonProps = AppProps & {
+type BorrowButtonProps = {
   buttonName: string;
   bookTitle: string;
   borrower: string;
