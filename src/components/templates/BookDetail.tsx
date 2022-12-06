@@ -11,36 +11,7 @@ import imgError from "../../assets/images/noImageAvailable.svg";
 import fetchBookLists from "../../actions/resultlists";
 import fetchBookId from "../../apis/fetchBookId";
 import LoadError from "../organisms/LoadError";
-
-const ButtonAbleDisable = (props: any) => {
-  const { abled, classname, onclick, text, nextLink } = props;
-
-  if (abled) {
-    return (
-      <>
-        <button
-          type="button"
-          className={classname}
-          onClick={e => onclick(e, nextLink)}
-        >
-          {text}
-        </button>
-      </>
-    );
-  }
-  return (
-    <>
-      <button
-        type="button"
-        className={classname}
-        onClick={e => onclick(e, nextLink)}
-        disabled
-      >
-        {text}
-      </button>
-    </>
-  );
-};
+import SelectButton from "../organisms/SelectButton";
 
 export const BookDetail = () => {
   // var
@@ -179,33 +150,27 @@ export const BookDetail = () => {
         </div>
 
         <div className={style.buttonsBlock}>
-          <div className={style.borrow}>
-            <ButtonAbleDisable
-              abled={borrowAbled}
-              nextLink={`/borrow/${bookID}`}
-              classname={cx(style.button, style.buttonColor1)}
-              onclick={handleClick}
-              text="Borrow"
-            />
-          </div>
-          <div className={style.return}>
-            <ButtonAbleDisable
-              abled={returnAbled}
-              nextLink={`/return/${bookID}`}
-              classname={cx(style.button, style.buttonColor2)}
-              onclick={handleClick}
-              text="Return"
-            />
-          </div>
-          <div className={style.review}>
-            <ButtonAbleDisable
-              abled={false}
-              nextLink={`/review/${bookID}`}
-              classname={cx(style.button, style.buttonColor3)}
-              onclick={handleClick}
-              text="Review"
-            />
-          </div>
+          <SelectButton
+            isAbled={borrowAbled}
+            nextLink={`/borrow/${bookID}`}
+            className={["BorrowButtonColor"]}
+            onClick={handleClick}
+            text="Borrow"
+          />
+          <SelectButton
+            isAbled={returnAbled}
+            nextLink={`/return/${bookID}`}
+            className={["ReturnButtonColor"]}
+            onClick={handleClick}
+            text="Return"
+          />
+          <SelectButton
+            isAbled={false}
+            nextLink={`/review/${bookID}`}
+            className={["ReviewButtonColor"]}
+            onClick={handleClick}
+            text="Review"
+          />
         </div>
       </div>
     </>
