@@ -113,7 +113,7 @@ export const ResultLists = () => {
 
   const handleClick = (
     e: React.MouseEvent<HTMLButtonElement>,
-    currentPageIndex: any
+    currentPageIndex: number
   ) => {
     const encode = `book-lists?${search.replace(
       `page=${currentPageIndex}`,
