@@ -9,14 +9,13 @@ import fetchReturn from "../../../apis/fetchReturn";
 import ModalWindow from "../../molecules/ModalWindow";
 
 type ReturnButtonProps = {
-  buttonName: string;
   bookTitle: string;
   returner: string;
   bookId: number;
 };
 
 export const ReturnButton = (props: ReturnButtonProps) => {
-  const { buttonName, bookTitle, returner, bookId } = props;
+  const { bookTitle, returner, bookId } = props;
   const dispatch = useDispatch();
 
   const maxBooks = useSelector((state: BooksState) =>
@@ -75,16 +74,14 @@ export const ReturnButton = (props: ReturnButtonProps) => {
   );
 
   return (
-    // <div className={styles.ReturnButtonWrapper}>
     <button
       type="button"
       aria-label="Submit"
       onClick={showModal}
       className={styles.ReturnButton}
     >
-      {buttonName}
+      {returner}
     </button>
-    // </div>
   );
 };
 

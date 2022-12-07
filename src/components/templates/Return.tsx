@@ -87,8 +87,7 @@ export const Return = () => {
             {borrowerList.map((name, index) => {
               return (
                 <ReturnButton
-                  key={bookId}
-                  buttonName={name}
+                  key={index}
                   bookTitle={bookTitle}
                   returner={name}
                   bookId={bookId}
