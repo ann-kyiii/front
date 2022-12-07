@@ -9,14 +9,13 @@ import fetchBorrow from "../../../apis/fetchBorrow";
 import ModalWindow from "../../molecules/ModalWindow";
 
 type BorrowButtonProps = {
-  buttonName: string;
   bookTitle: string;
   borrower: string;
   bookId: number;
 };
 
 export const BorrowButton = (props: BorrowButtonProps) => {
-  const { buttonName, bookTitle, borrower, bookId } = props;
+  const { bookTitle, borrower, bookId } = props;
   const dispatch = useDispatch();
 
   const maxBooks = useSelector((state: BooksState) =>
@@ -55,7 +54,6 @@ export const BorrowButton = (props: BorrowButtonProps) => {
       console.log(`Error fetcing in getBookLists: ${error}`);
     }
   };
-
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     sendBorrowerName();
     const encode = encodeURI(`/book-detail/${bookId}`);
@@ -84,7 +82,7 @@ export const BorrowButton = (props: BorrowButtonProps) => {
         disabled={borrower === ""}
         className={styles.BorrowButton}
       >
-        {buttonName}
+        Borrow
       </button>
     </div>
   );

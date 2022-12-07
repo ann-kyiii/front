@@ -91,7 +91,6 @@ export const Borrow = () => {
         />
         <ModalProvider>
           <BorrowButton
-            buttonName="Borrow"
             bookTitle={bookTitle}
             borrower={borrower}
             bookId={bookId}
