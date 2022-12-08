@@ -3,21 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { useModal } from "react-modal-hook";
 import { get } from "lodash";
-import { AppProps } from "../../../App";
 import fetchBookLists, { BooksState } from "../../../actions/resultlists";
 import styles from "./ReturnButton.module.css";
 import fetchReturn from "../../../apis/fetchReturn";
 import ModalWindow from "../../molecules/ModalWindow";
 
-type ReturnButtonProps = AppProps & {
-  buttonName: string;
+type ReturnButtonProps = {
   bookTitle: string;
   returner: string;
   bookId: number;
 };
 
 export const ReturnButton = (props: ReturnButtonProps) => {
-  const { buttonName, bookTitle, returner, bookId } = props;
+  const { bookTitle, returner, bookId } = props;
   const dispatch = useDispatch();
 
   const maxBooks = useSelector((state: BooksState) =>
@@ -76,16 +74,14 @@ export const ReturnButton = (props: ReturnButtonProps) => {
   );
 
   return (
-    // <div className={styles.ReturnButtonWrapper}>
     <button
       type="button"
       aria-label="Submit"
       onClick={showModal}
       className={styles.ReturnButton}
     >
-      {buttonName}
+      {returner}
     </button>
-    // </div>
   );
 };
 

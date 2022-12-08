@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash";
 import cx from "classnames";
 import { push } from "connected-react-router";
-import { AppProps } from "../../App";
 import Header from "../organisms/Header";
 import style from "./BookDetail.module.css";
 import { RootState } from "../../reducers";
@@ -12,38 +11,9 @@ import imgError from "../../assets/images/noImageAvailable.svg";
 import fetchBookLists from "../../actions/resultlists";
 import fetchBookId from "../../apis/fetchBookId";
 import LoadError from "../organisms/LoadError";
+import SelectButton from "../organisms/SelectButton";
 
-const ButtonAbleDisable = (props: any) => {
-  const { abled, classname, onclick, text, nextLink } = props;
-
-  if (abled) {
-    return (
-      <>
-        <button
-          type="button"
-          className={classname}
-          onClick={e => onclick(e, nextLink)}
-        >
-          {text}
-        </button>
-      </>
-    );
-  }
-  return (
-    <>
-      <button
-        type="button"
-        className={classname}
-        onClick={e => onclick(e, nextLink)}
-        disabled
-      >
-        {text}
-      </button>
-    </>
-  );
-};
-
-export const BookDetail = ({ history }: AppProps) => {
+export const BookDetail = () => {
   // var
   const [bookID, setBookID] = useState(-1);
   const [imgURL, setImgURL] = useState(undefined);
@@ -105,12 +75,7 @@ export const BookDetail = ({ history }: AppProps) => {
   // book-detail/id になっているか
   if (!new RegExp(/^[0-9]+$/).test(arg)) {
     return (
-      <LoadError
-        history={history}
-        backLink="/"
-        text="Failed to read BookID"
-        buttonName="Home"
-      />
+      <LoadError backLink="/" text="Failed to read BookID" buttonName="Home" />
     );
   }
   if (bookID < 0) {
@@ -119,14 +84,11 @@ export const BookDetail = ({ history }: AppProps) => {
 
   // 対象の本の情報がreduxにない ⇒ 対象の本だけ取得 (getでid指定で)
   if (!storeBookData) {
-    // LoadData({history, bookID, dummy});
-    // LoadData({bookID, dummy});
     getOneBook(bookID);
 
     // 一回目のrenderはこっち
     return (
       <LoadError
-        history={history}
         backLink="/"
         text="Failed to find the book"
         buttonName="Home"
@@ -138,16 +100,8 @@ export const BookDetail = ({ history }: AppProps) => {
 
   // borrowr計算
   const stockN = data.find - data.borrower.length;
-  // const stockN=0;
-  let borrowAbled = false;
-  let returnAbled = false;
-  if (stockN > 0) {
-    borrowAbled = true;
-  }
-  // if ((data.find - stockN)>0){
-  if (data.borrower.length > 0) {
-    returnAbled = true;
-  }
+  const borrowAbled = stockN > 0;
+  const returnAbled = data.borrower.length > 0;
 
   if (!imgURL) {
     setImgURL(data.imgURL);
@@ -156,7 +110,7 @@ export const BookDetail = ({ history }: AppProps) => {
   return (
     <>
       <div id={style.book_detail}>
-        <Header history={history} backLink="/" />
+        <Header backLink="/" />
 
         <div className={style.main}>
           <div className={style.bookTytle}>{data.bookName}</div>
@@ -196,33 +150,27 @@ export const BookDetail = ({ history }: AppProps) => {
         </div>
 
         <div className={style.buttonsBlock}>
-          <div className={style.borrow}>
-            <ButtonAbleDisable
-              abled={borrowAbled}
-              nextLink={`/borrow/${bookID}`}
-              classname={cx(style.button, style.buttonColor1)}
-              onclick={handleClick}
-              text="Borrow"
-            />
-          </div>
-          <div className={style.return}>
-            <ButtonAbleDisable
-              abled={returnAbled}
-              nextLink={`/return/${bookID}`}
-              classname={cx(style.button, style.buttonColor2)}
-              onclick={handleClick}
-              text="Return"
-            />
-          </div>
-          <div className={style.review}>
-            <ButtonAbleDisable
-              abled={false}
-              nextLink={`/review/${bookID}`}
-              classname={cx(style.button, style.buttonColor3)}
-              onclick={handleClick}
-              text="Review"
-            />
-          </div>
+          <SelectButton
+            isAbled={borrowAbled}
+            nextLink={`/borrow/${bookID}`}
+            className={["BorrowButtonColor"]}
+            onClick={handleClick}
+            text="Borrow"
+          />
+          <SelectButton
+            isAbled={returnAbled}
+            nextLink={`/return/${bookID}`}
+            className={["ReturnButtonColor"]}
+            onClick={handleClick}
+            text="Return"
+          />
+          <SelectButton
+            isAbled={false}
+            nextLink={`/review/${bookID}`}
+            className={["ReviewButtonColor"]}
+            onClick={handleClick}
+            text="Review"
+          />
         </div>
       </div>
     </>

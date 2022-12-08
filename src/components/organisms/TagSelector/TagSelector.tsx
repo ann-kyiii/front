@@ -1,8 +1,4 @@
-import React, {
-  // useState,
-  useEffect,
-  useCallback
-} from "react";
+import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import cx from "classnames";
 import { RootState } from "../../../reducers";
@@ -12,9 +8,7 @@ import {
 } from "../../../actions/tagselector";
 import styles from "./TagSelector.module.css";
 
-type TagSelectorProps = {};
-
-export const TagSelector = (props: TagSelectorProps) => {
+export const TagSelector = () => {
   const keywordTags = useSelector((state: RootState) => state.tagSelector);
   const dispatch = useDispatch();
 

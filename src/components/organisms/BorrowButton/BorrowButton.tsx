@@ -3,21 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { useModal } from "react-modal-hook";
 import { get } from "lodash";
-import { AppProps } from "../../../App";
 import styles from "./BorrowButton.module.css";
 import fetchBookLists, { BooksState } from "../../../actions/resultlists";
 import fetchBorrow from "../../../apis/fetchBorrow";
 import ModalWindow from "../../molecules/ModalWindow";
 
-type BorrowButtonProps = AppProps & {
-  buttonName: string;
+type BorrowButtonProps = {
   bookTitle: string;
   borrower: string;
   bookId: number;
 };
 
 export const BorrowButton = (props: BorrowButtonProps) => {
-  const { buttonName, bookTitle, borrower, bookId } = props;
+  const { bookTitle, borrower, bookId } = props;
   const dispatch = useDispatch();
 
   const maxBooks = useSelector((state: BooksState) =>
@@ -56,7 +54,6 @@ export const BorrowButton = (props: BorrowButtonProps) => {
       console.log(`Error fetcing in getBookLists: ${error}`);
     }
   };
-
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     sendBorrowerName();
     const encode = encodeURI(`/book-detail/${bookId}`);
@@ -85,7 +82,7 @@ export const BorrowButton = (props: BorrowButtonProps) => {
         disabled={borrower === ""}
         className={styles.BorrowButton}
       >
-        {buttonName}
+        Borrow
       </button>
     </div>
   );

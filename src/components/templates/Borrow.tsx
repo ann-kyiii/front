@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash";
 import { ModalProvider } from "react-modal-hook";
-import { AppProps } from "../../App";
 import Header from "../organisms/Header";
 import BookName from "../molecules/BookName";
 import BorrowButton from "../organisms/BorrowButton";
@@ -12,7 +11,7 @@ import fetchBookLists, { BooksState } from "../../actions/resultlists";
 import fetchBookId from "../../apis/fetchBookId";
 import LoadError from "../organisms/LoadError";
 
-export const Borrow = ({ history }: AppProps) => {
+export const Borrow = () => {
   const [borrower, setBorrower] = useState<string>("");
   const dispatch = useDispatch();
   // URLからid取得
@@ -84,7 +83,7 @@ export const Borrow = ({ history }: AppProps) => {
   if (bookTitle !== undefined) {
     return (
       <>
-        <Header history={history} backLink={`/book-detail/${bookId}`} />
+        <Header backLink={`/book-detail/${bookId}`} />
         <BookName>{bookTitle}</BookName>
         <BorrowUserNameInput
           placeValue="UserName"
@@ -92,8 +91,6 @@ export const Borrow = ({ history }: AppProps) => {
         />
         <ModalProvider>
           <BorrowButton
-            history={history}
-            buttonName="Borrow"
             bookTitle={bookTitle}
             borrower={borrower}
             bookId={bookId}
@@ -103,12 +100,7 @@ export const Borrow = ({ history }: AppProps) => {
     );
   }
   return (
-    <LoadError
-      history={history}
-      backLink="/"
-      text="Failed to find the book"
-      buttonName="Home"
-    />
+    <LoadError backLink="/" text="Failed to find the book" buttonName="Home" />
   );
 };
 

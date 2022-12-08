@@ -3,14 +3,13 @@ import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import styles from "./Header.module.css";
 import Arrow from "../../atoms/Arrow";
-import { AppProps } from "../../../App";
 
-type HeaderProps = AppProps & {
+type HeaderProps = {
   backLink: string;
 };
 
 export const Header = (props: HeaderProps) => {
-  const { history, backLink } = props;
+  const { backLink } = props;
   const dispatch = useDispatch();
 
   const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {

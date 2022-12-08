@@ -1,19 +1,14 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import cx from "classnames";
-import {
-  // isEmpty,
-  get
-} from "lodash";
+import { get } from "lodash";
 import { push } from "connected-react-router";
-import { AppProps } from "../../App";
 import Header from "../organisms/Header";
 import style from "./Review.module.css";
-// import { string } from "prop-types";
 import { RootState } from "../../reducers";
 import LoadError from "../organisms/LoadError";
 
-export const Review = ({ history }: AppProps) => {
+export const Review = () => {
   const path = useSelector((state: RootState) =>
     get(state, ["router", "location", "pathname"])
   );
@@ -52,12 +47,7 @@ export const Review = ({ history }: AppProps) => {
   // book-detail/id になっているか
   if (!new RegExp(/^[0-9]+$/).test(arg)) {
     return (
-      <LoadError
-        history={history}
-        backLink="/"
-        text="Failed to read BookID"
-        buttonName="Home"
-      />
+      <LoadError backLink="/" text="Failed to read BookID" buttonName="Home" />
     );
   }
 
@@ -76,7 +66,7 @@ export const Review = ({ history }: AppProps) => {
   return (
     <>
       <div id={style.book_review}>
-        <Header history={history} backLink={backLink} />
+        <Header backLink={backLink} />
 
         <div className={style.reviewListBrock}>
           <ul className={style.reviewList}>

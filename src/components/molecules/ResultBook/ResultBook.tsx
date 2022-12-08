@@ -1,22 +1,17 @@
-import React, {
-  // RefObject,
-  // useCallback,
-  useState
-} from "react";
+import React, { useState } from "react";
 import cx from "classnames";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import style from "./ResultBook.module.css";
 
 import imgError from "../../../assets/images/noImageAvailable.svg";
-import { AppProps } from "../../../App";
 
-type ResultBook = AppProps & {
+type ResultBook = {
   data: { bookId: number; bookName: string; author: string; imgURL: string };
 };
 
 export const ResultBook = (props: ResultBook) => {
-  const { history, data } = props;
+  const { data } = props;
   const [imgURL, setImgURL] = useState(data.imgURL);
   const dispatch = useDispatch();
   // const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>, nextLink:string) => {

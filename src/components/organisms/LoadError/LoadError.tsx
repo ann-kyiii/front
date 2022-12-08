@@ -3,16 +3,15 @@ import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import style from "./LoadError.module.css";
 import bookImg from "../../../assets/images/book.svg";
-import { AppProps } from "../../../App";
 
-type Props = AppProps & {
+type Props = {
   backLink: string;
   text: string;
   buttonName?: string;
 };
 
 export const LoadError = (props: Props) => {
-  const { text, backLink, history, buttonName } = props;
+  const { text, backLink, buttonName } = props;
   const dispatch = useDispatch();
 
   // backLinkに遷移する関数

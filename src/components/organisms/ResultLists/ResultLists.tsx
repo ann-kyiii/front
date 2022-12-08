@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash";
 import { normalize, schema } from "normalizr";
 import { push } from "connected-react-router";
-import { AppProps } from "../../../App";
 import { RootState } from "../../../reducers";
 import fetchBookLists, {
   BookLists,
@@ -14,9 +13,7 @@ import fetchSearch from "../../../apis/fetchSearch";
 import ResultBook from "../../molecules/ResultBook";
 import styles from "./ResultLists.module.css";
 
-type ResultListsProps = AppProps & {};
-
-export const ResultLists = (props: ResultListsProps) => {
+export const ResultLists = () => {
   // init: ページ情報取得
   const search: string = useSelector((state: RootState) =>
     get(state, ["router", "location", "search"])
@@ -116,7 +113,7 @@ export const ResultLists = (props: ResultListsProps) => {
 
   const handleClick = (
     e: React.MouseEvent<HTMLButtonElement>,
-    currentPageIndex: any
+    currentPageIndex: number
   ) => {
     const encode = `book-lists?${search.replace(
       `page=${currentPageIndex}`,
@@ -154,7 +151,6 @@ export const ResultLists = (props: ResultListsProps) => {
       {storedBooksIdList.map((bookId: number) => {
         return (
           <ResultBook
-            history={props.history}
             data={{
               bookId,
               bookName: storedBooksTable[bookId].bookName,
