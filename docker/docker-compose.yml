@@ -1,0 +1,11 @@
+version: '3'
+services:
+    node:
+        build:
+            context: ../
+            dockerfile: ./docker/Dockerfile
+        environment:
+            - NODE_ENV=production
+        working_dir: /app
+        ports:
+            - '3000:3000'

@@ -1,0 +1,8 @@
+{
+    "name": "library app",
+    "dockerComposeFile": ["./docker-compose.yml"],
+    "service": "node",
+    "workspaceFolder": "/usr/src/app",
+    "extensions": [],
+    "settings": {}
+}
