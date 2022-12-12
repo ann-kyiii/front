@@ -94,7 +94,6 @@ export const Return = () => {
                 />
               );
             })}
-            ;
           </div>
         </ModalProvider>
       </>
