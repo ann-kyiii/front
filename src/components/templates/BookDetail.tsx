@@ -113,7 +113,7 @@ export const BookDetail = () => {
         <Header backLink="/" />
 
         <div className={style.main}>
-          <div className={style.bookTytle}>{data.bookName}</div>
+          <div className={style.bookTitle}>{data.bookName}</div>
           <div className={style.bookImageBrock}>
             <img
               src={imgURL}

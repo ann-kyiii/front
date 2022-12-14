@@ -18,7 +18,7 @@ export const ModalWindow = (props: ModalWindowProps) => {
         <div className={styles.title}>確認</div>
         <div className={styles.center}>
           <p>
-            Book Title：
+            BookTitle：
             {bookTitle}
           </p>
           <p>

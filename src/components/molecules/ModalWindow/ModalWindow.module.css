@@ -13,6 +13,14 @@
   box-shadow: 10px 10px 15px -10px;
 }
 
+/* スマホ用 */
+@media only screen and (max-width: 400px) {
+  .modal {
+    width: auto;
+    margin: auto 10px;
+  }
+} /*デバイスの横幅が850以下の場合*/
+
 .wrapper {
   position: absolute;
   top: 0%;
@@ -30,6 +38,7 @@
   padding-top: 10px;
   margin-left: 5em;
   text-indent: -5em;
+  line-height: 20px;
 }
 
 .ChooseButtonWrapper {

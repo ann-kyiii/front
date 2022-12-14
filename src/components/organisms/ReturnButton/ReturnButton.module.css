@@ -20,6 +20,13 @@
   appearance: none;
 }
 
+/* スマホ用 */
+@media only screen and (max-width: 400px) {
+  .ReturnButton {
+    width: 50%;
+  }
+} /*デバイスの横幅が850以下の場合*/
+
 .ReturnButton:hover,
 .ReturnButton:focus {
   background-color: var(--focus-background);

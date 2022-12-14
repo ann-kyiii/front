@@ -1,15 +1,10 @@
 .main {
   display: flex;
-  /* justify-content: space-between; */
   width: 85vw;
   margin: 10px auto;
   cursor: pointer;
-  /* height: calc(100% - 100vh / 7 - 60px); */
-  /* 100%-button-header */
-  /* height: var(--main); */
-  /* overflow: auto; */
-  background-color: var(--focus-background);
   border: none;
+  box-shadow: 10px 10px 10px -10px;
 }
 
 .content {
@@ -48,13 +43,4 @@
   padding-left: 10px;
   margin-left: auto;
   text-align: center;
-}
-
-.image {
-  /* max-width: 100%; */
-}
-
-.image_error {
-  /* width: 80%; */
-  /* max-width: 100%; */
 }

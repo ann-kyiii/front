@@ -1,6 +1,6 @@
 :root {
-  --header: calc(10px + 42px); /* headerのpadとarrow */
-  --footer: calc(100vh / 8);
+  --header: calc(10px + 47px); /* headerのpadとarrow */
+  --footer: 70px;
   --main: calc(100vh - var(--header) - var(--footer));
 }
 
@@ -29,7 +29,7 @@
   /* background-color: yellowgreen; */
 }
 
-.bookTytle {
+.bookTitle {
   /* background-color: blueviolet; */
   float: left;
   width: calc(100% - 135px - 20px); /* 100% - image - pad_left*/
