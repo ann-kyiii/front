@@ -17,6 +17,14 @@ export const BookSearcher = (props: BookSearchProps) => {
   const path = useSelector((state: RootState) =>
     get(state, ["router", "location", "pathname"])
   );
+  const search: string = useSelector((state: RootState) =>
+    get(state, ["router", "location", "search"])
+  ).slice(1);
+  const decode: string = decodeURI(search);
+  const urlParams: string[] = decode.split(/&/g);
+  const keyWords: string[] = urlParams
+    .filter(param => param.startsWith("key="))
+    .map(param => param.replace(/^key=/g, ""));
 
   const handleToBookLists = () => {
     const keyWord: string = keywordTags
@@ -75,10 +83,14 @@ export const BookSearcher = (props: BookSearchProps) => {
       sessionStorage.removeItem("keyword");
       return;
     }
+    // ブラウザの戻るで一致しなくなった時に設定し直し
+    if (sessionStorage.getItem("keyword") || "" !== keyWords.join(" ")) {
+      sessionStorage.setItem("keyword", keyWords.join(" "));
+    }
     const sessValue = sessionStorage.getItem("keyword") || "";
     setInputValue(sessValue);
     // eslint-disable-next-line
-  }, []);
+  }, [search]);
 
   const { className } = props;
 
