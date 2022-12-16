@@ -62,6 +62,9 @@ export const Borrow = () => {
   const bookTitle = useSelector((state: RootState) =>
     get(state, ["books", "booksTable", bookId, "bookName"])
   );
+  const borrowerList = useSelector((state: RootState) =>
+    get(state, ["books", "booksTable", bookId, "borrower"])
+  );
 
   useEffect(() => {
     if (maxBooks === 0) {
@@ -93,6 +96,7 @@ export const Borrow = () => {
           <BorrowButton
             bookTitle={bookTitle}
             borrower={borrower}
+            borrowerList={borrowerList}
             bookId={bookId}
           />
         </ModalProvider>

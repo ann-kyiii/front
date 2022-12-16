@@ -11,11 +11,12 @@ import ModalWindow from "../../molecules/ModalWindow";
 type BorrowButtonProps = {
   bookTitle: string;
   borrower: string;
+  borrowerList: string[];
   bookId: number;
 };
 
 export const BorrowButton = (props: BorrowButtonProps) => {
-  const { bookTitle, borrower, bookId } = props;
+  const { bookTitle, borrower, borrowerList, bookId } = props;
   const dispatch = useDispatch();
 
   const maxBooks = useSelector((state: BooksState) =>
@@ -79,7 +80,7 @@ export const BorrowButton = (props: BorrowButtonProps) => {
         type="button"
         aria-label="Submit"
         onClick={showModal}
-        disabled={borrower === ""}
+        disabled={borrower === "" || borrowerList.includes(borrower)}
         className={styles.BorrowButton}
       >
         Borrow
