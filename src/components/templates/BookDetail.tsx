@@ -97,6 +97,7 @@ export const BookDetail = () => {
   }
 
   const data = storeBookData;
+  const sessValue = sessionStorage.getItem("keyword") || "";
 
   // borrowr計算
   const stockN = data.find - data.borrower.length;
@@ -110,7 +111,7 @@ export const BookDetail = () => {
   return (
     <>
       <div id={style.book_detail}>
-        <Header backLink="/" />
+        <Header backLink={`/book-lists?key=${sessValue}&page=1`} />
 
         <div className={style.main}>
           <div className={style.bookTitle}>{data.bookName}</div>
