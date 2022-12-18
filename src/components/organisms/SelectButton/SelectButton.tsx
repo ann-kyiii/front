@@ -17,7 +17,10 @@ export const SelectButton = (props: SelectButtonProps) => {
     <>
       <button
         type="button"
-        className={cx(styles.SelectButton, className!.map(c => styles[c]))}
+        className={cx(
+          styles.SelectButton,
+          className!.map(c => styles[c])
+        )}
         onClick={e => onClick(e, nextLink)}
         disabled={!isAbled}
       >
@@ -25,6 +28,10 @@ export const SelectButton = (props: SelectButtonProps) => {
       </button>
     </>
   );
+};
+
+SelectButton.defaultProps = {
+  className: [""]
 };
 
 export default SelectButton;

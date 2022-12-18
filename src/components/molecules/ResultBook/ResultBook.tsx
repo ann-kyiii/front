@@ -6,11 +6,11 @@ import style from "./ResultBook.module.css";
 
 import imgError from "../../../assets/images/noImageAvailable.svg";
 
-type ResultBook = {
+type ResultBookProps = {
   data: { bookId: number; bookName: string; author: string; imgURL: string };
 };
 
-export const ResultBook = (props: ResultBook) => {
+export const ResultBook = (props: ResultBookProps) => {
   const { data } = props;
   const [imgURL, setImgURL] = useState(data.imgURL);
   const dispatch = useDispatch();

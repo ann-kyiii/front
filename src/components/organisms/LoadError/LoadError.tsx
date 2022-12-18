@@ -7,7 +7,7 @@ import bookImg from "../../../assets/images/book.svg";
 type Props = {
   backLink: string;
   text: string;
-  buttonName?: string;
+  buttonName: string;
 };
 
 export const LoadError = (props: Props) => {
