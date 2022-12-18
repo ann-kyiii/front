@@ -26,7 +26,7 @@ export type BookLists = BookInfo[];
 export type BooksState = {
   statusCode: number;
   isLoading: boolean;
-  booksTable: object;
+  booksTable: object | undefined;
   booksIdList: number[];
   successedPageIndex: number[];
   maxBooks: number;
