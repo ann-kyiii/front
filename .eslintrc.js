@@ -6,8 +6,8 @@ module.exports = {
   },
   extends: [
     "airbnb",
+    "airbnb-typescript",
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
     "plugin:prettier/recommended"
   ],
   globals: {
@@ -20,7 +20,8 @@ module.exports = {
       jsx: true
     },
     ecmaVersion: 2018,
-    sourceType: "module"
+    sourceType: "module",
+    project: ["tsconfig.json"]
   },
   plugins: ["react", "@typescript-eslint", "react-hooks"],
   settings: {
@@ -36,6 +37,7 @@ module.exports = {
     "react/prop-types": "off",
     "spaced-comment": ["error", "always", { markers: ["/ <reference"] }],
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
-  }
+    "react-hooks/exhaustive-deps": "warn",
+    "import/no-named-as-default": "off"
+  },
 };

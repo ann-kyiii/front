@@ -6,7 +6,7 @@ type ModalWindowProps = {
   bookTitle: string;
   userType: string;
   user: string;
-  hideModal:  () => void;
+  hideModal: () => void;
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 

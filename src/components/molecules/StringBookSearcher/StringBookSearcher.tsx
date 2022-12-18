@@ -4,7 +4,7 @@ import SearchBox from "../../atoms/SearchBox";
 import SearchIcon from "../../atoms/SearchIcon";
 import styles from "./StringBookSearcher.module.css";
 
-type StringBookSearcher = {
+type StringBookSearcherProps = {
   inputValue: string;
   className?: string[];
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -13,7 +13,7 @@ type StringBookSearcher = {
   handleKeyUp: (event: React.KeyboardEvent<HTMLElement>) => void;
 };
 
-export const StringBookSearcher = (props: StringBookSearcher) => {
+export const StringBookSearcher = (props: StringBookSearcherProps) => {
   const {
     inputValue,
     className,
@@ -24,7 +24,10 @@ export const StringBookSearcher = (props: StringBookSearcher) => {
   } = props;
   return (
     <div
-      className={cx(styles.SearchBoxWrapper, className!.map(c => styles[c]))}
+      className={cx(
+        styles.SearchBoxWrapper,
+        className!.map(c => styles[c])
+      )}
     >
       <SearchBox
         inputValue={inputValue}
@@ -36,6 +39,10 @@ export const StringBookSearcher = (props: StringBookSearcher) => {
       <SearchIcon handleClick={handleClick} className={className} />
     </div>
   );
+};
+
+StringBookSearcher.defaultProps = {
+  className: [""]
 };
 
 export default StringBookSearcher;

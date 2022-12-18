@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import cx from "classnames";
 import styles from "./SearchBox.module.css";
 
@@ -8,7 +8,6 @@ type SearchBoxProps = {
   handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleKeyPress: (event: React.KeyboardEvent<HTMLElement>) => void;
   handleKeyUp: (event: React.KeyboardEvent<HTMLElement>) => void;
-  child?: ReactNode;
 };
 
 export const SearchBox = (props: SearchBoxProps) => {
@@ -23,7 +22,10 @@ export const SearchBox = (props: SearchBoxProps) => {
   return (
     <input
       value={inputValue}
-      className={cx(styles.BookSearcher, className!.map(c => styles[c]))}
+      className={cx(
+        styles.BookSearcher,
+        className!.map(c => styles[c])
+      )}
       onChange={e => handleOnChange(e)}
       onKeyPress={handleKeyPress}
       onKeyUp={handleKeyUp}
