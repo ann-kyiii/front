@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import style from "./LoadError.module.css";
-import bookImg from "../../../assets/images/book.svg";
 
 type Props = {
   backLink: string;
@@ -24,7 +23,7 @@ export const LoadError = (props: Props) => {
   console.log(buttonName);
 
   const divStyle = {
-    backgroundImage: `url(${bookImg})`
+    backgroundImage: `url(${`${process.env.PUBLIC_URL}/images/book.svg`})`
   };
 
   return (

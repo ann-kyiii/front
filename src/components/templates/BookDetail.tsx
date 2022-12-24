@@ -7,7 +7,6 @@ import Header from "../organisms/Header";
 import style from "./BookDetail.module.css";
 import { RootState } from "../../reducers";
 
-import imgError from "../../assets/images/noImageAvailable.svg";
 import fetchBookLists from "../../actions/resultlists";
 import fetchBookId from "../../apis/fetchBookId";
 import LoadError from "../organisms/LoadError";
@@ -16,7 +15,7 @@ import SelectButton from "../organisms/SelectButton";
 export const BookDetail = () => {
   // var
   const [bookID, setBookID] = useState(-1);
-  const [imgURL, setImgURL] = useState(undefined);
+  const [imgURL, setImgURL] = useState("");
   const dispatch = useDispatch();
 
   // function
@@ -121,7 +120,11 @@ export const BookDetail = () => {
               className={cx(style.image, {
                 [style.image_error]: imgURL !== data.imgURL
               })}
-              onError={e => setImgURL(imgError)}
+              onError={e =>
+                setImgURL(
+                  `${process.env.PUBLIC_URL}/images/noImageAvailable.svg`
+                )
+              }
               alt="book title"
             />
           </div>
