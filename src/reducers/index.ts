@@ -6,12 +6,12 @@ import tagSelectorReducer from "./tagselector";
 import resultListsReducer from "./resultlists";
 
 import { KeywordTags } from "../actions/tagselector";
-import { BooksState } from "../actions/resultlists";
+import { BooksStateInfo } from "../actions/resultlists";
 
 export interface RootState {
   router: RouterState;
   tagSelector: KeywordTags;
-  books: BooksState;
+  books: BooksStateInfo;
 }
 
 const rootReducer = (history: History) =>

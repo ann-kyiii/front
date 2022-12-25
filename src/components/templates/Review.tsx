@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import cx from "classnames";
-import { get } from "lodash";
 import { push } from "connected-react-router";
 import Header from "../organisms/Header";
 import style from "./Review.module.css";
@@ -9,8 +8,8 @@ import { RootState } from "../../reducers";
 import LoadError from "../organisms/LoadError";
 
 export const Review = () => {
-  const path = useSelector((state: RootState) =>
-    get(state, ["router", "location", "pathname"])
+  const path = useSelector(
+    (state: RootState) => state.router.location.pathname
   );
 
   // isFocus of textarea

@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { useModal } from "react-modal-hook";
-import { get } from "lodash";
 import styles from "./BorrowButton.module.css";
 import fetchBookLists, { BooksState } from "../../../actions/resultlists";
 import fetchBorrow from "../../../apis/fetchBorrow";
@@ -19,9 +18,7 @@ export const BorrowButton = (props: BorrowButtonProps) => {
   const { bookTitle, borrower, borrowerList, bookId } = props;
   const dispatch = useDispatch();
 
-  const maxBooks = useSelector((state: BooksState) =>
-    get(state, ["books", "maxBooks"])
-  );
+  const maxBooks = useSelector((state: BooksState) => state.books.maxBooks);
 
   // サーバにidと名前を送り，redux更新
   const sendBorrowerName = async () => {

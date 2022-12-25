@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get } from "lodash";
 import cx from "classnames";
 import { push } from "connected-react-router";
 import Header from "../organisms/Header";
@@ -59,13 +58,13 @@ export const BookDetail = () => {
     }
   };
 
-  const path = useSelector((state: RootState) =>
-    get(state, ["router", "location", "pathname"])
+  const path = useSelector(
+    (state: RootState) => state.router.location.pathname
   );
 
   // storeのデータ取得
-  const storeBookData = useSelector((state: RootState) =>
-    get(state, ["books", "booksTable", bookID])
+  const storeBookData = useSelector(
+    (state: RootState) => state.books.booksTable[bookID]
   );
 
   const arg = path.split("/").slice(-1)[0];

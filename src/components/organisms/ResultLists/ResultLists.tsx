@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get } from "lodash";
 import { normalize, schema } from "normalizr";
 import { push } from "connected-react-router";
 import { RootState } from "../../../reducers";
 import fetchBookLists, {
   BookLists,
-  BooksState
+  BooksState,
+  BooksStateInfo,
+  BooksTable
 } from "../../../actions/resultlists";
 import PageNatior from "../../molecules/PageNatior";
 import fetchSearch from "../../../apis/fetchSearch";
@@ -15,8 +16,8 @@ import styles from "./ResultLists.module.css";
 
 export const ResultLists = () => {
   // init: ページ情報取得
-  const search: string = useSelector((state: RootState) =>
-    get(state, ["router", "location", "search"])
+  const search: string = useSelector(
+    (state: RootState) => state.router.location.search
   ).slice(1);
   const decode: string = decodeURI(search);
   const urlParams: string[] = decode.split(/&/g);
@@ -36,32 +37,24 @@ export const ResultLists = () => {
 
   // process: データ関係の処理
   // ページに関わる変数をReduxから取得
-  const storedBooksTable = useSelector((state: BooksState) =>
-    get(state, ["books", "booksTable"])
+  const storedBooksTable = useSelector(
+    (state: BooksState) => state.books.booksTable
   );
-  const storedBooksIdList = useSelector((state: BooksState) =>
-    get(state, ["books", "booksIdList"])
+  const storedBooksIdList = useSelector(
+    (state: BooksState) => state.books.booksIdList
   );
-  const isLoading = useSelector((state: BooksState) =>
-    get(state, ["books", "isLoading"])
-  );
-  const statusCode = useSelector((state: BooksState) =>
-    get(state, ["books", "statusCode"])
-  );
-  const maxBooks = useSelector((state: BooksState) =>
-    get(state, ["books", "maxBooks"])
-  );
+  const isLoading = useSelector((state: BooksState) => state.books.isLoading);
+  const statusCode = useSelector((state: BooksState) => state.books.statusCode);
+  const maxBooks = useSelector((state: BooksState) => state.books.maxBooks);
   const dispatch = useDispatch();
 
   const normalizeData = (
     data: BookLists
-  ): Pick<BooksState, "booksTable" | "booksIdList"> => {
+  ): Pick<BooksStateInfo, "booksTable" | "booksIdList"> => {
     const booksSchema = new schema.Entity("books", {}, { idAttribute: "id" });
-    const booksTable = get(normalize(data, [booksSchema]), [
-      "entities",
-      "books"
-    ]);
-    const booksIdList = get(normalize(data, [booksSchema]), ["result"]);
+    const booksTable = normalize(data, [booksSchema]).entities
+      .books as BooksTable;
+    const booksIdList = normalize(data, [booksSchema]).result;
     return { booksTable, booksIdList };
   };
 

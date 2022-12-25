@@ -18,23 +18,29 @@ type BookInfo = {
   withDisc: string;
   other: string;
   borrower: string[];
-  location: string;
+  imgURL: string;
 };
 
 // 類似度でソートされた物が返却されるので配列
 export type BookLists = BookInfo[];
-export type BooksState = {
+export type BooksTable = {
+  [id: number]: BookInfo;
+};
+export type BooksStateInfo = {
   statusCode: number;
   isLoading: boolean;
-  booksTable: object | undefined;
+  booksTable: BooksTable;
   booksIdList: number[];
   successedPageIndex: number[];
   maxBooks: number;
 };
+export type BooksState = {
+  books: BooksStateInfo;
+};
 
 export const fetchBookLists = actionCreator.async<
   { pageIndex: number }, // payload: { pageIndex: number }
-  Pick<BooksState, "booksTable" | "booksIdList" | "maxBooks">, // payload: { params: { pageIndex: number }, result: { BooksState: {...} } }
+  Pick<BooksStateInfo, "booksTable" | "booksIdList" | "maxBooks">, // payload: { params: { pageIndex: number }, result: { BooksState: {...} } }
   { statusCode: number } // payload: { params: { pageIndex: number }, error: { statusCode: number } }
 >("FETCH_BOOK_LISTS");
 
