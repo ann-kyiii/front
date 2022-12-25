@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
-import { isEmpty, get } from "lodash";
 import StringBookSearcher from "../../molecules/StringBookSearcher";
 import { RootState } from "../../../reducers";
 
@@ -14,11 +13,11 @@ export const BookSearcher = (props: BookSearchProps) => {
   const [inputValue, setInputValue] = useState<string>("");
   const [canEnter, setCanEnter] = useState<boolean>(false);
   const keywordTags = useSelector((state: RootState) => state.tagSelector);
-  const path = useSelector((state: RootState) =>
-    get(state, ["router", "location", "pathname"])
+  const path = useSelector(
+    (state: RootState) => state.router.location.pathname
   );
-  const search: string = useSelector((state: RootState) =>
-    get(state, ["router", "location", "search"])
+  const search: string = useSelector(
+    (state: RootState) => state.router.location.search
   ).slice(1);
   const decode: string = decodeURI(search);
   const urlParams: string[] = decode.split(/&/g);
@@ -49,7 +48,7 @@ export const BookSearcher = (props: BookSearchProps) => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     // tagが選択されている場合は、虫眼鏡ボタンを押す事で遷移できる
     const isAnythingSelected = keywordTags.filter(tag => tag.isSelected);
-    if (!inputValue.trim() && isEmpty(isAnythingSelected)) {
+    if (!inputValue.trim() && isAnythingSelected.length === 0) {
       return;
     }
     handleToBookLists();

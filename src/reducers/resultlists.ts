@@ -1,7 +1,7 @@
 import { reducerWithInitialState } from "typescript-fsa-reducers";
-import fetchBookLists, { BooksState } from "../actions/resultlists";
+import fetchBookLists, { BooksStateInfo } from "../actions/resultlists";
 
-const initialState: BooksState = {
+const initialState: BooksStateInfo = {
   statusCode: 200,
   isLoading: false,
   successedPageIndex: [],

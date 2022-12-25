@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get } from "lodash";
 import { ModalProvider } from "react-modal-hook";
 import Header from "../organisms/Header";
 import BookName from "../molecules/BookName";
@@ -14,15 +13,13 @@ import LoadError from "../organisms/LoadError";
 export const Return = () => {
   const dispatch = useDispatch();
   // URLからid取得
-  const path: string = useSelector((state: RootState) =>
-    get(state, ["router", "location", "pathname"])
+  const path: string = useSelector(
+    (state: RootState) => state.router.location.pathname
   ).slice(1);
   const decode: string = decodeURI(path);
   const urlParams: string[] = decode.split("/");
   const bookId = parseInt(urlParams[1], 10);
-  const maxBooks = useSelector((state: BooksState) =>
-    get(state, ["books", "maxBooks"])
-  );
+  const maxBooks = useSelector((state: BooksState) => state.books.maxBooks);
 
   // 1冊の情報だけ取得する
   const getOneBook = async () => {
@@ -58,12 +55,12 @@ export const Return = () => {
     }
   };
 
-  const bookTitle = useSelector((state: RootState) =>
-    get(state, ["books", "booksTable", bookId, "bookName"])
+  const bookTitle = useSelector(
+    (state: RootState) => state.books.booksTable[bookId].bookName
   );
 
-  const borrowerList: string[] = useSelector((state: RootState) =>
-    get(state, ["books", "booksTable", bookId, "borrower"])
+  const borrowerList: string[] = useSelector(
+    (state: RootState) => state.books.booksTable[bookId].borrower
   );
 
   useEffect(() => {
