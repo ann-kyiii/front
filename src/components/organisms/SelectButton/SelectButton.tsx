@@ -14,19 +14,17 @@ export const SelectButton = (props: SelectButtonProps) => {
   const { isAbled, className, onClick, text, nextLink } = props;
 
   return (
-    <>
-      <button
-        type="button"
-        className={cx(
-          styles.SelectButton,
-          className!.map(c => styles[c])
-        )}
-        onClick={e => onClick(e, nextLink)}
-        disabled={!isAbled}
-      >
-        {text}
-      </button>
-    </>
+    <button
+      type="button"
+      className={cx(
+        styles.SelectButton,
+        className!.map(c => styles[c])
+      )}
+      onClick={e => onClick(e, nextLink)}
+      disabled={!isAbled}
+    >
+      {text}
+    </button>
   );
 };
 

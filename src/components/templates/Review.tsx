@@ -45,7 +45,7 @@ export const Review = () => {
   const arg = path.split("/").slice(-1)[0];
 
   // book-detail/id になっているか
-  if (!new RegExp(/^[0-9]+$/).test(arg)) {
+  if (!/^[0-9]+$/.test(arg)) {
     return (
       <LoadError backLink="/" text="Failed to read BookID" buttonName="Home" />
     );
@@ -64,41 +64,39 @@ export const Review = () => {
   const backLink = `/book-detail/${bookId}`;
 
   return (
-    <>
-      <div id={style.book_review}>
-        <Header backLink={backLink} />
+    <div id={style.book_review}>
+      <Header backLink={backLink} />
 
-        <div className={style.reviewListBrock}>
-          <ul className={style.reviewList}>
-            {data.map((item, index) => (
-              <li className={style.reviewLi}>{item}</li>
-            ))}
-          </ul>
-        </div>
+      <div className={style.reviewListBrock}>
+        <ul className={style.reviewList}>
+          {data.map((item, index) => (
+            <li className={style.reviewLi}>{item}</li>
+          ))}
+        </ul>
+      </div>
 
-        <p
-          className={cx(style.textBlock, {
-            [style.textBlock_big]: isFocus
+      <p
+        className={cx(style.textBlock, {
+          [style.textBlock_big]: isFocus
+        })}
+      >
+        <textarea
+          className={style.textarea}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          placeholder="ここに入力"
+        />
+        <button
+          type="button"
+          onClick={handleClick}
+          className={cx(style.button, {
+            [style.button_visible]: isFocus
           })}
         >
-          <textarea
-            className={style.textarea}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            placeholder="ここに入力"
-          />
-          <button
-            type="button"
-            onClick={handleClick}
-            className={cx(style.button, {
-              [style.button_visible]: isFocus
-            })}
-          >
-            送
-          </button>
-        </p>
-      </div>
-    </>
+          送
+        </button>
+      </p>
+    </div>
   );
 };
 

@@ -4,8 +4,6 @@ import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import style from "./ResultBook.module.css";
 
-import imgError from "../../../assets/images/noImageAvailable.svg";
-
 type ResultBookProps = {
   data: { bookId: number; bookName: string; author: string; imgURL: string };
 };
@@ -45,7 +43,9 @@ export const ResultBook = (props: ResultBookProps) => {
           className={cx(style.image, {
             [style.image_error]: imgURL !== data.imgURL
           })}
-          onError={e => setImgURL(imgError)}
+          onError={e =>
+            setImgURL(`${process.env.PUBLIC_URL}/images/noImageAvailable.svg`)
+          }
           width="130"
           height="180"
           alt="book title"
