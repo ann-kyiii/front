@@ -95,16 +95,14 @@ export const BookSearcher = (props: BookSearchProps) => {
   const { className } = props;
 
   return (
-    <>
-      <StringBookSearcher
-        inputValue={inputValue}
-        handleClick={handleClick}
-        handleOnChange={handleOnChange}
-        handleKeyPress={handleKeyPress}
-        handleKeyUp={handleKeyUp}
-        className={className}
-      />
-    </>
+    <StringBookSearcher
+      inputValue={inputValue}
+      handleClick={handleClick}
+      handleOnChange={handleOnChange}
+      handleKeyPress={handleKeyPress}
+      handleKeyUp={handleKeyUp}
+      className={className}
+    />
   );
 };
 

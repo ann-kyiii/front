@@ -25,7 +25,6 @@ export const BookDetail = () => {
       // eslint-disable-next-line
   }, []);
 
-
   // 1冊の情報だけ取得する
   const getOneBook = async (bookId: number) => {
     const payload = {
@@ -72,7 +71,7 @@ export const BookDetail = () => {
   const arg = path.split("/").slice(-1)[0];
 
   // book-detail/id になっているか
-  if (!new RegExp(/^[0-9]+$/).test(arg)) {
+  if (!/^[0-9]+$/.test(arg)) {
     return (
       <LoadError backLink="/" text="Failed to read BookID" buttonName="Home" />
     );
@@ -108,76 +107,72 @@ export const BookDetail = () => {
   }
 
   return (
-    <>
-      <div id={style.book_detail}>
-        <Header backLink={`/book-lists?key=${sessValue}&page=1`} />
+    <div id={style.book_detail}>
+      <Header backLink={`/book-lists?key=${sessValue}&page=1`} />
 
-        <div className={style.main}>
-          <div className={style.bookTitle}>{data.bookName}</div>
-          <div className={style.bookImageBrock}>
-            <img
-              src={imgURL}
-              className={cx(style.image, {
-                [style.image_error]: imgURL !== data.imgURL
-              })}
-              onError={e =>
-                setImgURL(
-                  `${process.env.PUBLIC_URL}/images/noImageAvailable.svg`
-                )
-              }
-              alt="book title"
-            />
-          </div>
-          <div className={style.contents}>
-            <p className={style.itemName}>著者：</p>
-            <p className={style.item}>{data.author}</p>
-            <p className={style.itemName}>出版社：</p>
-            <p className={style.item}>
-              <>{data.publisher}</>
-              <> (</>
-              <>{data.pubdate}</>
-              <>)</>
-            </p>
-            <p className={style.itemName}>ISBN：</p>
-            <p className={style.item}>{data.ISBN}</p>
-            <p className={style.itemName}>ジャンル：</p>
-            <p className={style.item}>{data.genre}</p>
-            <p className={style.itemName}>サブジャンル：</p>
-            <p className={style.item}>{data.subGenre}</p>
-            <p className={style.itemName}>在庫数：</p>
-            <p className={style.item}>
-              <>{stockN}</>
-              <> / </>
-              <>{data.find}</>
-            </p>
-          </div>
+      <div className={style.main}>
+        <div className={style.bookTitle}>{data.bookName}</div>
+        <div className={style.bookImageBrock}>
+          <img
+            src={imgURL}
+            className={cx(style.image, {
+              [style.image_error]: imgURL !== data.imgURL
+            })}
+            onError={e =>
+              setImgURL(`${process.env.PUBLIC_URL}/images/noImageAvailable.svg`)
+            }
+            alt="book title"
+          />
         </div>
-
-        <div className={style.buttonsBlock}>
-          <SelectButton
-            isAbled={borrowAbled}
-            nextLink={`/borrow/${bookID}`}
-            className={["BorrowButtonColor"]}
-            onClick={handleClick}
-            text="Borrow"
-          />
-          <SelectButton
-            isAbled={returnAbled}
-            nextLink={`/return/${bookID}`}
-            className={["ReturnButtonColor"]}
-            onClick={handleClick}
-            text="Return"
-          />
-          <SelectButton
-            isAbled={false}
-            nextLink={`/review/${bookID}`}
-            className={["ReviewButtonColor"]}
-            onClick={handleClick}
-            text="Review"
-          />
+        <div className={style.contents}>
+          <p className={style.itemName}>著者：</p>
+          <p className={style.item}>{data.author}</p>
+          <p className={style.itemName}>出版社：</p>
+          <p className={style.item}>
+            <span>{data.publisher}</span>
+            <span> (</span>
+            <span>{data.pubdate}</span>
+            <span>)</span>
+          </p>
+          <p className={style.itemName}>ISBN：</p>
+          <p className={style.item}>{data.ISBN}</p>
+          <p className={style.itemName}>ジャンル：</p>
+          <p className={style.item}>{data.genre}</p>
+          <p className={style.itemName}>サブジャンル：</p>
+          <p className={style.item}>{data.subGenre}</p>
+          <p className={style.itemName}>在庫数：</p>
+          <p className={style.item}>
+            <span>{stockN}</span>
+            <span> / </span>
+            <span>{data.find}</span>
+          </p>
         </div>
       </div>
-    </>
+
+      <div className={style.buttonsBlock}>
+        <SelectButton
+          isAbled={borrowAbled}
+          nextLink={`/borrow/${bookID}`}
+          className={["BorrowButtonColor"]}
+          onClick={handleClick}
+          text="Borrow"
+        />
+        <SelectButton
+          isAbled={returnAbled}
+          nextLink={`/return/${bookID}`}
+          className={["ReturnButtonColor"]}
+          onClick={handleClick}
+          text="Return"
+        />
+        <SelectButton
+          isAbled={false}
+          nextLink={`/review/${bookID}`}
+          className={["ReviewButtonColor"]}
+          onClick={handleClick}
+          text="Review"
+        />
+      </div>
+    </div>
   );
 };
 

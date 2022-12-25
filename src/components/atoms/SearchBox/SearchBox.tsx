@@ -11,13 +11,8 @@ type SearchBoxProps = {
 };
 
 export const SearchBox = (props: SearchBoxProps) => {
-  const {
-    inputValue,
-    className,
-    handleOnChange,
-    handleKeyPress,
-    handleKeyUp
-  } = props;
+  const { inputValue, className, handleOnChange, handleKeyPress, handleKeyUp } =
+    props;
 
   return (
     <input
