@@ -38,6 +38,8 @@ module.exports = {
     "spaced-comment": ["error", "always", { markers: ["/ <reference"] }],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "import/no-named-as-default": "off"
+    "import/no-named-as-default": "off",
+    "react/function-component-definition": "off",
+    "no-restricted-exports": "off"
   },
 };
