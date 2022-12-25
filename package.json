@@ -5,8 +5,8 @@
   "dependencies": {
     "@types/jest": "^29.2.4",
     "@types/node": "^18.11.17",
-    "@types/react": "^17.0.52",
-    "@types/react-dom": "^17.0.18",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2",
     "classnames": "^2.3.2",
     "connected-react-router": "^6.9.3",
     "history": "^4.10.1",
@@ -46,6 +46,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "resolutions": {
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2"
   },
   "devDependencies": {
     "@types/history": "^4.7.11",
