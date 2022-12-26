@@ -57,10 +57,10 @@ export const Borrow = () => {
   };
 
   const bookTitle = useSelector(
-    (state: RootState) => state.books.booksTable[bookId].bookName
+    (state: RootState) => state.books.booksTable[bookId]?.bookName
   );
   const borrowerList = useSelector(
-    (state: RootState) => state.books.booksTable[bookId].borrower
+    (state: RootState) => state.books.booksTable[bookId]?.borrower
   );
 
   useEffect(() => {
