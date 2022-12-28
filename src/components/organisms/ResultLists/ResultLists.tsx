@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { normalize, schema } from "normalizr";
 import { push } from "connected-react-router";
 import { RootState } from "../../../reducers";
 import fetchBookLists, {
@@ -51,10 +50,11 @@ export const ResultLists = () => {
   const normalizeData = (
     data: BookLists
   ): Pick<BooksStateInfo, "booksTable" | "booksIdList"> => {
-    const booksSchema = new schema.Entity("books", {}, { idAttribute: "id" });
-    const booksTable = normalize(data, [booksSchema]).entities
-      .books as BooksTable;
-    const booksIdList = normalize(data, [booksSchema]).result;
+    const booksTable: BooksTable = {};
+    data.forEach(d => {
+      booksTable[d.id] = d;
+    });
+    const booksIdList = data.map(d => d.id);
     return { booksTable, booksIdList };
   };
 

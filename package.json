@@ -10,7 +10,6 @@
     "classnames": "^2.3.2",
     "connected-react-router": "^6.9.3",
     "history": "^4.10.1",
-    "normalizr": "^3.6.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-modal-hook": "^3.0.2",
