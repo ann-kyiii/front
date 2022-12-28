@@ -21,8 +21,9 @@ export const BookDetail = () => {
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>, nextLink: string) => {
       dispatch(push(nextLink));
-      // eslint-disable-next-line
-  }, []);
+    },
+    []
+  );
 
   // 1冊の情報だけ取得する
   const getOneBook = async (bookId: number) => {
@@ -43,18 +44,15 @@ export const BookDetail = () => {
         return;
       }
       const json = await response.json();
-      console.log(json);
 
       const newData = {
         booksTable: { [json.id]: json },
         booksIdList: [json.id]
       };
-      console.log("#######################");
-      console.log(newData);
       const result = { ...newData, maxBooks: 1 };
       dispatch(fetchBookLists.done({ params: { pageIndex: 0 }, result }));
     } catch (error) {
-      console.log(`Error fetcing in getBookLists: ${error}`);
+      console.log(`Error fetching in getBookLists: ${error}`);
     }
   };
 
@@ -117,7 +115,7 @@ export const BookDetail = () => {
             className={cx(style.image, {
               [style.image_error]: imgURL !== data.imgURL
             })}
-            onError={e =>
+            onError={() =>
               setImgURL(`${process.env.PUBLIC_URL}/images/noImageAvailable.svg`)
             }
             alt="book title"

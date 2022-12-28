@@ -12,20 +12,15 @@ export const TagSelector = () => {
   const keywordTags = useSelector((state: RootState) => state.tagSelector);
   const dispatch = useDispatch();
 
-  const handleClick = useCallback(
-    (id: number, e: React.MouseEvent<HTMLElement>): void => {
-      dispatch(changeKeywordTag(id));
-    },
-    // eslint-disable-next-line
-    []
-  );
+  const handleClick = useCallback((id: number): void => {
+    dispatch(changeKeywordTag(id));
+  }, []);
 
   useEffect(() => {
     dispatch(resetKeywordTag());
     return () => {
       dispatch(resetKeywordTag());
     };
-    // eslint-disable-next-line
   }, []);
 
   return (
@@ -36,7 +31,7 @@ export const TagSelector = () => {
             <button
               type="button"
               tabIndex={0}
-              onClick={e => handleClick(tag.id, e)}
+              onClick={() => handleClick(tag.id)}
               className={cx(styles.ListButton, {
                 [styles.isSelected]: tag.isSelected
               })}

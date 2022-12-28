@@ -40,37 +40,30 @@ export const Return = () => {
         return;
       }
       const json = await response.json();
-      console.log(json);
 
       const newData = {
         booksTable: { [json.id]: json },
         booksIdList: [json.id]
       };
-      console.log("#######################");
-      console.log(newData);
       const result = { ...newData, maxBooks: 1 };
       dispatch(fetchBookLists.done({ params: { pageIndex: 0 }, result }));
     } catch (error) {
-      console.log(`Error fetcing in getBookLists: ${error}`);
+      console.log(`Error fetching in getBookLists: ${error}`);
     }
   };
 
   const bookTitle = useSelector(
-    (state: RootState) => state.books.booksTable[bookId].bookName
+    (state: RootState) => state.books.booksTable[bookId]?.bookName
   );
 
   const borrowerList: string[] = useSelector(
-    (state: RootState) => state.books.booksTable[bookId].borrower
+    (state: RootState) => state.books.booksTable[bookId]?.borrower
   );
 
   useEffect(() => {
     if (maxBooks === 0) {
       getOneBook();
-      console.log("maxBooks === 0");
-    } else {
-      console.log("booksTable is defined");
     }
-    // eslint-disable-next-line
   }, []);
 
   if (bookTitle !== undefined) {
@@ -81,7 +74,7 @@ export const Return = () => {
         <div className={styles.BorrowerWrapper}>Borrower</div>
         <ModalProvider>
           <div className={styles.ReturnButtonWrapper}>
-            {borrowerList.map((name, index) => {
+            {borrowerList.map(name => {
               return (
                 <ReturnButton
                   key={name}

@@ -43,7 +43,7 @@ export const ResultBook = (props: ResultBookProps) => {
           className={cx(style.image, {
             [style.image_error]: imgURL !== data.imgURL
           })}
-          onError={e =>
+          onError={() =>
             setImgURL(`${process.env.PUBLIC_URL}/images/noImageAvailable.svg`)
           }
           width="130"

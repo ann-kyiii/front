@@ -14,13 +14,9 @@ export const LoadError = (props: Props) => {
   const dispatch = useDispatch();
 
   // backLinkに遷移する関数
-  const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = useCallback(() => {
     dispatch(push(backLink));
-    // eslint-disable-next-line
   }, []);
-
-  console.log(text);
-  console.log(buttonName);
 
   const divStyle = {
     backgroundImage: `url(${`${process.env.PUBLIC_URL}/images/book.svg`})`
