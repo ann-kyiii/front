@@ -45,7 +45,7 @@ export const BookSearcher = (props: BookSearchProps) => {
     dispatch(push(encode));
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = () => {
     // tagが選択されている場合は、虫眼鏡ボタンを押す事で遷移できる
     const isAnythingSelected = keywordTags.filter(tag => tag.isSelected);
     if (!inputValue.trim() && isAnythingSelected.length === 0) {
@@ -67,7 +67,7 @@ export const BookSearcher = (props: BookSearchProps) => {
     }
   }, []);
 
-  const handleKeyUp = (e: React.KeyboardEvent<HTMLElement>) => {
+  const handleKeyUp = () => {
     if (!canEnter) return;
     if (!inputValue.trim()) {
       setCanEnter(false);
@@ -88,7 +88,6 @@ export const BookSearcher = (props: BookSearchProps) => {
     }
     const sessValue = sessionStorage.getItem("keyword") || "";
     setInputValue(sessValue);
-    // eslint-disable-next-line
   }, [search]);
 
   const { className } = props;

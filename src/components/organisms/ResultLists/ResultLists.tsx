@@ -95,13 +95,12 @@ export const ResultLists = () => {
           error: { statusCode: 500 } // TODO: サーバに接続できないときのため暫定で設定
         })
       );
-      console.log(`Error fetcing in getBookLists: ${error}`);
+      console.log(`Error fetching in getBookLists: ${error}`);
     }
   };
 
   useEffect(() => {
     getBookLists(pageIndex);
-    // eslint-disable-next-line
   }, [pageIndex, search]);
 
   const handleClick = (
@@ -118,7 +117,6 @@ export const ResultLists = () => {
   };
 
   if (statusCode !== 200) {
-    console.log(`ERROR: ${statusCode}`);
     return (
       <div className={styles.ResultCount}>
         <p>Server Error</p>

@@ -26,19 +26,16 @@ export const Review = () => {
   };
 
   // isClick of submit Button
-  const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = useCallback(() => {
     // APIをたたいて、新コメ送信
 
     const nextLink = path;
     dispatch(push(nextLink));
-    // eslint-disable-next-line
   }, []);
 
-  // eslint-disable-next-line
-  const handleClickHome = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-      const nextLink = "/";
-      dispatch(push(nextLink));
-      // eslint-disable-next-line
+  const handleClickHome = useCallback(() => {
+    const nextLink = "/";
+    dispatch(push(nextLink));
   }, []);
 
   const arg = path.split("/").slice(-1)[0];
@@ -55,7 +52,7 @@ export const Review = () => {
   // レビュー受信
   // const data =
 
-  const data: any[] = new Array(0);
+  const data: string[] = new Array(0);
   for (let i = 0; i < 15; i += 1) {
     data.push(`test ${i}`);
   }
@@ -68,7 +65,7 @@ export const Review = () => {
 
       <div className={style.reviewListBrock}>
         <ul className={style.reviewList}>
-          {data.map((item, index) => (
+          {data.map(item => (
             <li className={style.reviewLi}>{item}</li>
           ))}
         </ul>
