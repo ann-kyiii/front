@@ -100,7 +100,9 @@ export const ResultLists = () => {
   };
 
   useEffect(() => {
-    getBookLists(pageIndex);
+    if (search !== "") {
+      getBookLists(pageIndex);
+    }
   }, [pageIndex, search]);
 
   const handleClick = (

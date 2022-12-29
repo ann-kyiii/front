@@ -83,7 +83,10 @@ export const BookSearcher = (props: BookSearchProps) => {
       return;
     }
     // ブラウザの戻るで一致しなくなった時に設定し直し
-    if ((sessionStorage.getItem("keyword") || "") !== keyWords.join(" ")) {
+    if (
+      path === "/book-lists" &&
+      (sessionStorage.getItem("keyword") || "") !== keyWords.join(" ")
+    ) {
       sessionStorage.setItem("keyword", keyWords.join(" "));
     }
     const sessValue = sessionStorage.getItem("keyword") || "";
