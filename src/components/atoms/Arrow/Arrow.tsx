@@ -7,9 +7,7 @@ type ArrowProps = {
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const Arrow = (props: ArrowProps) => {
-  const { handleClick, className } = props;
-
+export const Arrow = ({ className = [""], handleClick }: ArrowProps) => {
   return (
     <button
       type="button"
@@ -23,10 +21,6 @@ export const Arrow = (props: ArrowProps) => {
       )}
     />
   );
-};
-
-Arrow.defaultProps = {
-  className: [""]
 };
 
 export default Arrow;

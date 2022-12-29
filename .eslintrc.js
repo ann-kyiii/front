@@ -42,6 +42,7 @@ module.exports = {
     "react/function-component-definition": "off",
     "no-restricted-exports": "off",
     "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": ["error", { functions: "defaultArguments" }]
   },
 };

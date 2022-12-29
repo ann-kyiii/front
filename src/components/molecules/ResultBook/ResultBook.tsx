@@ -6,8 +6,7 @@ type ResultBookProps = {
   data: { bookId: number; bookName: string; author: string; imgURL: string };
 };
 
-export const ResultBook = (props: ResultBookProps) => {
-  const { data } = props;
+export const ResultBook = ({ data }: ResultBookProps) => {
   const dispatch = useDispatch();
   const handleClick = (nextLink: string) => {
     const encode = encodeURI(nextLink);

@@ -8,8 +8,7 @@ type BookSearchProps = {
   className?: string[];
 };
 
-export const BookSearcher = (props: BookSearchProps) => {
-  const { className } = props;
+export const BookSearcher = ({ className = [""] }: BookSearchProps) => {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState<string>("");
   const [canEnter, setCanEnter] = useState<boolean>(false);
@@ -104,10 +103,6 @@ export const BookSearcher = (props: BookSearchProps) => {
       className={className}
     />
   );
-};
-
-BookSearcher.defaultProps = {
-  className: [""]
 };
 
 export default BookSearcher;

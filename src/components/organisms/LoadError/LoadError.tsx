@@ -9,8 +9,7 @@ type Props = {
   buttonName: string;
 };
 
-export const LoadError = (props: Props) => {
-  const { text, backLink, buttonName } = props;
+export const LoadError = ({ backLink, text, buttonName }: Props) => {
   const dispatch = useDispatch();
 
   // backLinkに遷移する関数

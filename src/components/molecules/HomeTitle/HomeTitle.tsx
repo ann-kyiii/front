@@ -2,11 +2,11 @@ import React from "react";
 import styles from "./HomeTitle.module.css";
 
 type HomeTitleProps = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
-export const HomeTitle = (props: HomeTitleProps) => (
-  <h1 className={styles.HomeTitle}>{props.children}</h1>
+export const HomeTitle = ({ children }: HomeTitleProps) => (
+  <h1 className={styles.HomeTitle}>{children}</h1>
 );
 
 export default HomeTitle;

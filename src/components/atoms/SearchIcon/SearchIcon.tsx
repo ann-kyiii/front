@@ -7,8 +7,10 @@ type SearchIconProps = {
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const SearchIcon = (props: SearchIconProps) => {
-  const { handleClick, className } = props;
+export const SearchIcon = ({
+  className = [""],
+  handleClick
+}: SearchIconProps) => {
   return (
     <button
       type="button"
@@ -24,10 +26,6 @@ export const SearchIcon = (props: SearchIconProps) => {
       )}
     />
   );
-};
-
-SearchIcon.defaultProps = {
-  className: [""]
 };
 
 export default SearchIcon;

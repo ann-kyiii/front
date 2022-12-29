@@ -8,9 +8,11 @@ type PageNatiorProps = {
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const PageNatior = (props: PageNatiorProps) => {
-  const { totalPage, currentPage, handleClick } = props;
-
+export const PageNatior = ({
+  totalPage,
+  currentPage,
+  handleClick
+}: PageNatiorProps) => {
   const innerPage = () => {
     const items = [];
     for (let idx = 1; idx <= totalPage; idx += 1) {

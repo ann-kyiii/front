@@ -12,8 +12,11 @@ type ReturnButtonProps = {
   bookId: number;
 };
 
-export const ReturnButton = (props: ReturnButtonProps) => {
-  const { bookTitle, returner, bookId } = props;
+export const ReturnButton = ({
+  bookTitle,
+  returner,
+  bookId
+}: ReturnButtonProps) => {
   const dispatch = useDispatch();
 
   const maxBooks = useSelector((state: BooksState) => state.books.maxBooks);

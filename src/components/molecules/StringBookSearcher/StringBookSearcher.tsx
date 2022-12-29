@@ -13,15 +13,14 @@ type StringBookSearcherProps = {
   handleKeyUp: (event: React.KeyboardEvent<HTMLElement>) => void;
 };
 
-export const StringBookSearcher = (props: StringBookSearcherProps) => {
-  const {
-    inputValue,
-    className,
-    handleOnChange,
-    handleKeyPress,
-    handleKeyUp,
-    handleClick
-  } = props;
+export const StringBookSearcher = ({
+  inputValue,
+  className = [""],
+  handleOnChange,
+  handleKeyPress,
+  handleKeyUp,
+  handleClick
+}: StringBookSearcherProps) => {
   return (
     <div
       className={cx(
@@ -39,10 +38,6 @@ export const StringBookSearcher = (props: StringBookSearcherProps) => {
       <SearchIcon handleClick={handleClick} className={className} />
     </div>
   );
-};
-
-StringBookSearcher.defaultProps = {
-  className: [""]
 };
 
 export default StringBookSearcher;

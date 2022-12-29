@@ -6,9 +6,10 @@ type BorrowUserNameInputProps = {
   handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const BorrowUserNameInput = (props: BorrowUserNameInputProps) => {
-  const { placeValue, handleOnChange } = props;
-
+export const BorrowUserNameInput = ({
+  placeValue,
+  handleOnChange
+}: BorrowUserNameInputProps) => {
   return (
     <input
       placeholder={placeValue}
