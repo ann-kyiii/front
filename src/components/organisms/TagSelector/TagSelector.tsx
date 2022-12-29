@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import cx from "classnames";
 import { RootState } from "../../../reducers";
@@ -33,7 +33,7 @@ export const TagSelector = () => {
               tabIndex={0}
               onClick={() => handleClick(tag.id)}
               className={cx(styles.ListButton, {
-                [styles.isSelected]: tag.isSelected
+                [styles.IsSelected]: tag.isSelected
               })}
             >
               {tag.keyword}

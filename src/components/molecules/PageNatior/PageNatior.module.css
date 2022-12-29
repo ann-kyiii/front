@@ -8,7 +8,6 @@
 }
 
 .ListButton {
-  /* margin: 5px; */
   padding: 0 0.7em;
   margin: 0.3em 0.3em;
   font-size: 16px;
@@ -24,11 +23,11 @@
   appearance: none;
 }
 
-.ListButton:hover:not(.isSelected),
-.ListButton:focus:not(.isSelected) {
+.ListButton:hover:not(.IsSelected),
+.ListButton:focus:not(.IsSelected) {
   background-color: var(--focus-background);
 }
 
-.isSelected {
+.IsSelected {
   color: black;
 }

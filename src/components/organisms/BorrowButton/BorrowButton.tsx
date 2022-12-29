@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { useModal } from "react-modal-hook";
@@ -14,8 +13,12 @@ type BorrowButtonProps = {
   bookId: number;
 };
 
-export const BorrowButton = (props: BorrowButtonProps) => {
-  const { bookTitle, borrower, borrowerList, bookId } = props;
+export const BorrowButton = ({
+  bookTitle,
+  borrower,
+  borrowerList,
+  bookId
+}: BorrowButtonProps) => {
   const dispatch = useDispatch();
 
   const maxBooks = useSelector((state: BooksState) => state.books.maxBooks);

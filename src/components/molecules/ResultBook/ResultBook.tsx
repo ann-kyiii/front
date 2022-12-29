@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import cx from "classnames";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import style from "./ResultBook.module.css";
@@ -8,18 +6,9 @@ type ResultBookProps = {
   data: { bookId: number; bookName: string; author: string; imgURL: string };
 };
 
-export const ResultBook = (props: ResultBookProps) => {
-  const { data } = props;
-  const [imgURL, setImgURL] = useState(data.imgURL);
+export const ResultBook = ({ data }: ResultBookProps) => {
   const dispatch = useDispatch();
-  // const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>, nextLink:string) => {
-  //   // dispatch(push(nextLink));
-  //   history.push(nextLink);
-  // }, []);
-  const handleClick = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    nextLink: string
-  ) => {
+  const handleClick = (nextLink: string) => {
     const encode = encodeURI(nextLink);
     dispatch(push(encode));
   };
@@ -27,24 +16,22 @@ export const ResultBook = (props: ResultBookProps) => {
   return (
     <button
       type="button"
-      className={style.main}
-      onClick={e => handleClick(e, `book-detail/${data.bookId}`)}
+      className={style.Main}
+      onClick={() => handleClick(`book-detail/${data.bookId}`)}
     >
-      <div className={style.content}>
-        <div className={style.bookTitle}>{data.bookName}</div>
-        <div className={style.bookAuthor}>
+      <div className={style.Content}>
+        <h2 className={style.BookTitle}>{data.bookName}</h2>
+        <div className={style.BookAuthor}>
           著者：
           {data.author}
         </div>
       </div>
-      <div className={style.bookImageBrock}>
+      <div className={style.BookImageBrock}>
         <img
-          src={imgURL}
-          className={cx(style.image, {
-            [style.image_error]: imgURL !== data.imgURL
-          })}
-          onError={() =>
-            setImgURL(`${process.env.PUBLIC_URL}/images/noImageAvailable.svg`)
+          src={
+            data.imgURL !== "unidentified"
+              ? data.imgURL
+              : `${process.env.PUBLIC_URL}/images/noImageAvailable.svg`
           }
           width="130"
           height="180"

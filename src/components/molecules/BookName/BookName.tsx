@@ -1,7 +1,11 @@
 import React from "react";
 import styles from "./BookName.module.css";
 
-export const BookName: React.FC = ({ children }) => (
+type BookNameProps = {
+  children: React.ReactNode;
+};
+
+export const BookName = ({ children }: BookNameProps) => (
   <h1 className={styles.BookName}>{children}</h1>
 );
 

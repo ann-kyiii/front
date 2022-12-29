@@ -8,7 +8,7 @@ type BookSearchProps = {
   className?: string[];
 };
 
-export const BookSearcher = (props: BookSearchProps) => {
+export const BookSearcher = ({ className = [""] }: BookSearchProps) => {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState<string>("");
   const [canEnter, setCanEnter] = useState<boolean>(false);
@@ -83,14 +83,15 @@ export const BookSearcher = (props: BookSearchProps) => {
       return;
     }
     // ブラウザの戻るで一致しなくなった時に設定し直し
-    if ((sessionStorage.getItem("keyword") || "") !== keyWords.join(" ")) {
+    if (
+      path === "/book-lists" &&
+      (sessionStorage.getItem("keyword") || "") !== keyWords.join(" ")
+    ) {
       sessionStorage.setItem("keyword", keyWords.join(" "));
     }
     const sessValue = sessionStorage.getItem("keyword") || "";
     setInputValue(sessValue);
   }, [search]);
-
-  const { className } = props;
 
   return (
     <StringBookSearcher
@@ -102,10 +103,6 @@ export const BookSearcher = (props: BookSearchProps) => {
       className={className}
     />
   );
-};
-
-BookSearcher.defaultProps = {
-  className: [""]
 };
 
 export default BookSearcher;

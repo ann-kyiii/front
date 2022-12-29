@@ -10,10 +10,13 @@ type SearchBoxProps = {
   handleKeyUp: (event: React.KeyboardEvent<HTMLElement>) => void;
 };
 
-export const SearchBox = (props: SearchBoxProps) => {
-  const { inputValue, className, handleOnChange, handleKeyPress, handleKeyUp } =
-    props;
-
+export const SearchBox = ({
+  inputValue,
+  className = [""],
+  handleOnChange,
+  handleKeyPress,
+  handleKeyUp
+}: SearchBoxProps) => {
   return (
     <input
       value={inputValue}
@@ -26,10 +29,6 @@ export const SearchBox = (props: SearchBoxProps) => {
       onKeyUp={handleKeyUp}
     />
   );
-};
-
-SearchBox.defaultProps = {
-  className: [""]
 };
 
 export default SearchBox;

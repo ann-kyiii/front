@@ -10,9 +10,13 @@ type SelectButtonProps = {
   nextLink: string;
 };
 
-export const SelectButton = (props: SelectButtonProps) => {
-  const { isAbled, className, onClick, text, nextLink } = props;
-
+export const SelectButton = ({
+  isAbled,
+  className = [""],
+  onClick,
+  text,
+  nextLink
+}: SelectButtonProps) => {
   return (
     <button
       type="button"
@@ -26,10 +30,6 @@ export const SelectButton = (props: SelectButtonProps) => {
       {text}
     </button>
   );
-};
-
-SelectButton.defaultProps = {
-  className: [""]
 };
 
 export default SelectButton;

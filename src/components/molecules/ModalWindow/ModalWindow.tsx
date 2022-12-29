@@ -10,13 +10,18 @@ type ModalWindowProps = {
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const ModalWindow = (props: ModalWindowProps) => {
-  const { bookTitle, userType, user, hideModal, handleClick } = props;
+export const ModalWindow = ({
+  bookTitle,
+  userType,
+  user,
+  hideModal,
+  handleClick
+}: ModalWindowProps) => {
   return (
-    <div className={styles.wrapper}>
-      <div role="dialog" className={styles.modal}>
-        <div className={styles.title}>確認</div>
-        <div className={styles.center}>
+    <div className={styles.Wrapper}>
+      <div role="dialog" className={styles.Modal}>
+        <div className={styles.Title}>確認</div>
+        <div className={styles.Center}>
           <p>
             BookTitle：
             {bookTitle}

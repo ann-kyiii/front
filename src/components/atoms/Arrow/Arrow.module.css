@@ -8,15 +8,15 @@
   appearance: none;
 }
 
-.ArrorwRect {
+.ArrowRect {
   position: relative;
   display: block;
   width: 42px;
   height: 42px;
 }
 
-.Arrorw::before,
-.Arrorw::after {
+.Arrow::before,
+.Arrow::after {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -24,13 +24,13 @@
   content: "";
 }
 
-.Arrorw::before {
+.Arrow::before {
   left: 14px;
   width: 18px;
   height: 3px;
   background: #b4b4b4;
 }
-.Arrorw::after {
+.Arrow::after {
   left: 14px;
   width: 11px;
   height: 11px;

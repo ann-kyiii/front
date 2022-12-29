@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import cx from "classnames";
 import { push } from "connected-react-router";
@@ -12,10 +12,16 @@ import LoadError from "../organisms/LoadError";
 import SelectButton from "../organisms/SelectButton";
 
 export const BookDetail = () => {
-  // var
-  const [bookID, setBookID] = useState(-1);
-  const [imgURL, setImgURL] = useState("");
   const dispatch = useDispatch();
+  const sessValue = sessionStorage.getItem("keyword") || "";
+  const path = useSelector(
+    (state: RootState) => state.router.location.pathname
+  ).slice(1);
+  const bookId = parseInt(path.split("/")[1], 10);
+  // storeのデータ取得
+  const storeBookData = useSelector(
+    (state: RootState) => state.books.booksTable[bookId]
+  );
 
   // function
   const handleClick = useCallback(
@@ -26,7 +32,7 @@ export const BookDetail = () => {
   );
 
   // 1冊の情報だけ取得する
-  const getOneBook = async (bookId: number) => {
+  const getOneBook = async () => {
     const payload = {
       id: bookId
     };
@@ -56,120 +62,98 @@ export const BookDetail = () => {
     }
   };
 
-  const path = useSelector(
-    (state: RootState) => state.router.location.pathname
-  );
-
-  // storeのデータ取得
-  const storeBookData = useSelector(
-    (state: RootState) => state.books.booksTable[bookID]
-  );
+  useEffect(() => {
+    if (!storeBookData) {
+      getOneBook();
+    }
+  }, []);
 
   const arg = path.split("/").slice(-1)[0];
-
   // book-detail/id になっているか
   if (!/^[0-9]+$/.test(arg)) {
     return (
       <LoadError backLink="/" text="Failed to read BookID" buttonName="Home" />
     );
   }
-  if (bookID < 0) {
-    setBookID(parseInt(arg, 10));
-  }
 
-  // 対象の本の情報がreduxにない ⇒ 対象の本だけ取得 (getでid指定で)
-  if (!storeBookData) {
-    getOneBook(bookID);
+  if (storeBookData) {
+    // borrower計算
+    const stockN = storeBookData.find - storeBookData.borrower.length;
+    const borrowAbled = stockN > 0;
+    const returnAbled = storeBookData.borrower.length > 0;
 
-    // 一回目のrenderはこっち
     return (
-      <LoadError
-        backLink="/"
-        text="Failed to find the book"
-        buttonName="Home"
-      />
-    );
-  }
+      <div id={style.book_detail}>
+        <Header backLink={`/book-lists?key=${sessValue}&page=1`} />
 
-  const data = storeBookData;
-  const sessValue = sessionStorage.getItem("keyword") || "";
+        <div className={style.Main}>
+          <h1 className={style.BookTitle}>{storeBookData.bookName}</h1>
+          <div className={style.BookImageBrock}>
+            <img
+              src={
+                storeBookData.imgURL !== "unidentified"
+                  ? storeBookData.imgURL
+                  : `${process.env.PUBLIC_URL}/images/noImageAvailable.svg`
+              }
+              className={cx(style.Image, {
+                [style.Image_error]: storeBookData.imgURL === "unidentified"
+              })}
+              alt="book title"
+            />
+          </div>
+          <div className={style.Contents}>
+            <p className={style.itemName}>著者：</p>
+            <p className={style.item}>{storeBookData.author}</p>
+            <p className={style.itemName}>出版社：</p>
+            <p className={style.item}>
+              <span>{storeBookData.publisher}</span>
+              <span> (</span>
+              <span>{storeBookData.pubdate}</span>
+              <span>)</span>
+            </p>
+            <p className={style.ItemName}>ISBN：</p>
+            <p className={style.Item}>{storeBookData.ISBN}</p>
+            <p className={style.ItemName}>ジャンル：</p>
+            <p className={style.Item}>{storeBookData.genre}</p>
+            <p className={style.ItemName}>サブジャンル：</p>
+            <p className={style.Item}>{storeBookData.subGenre}</p>
+            <p className={style.ItemName}>在庫数：</p>
+            <p className={style.Item}>
+              <span>{stockN}</span>
+              <span> / </span>
+              <span>{storeBookData.find}</span>
+            </p>
+          </div>
+        </div>
 
-  // borrowr計算
-  const stockN = data.find - data.borrower.length;
-  const borrowAbled = stockN > 0;
-  const returnAbled = data.borrower.length > 0;
-
-  if (!imgURL) {
-    setImgURL(data.imgURL);
-  }
-
-  return (
-    <div id={style.book_detail}>
-      <Header backLink={`/book-lists?key=${sessValue}&page=1`} />
-
-      <div className={style.main}>
-        <div className={style.bookTitle}>{data.bookName}</div>
-        <div className={style.bookImageBrock}>
-          <img
-            src={imgURL}
-            className={cx(style.image, {
-              [style.image_error]: imgURL !== data.imgURL
-            })}
-            onError={() =>
-              setImgURL(`${process.env.PUBLIC_URL}/images/noImageAvailable.svg`)
-            }
-            alt="book title"
+        <div className={style.ButtonsBlock}>
+          <SelectButton
+            isAbled={borrowAbled}
+            nextLink={`/borrow/${bookId}`}
+            className={["BorrowButtonColor"]}
+            onClick={handleClick}
+            text="Borrow"
+          />
+          <SelectButton
+            isAbled={returnAbled}
+            nextLink={`/return/${bookId}`}
+            className={["ReturnButtonColor"]}
+            onClick={handleClick}
+            text="Return"
+          />
+          <SelectButton
+            isAbled={false}
+            nextLink={`/review/${bookId}`}
+            className={["ReviewButtonColor"]}
+            onClick={handleClick}
+            text="Review"
           />
         </div>
-        <div className={style.contents}>
-          <p className={style.itemName}>著者：</p>
-          <p className={style.item}>{data.author}</p>
-          <p className={style.itemName}>出版社：</p>
-          <p className={style.item}>
-            <span>{data.publisher}</span>
-            <span> (</span>
-            <span>{data.pubdate}</span>
-            <span>)</span>
-          </p>
-          <p className={style.itemName}>ISBN：</p>
-          <p className={style.item}>{data.ISBN}</p>
-          <p className={style.itemName}>ジャンル：</p>
-          <p className={style.item}>{data.genre}</p>
-          <p className={style.itemName}>サブジャンル：</p>
-          <p className={style.item}>{data.subGenre}</p>
-          <p className={style.itemName}>在庫数：</p>
-          <p className={style.item}>
-            <span>{stockN}</span>
-            <span> / </span>
-            <span>{data.find}</span>
-          </p>
-        </div>
       </div>
-
-      <div className={style.buttonsBlock}>
-        <SelectButton
-          isAbled={borrowAbled}
-          nextLink={`/borrow/${bookID}`}
-          className={["BorrowButtonColor"]}
-          onClick={handleClick}
-          text="Borrow"
-        />
-        <SelectButton
-          isAbled={returnAbled}
-          nextLink={`/return/${bookID}`}
-          className={["ReturnButtonColor"]}
-          onClick={handleClick}
-          text="Return"
-        />
-        <SelectButton
-          isAbled={false}
-          nextLink={`/review/${bookID}`}
-          className={["ReviewButtonColor"]}
-          onClick={handleClick}
-          text="Review"
-        />
-      </div>
-    </div>
+    );
+  }
+  return (
+    <LoadError backLink="/" text="Failed to find the book" buttonName="Home" />
   );
 };
 

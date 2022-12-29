@@ -1,4 +1,4 @@
-.main {
+.Main {
   display: flex;
   width: 85vw;
   margin: 10px auto;
@@ -7,37 +7,27 @@
   box-shadow: 10px 10px 10px -10px;
 }
 
-.content {
+.Content {
   display: flex;
   flex-direction: column;
-  /* width: 90vm; */
 }
 
-.bookTitle {
-  /* background-color: blueviolet; */
+.BookTitle {
   float: left;
-  /* padding-top: 15px;
-    padding-left: 20px;
-    padding-bottom: 10px; */
   padding: 5px 0;
   font-size: 18px;
   text-align: left;
-  /* width: calc(100% - 135px - 20px); 100% - image - pad_left */
-  /* font-weight: bold; */
 }
 
-.bookAuthor {
+.BookAuthor {
   float: left;
   padding: 5px 0;
   font-size: 14px;
   text-align: left;
 }
 
-.bookImageBrock {
+.BookImageBrock {
   float: right;
-  /*width: calc(135px - 10px); /* -padR -padL */
-  /* min-height: 100px; */
-  /* width: 100%; */
   height: auto;
   padding-right: 10px;
   padding-left: 10px;

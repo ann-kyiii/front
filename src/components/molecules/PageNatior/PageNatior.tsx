@@ -8,9 +8,11 @@ type PageNatiorProps = {
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const PageNatior = (props: PageNatiorProps) => {
-  const { totalPage, currentPage, handleClick } = props;
-
+export const PageNatior = ({
+  totalPage,
+  currentPage,
+  handleClick
+}: PageNatiorProps) => {
   const innerPage = () => {
     const items = [];
     for (let idx = 1; idx <= totalPage; idx += 1) {
@@ -21,7 +23,7 @@ export const PageNatior = (props: PageNatiorProps) => {
             tabIndex={0}
             onClick={handleClick}
             className={cx(styles.ListButton, {
-              [styles.isSelected]: idx === currentPage
+              [styles.IsSelected]: idx === currentPage
             })}
             value={idx}
             disabled={(() => idx === currentPage)()}
