@@ -87,7 +87,7 @@ export const BookDetail = () => {
         <Header backLink={`/book-lists?key=${sessValue}&page=1`} />
 
         <div className={style.main}>
-          <div className={style.bookTitle}>{storeBookData.bookName}</div>
+          <h1 className={style.bookTitle}>{storeBookData.bookName}</h1>
           <div className={style.bookImageBrock}>
             <img
               src={

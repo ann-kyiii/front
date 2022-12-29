@@ -20,7 +20,7 @@ export const ResultBook = ({ data }: ResultBookProps) => {
       onClick={() => handleClick(`book-detail/${data.bookId}`)}
     >
       <div className={style.content}>
-        <div className={style.bookTitle}>{data.bookName}</div>
+        <h2 className={style.bookTitle}>{data.bookName}</h2>
         <div className={style.bookAuthor}>
           著者：
           {data.author}
