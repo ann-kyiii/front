@@ -1,5 +1,9 @@
-import React from "react";
+import LoadError from "../organisms/LoadError";
 
-export const NotFound = () => <div>Not Found</div>;
+export const NotFound = () => {
+    return (
+        <LoadError backLink="/" text="Not Found" buttonName="Home" />
+    );
+};
 
 export default NotFound;

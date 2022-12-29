@@ -46,6 +46,7 @@ export const ResultLists = () => {
   const statusCode = useSelector((state: BooksState) => state.books.statusCode);
   const maxBooks = useSelector((state: BooksState) => state.books.maxBooks);
   const dispatch = useDispatch();
+  const limit = 10;
 
   const normalizeData = (
     data: BookLists
@@ -58,7 +59,6 @@ export const ResultLists = () => {
     return { booksTable, booksIdList };
   };
 
-  const limit = 10;
   const getBookLists = async (page: number) => {
     if (pageIndex <= 0) {
       return;
@@ -99,12 +99,6 @@ export const ResultLists = () => {
     }
   };
 
-  useEffect(() => {
-    if (search !== "") {
-      getBookLists(pageIndex);
-    }
-  }, [pageIndex, search]);
-
   const handleClick = (
     e: React.MouseEvent<HTMLButtonElement>,
     currentPageIndex: number
@@ -117,6 +111,12 @@ export const ResultLists = () => {
     // ページ上部に戻す
     window.scrollTo(0, 0);
   };
+
+  useEffect(() => {
+    if (search !== "") {
+      getBookLists(pageIndex);
+    }
+  }, [pageIndex, search]);
 
   if (statusCode !== 200) {
     return (

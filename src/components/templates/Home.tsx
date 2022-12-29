@@ -1,4 +1,3 @@
-import React from "react";
 import HomeTitle from "../molecules/HomeTitle";
 import BookSearcher from "../organisms/BookSearcher";
 import TagSelector from "../organisms/TagSelector";

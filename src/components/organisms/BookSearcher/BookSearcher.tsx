@@ -9,6 +9,7 @@ type BookSearchProps = {
 };
 
 export const BookSearcher = (props: BookSearchProps) => {
+  const { className } = props;
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState<string>("");
   const [canEnter, setCanEnter] = useState<boolean>(false);
@@ -92,8 +93,6 @@ export const BookSearcher = (props: BookSearchProps) => {
     const sessValue = sessionStorage.getItem("keyword") || "";
     setInputValue(sessValue);
   }, [search]);
-
-  const { className } = props;
 
   return (
     <StringBookSearcher

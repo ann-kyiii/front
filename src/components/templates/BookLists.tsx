@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "../organisms/Header";
 import BookSearcher from "../organisms/BookSearcher";
 import ResultLists from "../organisms/ResultLists";

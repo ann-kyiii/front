@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import style from "./LoadError.module.css";
@@ -18,18 +18,16 @@ export const LoadError = (props: Props) => {
     dispatch(push(backLink));
   }, []);
 
-  const divStyle = {
+  const backgroundImageStyle = {
     backgroundImage: `url(${`${process.env.PUBLIC_URL}/images/book.svg`})`
   };
 
   return (
-    <div className={style.back} style={divStyle}>
-      <div className={style.FullCenter}>
-        <div className={style.text}>{text}</div>
-        <button type="button" onClick={handleClick} className={style.button}>
-          {buttonName}
-        </button>
-      </div>
+    <div className={style.FullCenter} style={backgroundImageStyle}>
+      <p className={style.text}>{text}</p>
+      <button type="button" onClick={handleClick} className={style.button}>
+        {buttonName}
+      </button>
     </div>
   );
 };

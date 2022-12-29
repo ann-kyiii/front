@@ -40,6 +40,8 @@ module.exports = {
     "react-hooks/exhaustive-deps": "warn",
     "import/no-named-as-default": "off",
     "react/function-component-definition": "off",
-    "no-restricted-exports": "off"
+    "no-restricted-exports": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off"
   },
 };

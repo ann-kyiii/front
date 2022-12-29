@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ModalProvider } from "react-modal-hook";
 import Header from "../organisms/Header";
@@ -16,10 +16,14 @@ export const Return = () => {
   const path: string = useSelector(
     (state: RootState) => state.router.location.pathname
   ).slice(1);
-  const decode: string = decodeURI(path);
-  const urlParams: string[] = decode.split("/");
-  const bookId = parseInt(urlParams[1], 10);
+  const bookId = parseInt(path.split("/")[1], 10);
   const maxBooks = useSelector((state: BooksState) => state.books.maxBooks);
+  const bookTitle = useSelector(
+    (state: RootState) => state.books.booksTable[bookId]?.bookName
+  );
+  const borrowerList = useSelector(
+    (state: RootState) => state.books.booksTable[bookId]?.borrower
+  );
 
   // 1冊の情報だけ取得する
   const getOneBook = async () => {
@@ -51,14 +55,6 @@ export const Return = () => {
       console.log(`Error fetching in getBookLists: ${error}`);
     }
   };
-
-  const bookTitle = useSelector(
-    (state: RootState) => state.books.booksTable[bookId]?.bookName
-  );
-
-  const borrowerList: string[] = useSelector(
-    (state: RootState) => state.books.booksTable[bookId]?.borrower
-  );
 
   useEffect(() => {
     if (maxBooks === 0) {

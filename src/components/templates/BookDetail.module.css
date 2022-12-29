@@ -7,7 +7,6 @@
 #book_detail {
   position: relative;
   width: 850px;
-  /* height: calc(var(var(--header)) + var(--main) + var(--footer)); */
   height: 100vh;
   margin: auto auto;
 }
@@ -22,15 +21,12 @@
 
 .main {
   width: 100%;
-  /* height: calc(100% - 100vh / 7 - 60px); */
   /* 100%-button-header */
   height: var(--main);
   overflow: auto;
-  /* background-color: yellowgreen; */
 }
 
 .bookTitle {
-  /* background-color: blueviolet; */
   float: left;
   width: calc(100% - 135px - 20px); /* 100% - image - pad_left*/
   padding-top: 15px;
@@ -62,12 +58,10 @@
   padding-top: 5px;
   padding-bottom: 10px;
   padding-left: 25px;
-  /* background-color: burlywood; */
   clear: both;
   font-size: 20px;
   line-height: 28px; /* font-size +  */
   text-align: left;
-  /* height: 1000px; */
 }
 
 .buttonsBlock {
@@ -76,11 +70,6 @@
   justify-content: space-between;
   width: 100%;
   height: var(--footer);
-}
-
-.errorDiv {
-  margin-top: 30px;
-  text-align: center;
 }
 
 .itemName {

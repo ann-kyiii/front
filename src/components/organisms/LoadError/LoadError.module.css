@@ -5,7 +5,6 @@
 
 .button {
   font-family: "Comic Sans MS";
-  /* width: 150vw; */
   font-size: 25px;
   color: maroon;
   background-color: rgba(0, 0, 0, 0);
@@ -26,9 +25,7 @@
   justify-content: center;
   width: 100vw;
   height: 100vh;
-}
 
-.back {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: right bottom;
