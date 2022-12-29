@@ -23,8 +23,8 @@ export const LoadError = ({ backLink, text, buttonName }: Props) => {
 
   return (
     <div className={style.FullCenter} style={backgroundImageStyle}>
-      <p className={style.text}>{text}</p>
-      <button type="button" onClick={handleClick} className={style.button}>
+      <p className={style.Text}>{text}</p>
+      <button type="button" onClick={handleClick} className={style.Button}>
         {buttonName}
       </button>
     </div>

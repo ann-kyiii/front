@@ -19,14 +19,14 @@
   }
 } /*デバイスの横幅が850以下の場合*/
 
-.main {
+.Main {
   width: 100%;
   /* 100%-button-header */
   height: var(--main);
   overflow: auto;
 }
 
-.bookTitle {
+.BookTitle {
   float: left;
   width: calc(100% - 135px - 20px); /* 100% - image - pad_left*/
   padding-top: 15px;
@@ -37,7 +37,7 @@
   text-align: left;
 }
 
-.bookImageBrock {
+.BookImageBrock {
   float: right;
   width: calc(135px - 10px); /* -padR -padL */
   min-height: 100px;
@@ -46,15 +46,15 @@
   text-align: center;
 }
 
-.image {
+.Image {
   max-width: 100%;
 }
 
-.image_error {
+.Image_error {
   width: 80%;
 }
 
-.contents {
+.Contents {
   padding-top: 5px;
   padding-bottom: 10px;
   padding-left: 25px;
@@ -64,20 +64,20 @@
   text-align: left;
 }
 
-.buttonsBlock {
+.ItemName {
+  font-weight: bold;
+}
+
+.Item {
+  width: calc(100% - 10px - 10px);
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.ButtonsBlock {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
   width: 100%;
   height: var(--footer);
-}
-
-.itemName {
-  font-weight: bold;
-}
-
-.item {
-  width: calc(100% - 10px - 10px);
-  padding-right: 10px;
-  padding-left: 10px;
 }

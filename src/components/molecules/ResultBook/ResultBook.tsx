@@ -16,17 +16,17 @@ export const ResultBook = ({ data }: ResultBookProps) => {
   return (
     <button
       type="button"
-      className={style.main}
+      className={style.Main}
       onClick={() => handleClick(`book-detail/${data.bookId}`)}
     >
-      <div className={style.content}>
-        <h2 className={style.bookTitle}>{data.bookName}</h2>
-        <div className={style.bookAuthor}>
+      <div className={style.Content}>
+        <h2 className={style.BookTitle}>{data.bookName}</h2>
+        <div className={style.BookAuthor}>
           著者：
           {data.author}
         </div>
       </div>
-      <div className={style.bookImageBrock}>
+      <div className={style.BookImageBrock}>
         <img
           src={
             data.imgURL !== "unidentified"

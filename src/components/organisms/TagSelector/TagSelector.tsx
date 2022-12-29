@@ -33,7 +33,7 @@ export const TagSelector = () => {
               tabIndex={0}
               onClick={() => handleClick(tag.id)}
               className={cx(styles.ListButton, {
-                [styles.isSelected]: tag.isSelected
+                [styles.IsSelected]: tag.isSelected
               })}
             >
               {tag.keyword}

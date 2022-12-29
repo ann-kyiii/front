@@ -23,7 +23,7 @@ export const PageNatior = ({
             tabIndex={0}
             onClick={handleClick}
             className={cx(styles.ListButton, {
-              [styles.isSelected]: idx === currentPage
+              [styles.IsSelected]: idx === currentPage
             })}
             value={idx}
             disabled={(() => idx === currentPage)()}

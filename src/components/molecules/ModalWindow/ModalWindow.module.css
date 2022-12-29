@@ -1,4 +1,4 @@
-.modal {
+.Modal {
   position: absolute;
   top: 0;
   right: 0;
@@ -15,13 +15,13 @@
 
 /* スマホ用 */
 @media only screen and (max-width: 400px) {
-  .modal {
+  .Modal {
     width: auto;
     margin: auto 10px;
   }
 } /*デバイスの横幅が850以下の場合*/
 
-.wrapper {
+.Wrapper {
   position: absolute;
   top: 0%;
   width: 100%;
@@ -30,11 +30,11 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.title {
+.Title {
   text-align: center;
 }
 
-.center {
+.Center {
   padding-top: 10px;
   margin-left: 5em;
   line-height: 20px;

@@ -18,10 +18,10 @@ export const ModalWindow = ({
   handleClick
 }: ModalWindowProps) => {
   return (
-    <div className={styles.wrapper}>
-      <div role="dialog" className={styles.modal}>
-        <div className={styles.title}>確認</div>
-        <div className={styles.center}>
+    <div className={styles.Wrapper}>
+      <div role="dialog" className={styles.Modal}>
+        <div className={styles.Title}>確認</div>
+        <div className={styles.Center}>
           <p>
             BookTitle：
             {bookTitle}

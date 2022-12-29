@@ -1,9 +1,9 @@
-.text {
+.Text {
   height: 80px;
   font-size: 25px;
 }
 
-.button {
+.Button {
   font-family: "Comic Sans MS";
   font-size: 25px;
   color: maroon;
@@ -12,7 +12,7 @@
   border-style: none;
 }
 
-.button:hover {
+.Button:hover {
   color: darkgreen;
 }
 
@@ -33,7 +33,7 @@
 }
 
 @media only screen and (min-width: 800px) {
-  .back {
+  .FullCenter {
     background-size: 320px auto;
   }
 }

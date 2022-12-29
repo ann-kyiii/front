@@ -37,7 +37,7 @@
   background-color: var(--focus-background);
 }
 
-.isSelected {
+.IsSelected {
   font-weight: 700;
   color: black;
 }

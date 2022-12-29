@@ -23,11 +23,11 @@
   appearance: none;
 }
 
-.ListButton:hover:not(.isSelected),
-.ListButton:focus:not(.isSelected) {
+.ListButton:hover:not(.IsSelected),
+.ListButton:focus:not(.IsSelected) {
   background-color: var(--focus-background);
 }
 
-.isSelected {
+.IsSelected {
   color: black;
 }

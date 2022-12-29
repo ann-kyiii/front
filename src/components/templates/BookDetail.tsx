@@ -86,22 +86,22 @@ export const BookDetail = () => {
       <div id={style.book_detail}>
         <Header backLink={`/book-lists?key=${sessValue}&page=1`} />
 
-        <div className={style.main}>
-          <h1 className={style.bookTitle}>{storeBookData.bookName}</h1>
-          <div className={style.bookImageBrock}>
+        <div className={style.Main}>
+          <h1 className={style.BookTitle}>{storeBookData.bookName}</h1>
+          <div className={style.BookImageBrock}>
             <img
               src={
                 storeBookData.imgURL !== "unidentified"
                   ? storeBookData.imgURL
                   : `${process.env.PUBLIC_URL}/images/noImageAvailable.svg`
               }
-              className={cx(style.image, {
-                [style.image_error]: storeBookData.imgURL === "unidentified"
+              className={cx(style.Image, {
+                [style.Image_error]: storeBookData.imgURL === "unidentified"
               })}
               alt="book title"
             />
           </div>
-          <div className={style.contents}>
+          <div className={style.Contents}>
             <p className={style.itemName}>著者：</p>
             <p className={style.item}>{storeBookData.author}</p>
             <p className={style.itemName}>出版社：</p>
@@ -111,14 +111,14 @@ export const BookDetail = () => {
               <span>{storeBookData.pubdate}</span>
               <span>)</span>
             </p>
-            <p className={style.itemName}>ISBN：</p>
-            <p className={style.item}>{storeBookData.ISBN}</p>
-            <p className={style.itemName}>ジャンル：</p>
-            <p className={style.item}>{storeBookData.genre}</p>
-            <p className={style.itemName}>サブジャンル：</p>
-            <p className={style.item}>{storeBookData.subGenre}</p>
-            <p className={style.itemName}>在庫数：</p>
-            <p className={style.item}>
+            <p className={style.ItemName}>ISBN：</p>
+            <p className={style.Item}>{storeBookData.ISBN}</p>
+            <p className={style.ItemName}>ジャンル：</p>
+            <p className={style.Item}>{storeBookData.genre}</p>
+            <p className={style.ItemName}>サブジャンル：</p>
+            <p className={style.Item}>{storeBookData.subGenre}</p>
+            <p className={style.ItemName}>在庫数：</p>
+            <p className={style.Item}>
               <span>{stockN}</span>
               <span> / </span>
               <span>{storeBookData.find}</span>
@@ -126,7 +126,7 @@ export const BookDetail = () => {
           </div>
         </div>
 
-        <div className={style.buttonsBlock}>
+        <div className={style.ButtonsBlock}>
           <SelectButton
             isAbled={borrowAbled}
             nextLink={`/borrow/${bookId}`}

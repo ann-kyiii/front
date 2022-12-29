@@ -15,8 +15,8 @@ export const Arrow = ({ className = [""], handleClick }: ArrowProps) => {
       onClick={handleClick}
       className={cx(
         styles.IconButton,
-        styles.ArrorwRect,
-        styles.Arrorw,
+        styles.ArrowRect,
+        styles.Arrow,
         className!.map(c => styles[c])
       )}
     />
