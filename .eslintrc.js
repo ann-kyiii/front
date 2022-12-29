@@ -41,8 +41,10 @@ module.exports = {
     "import/no-named-as-default": "off",
     "react/function-component-definition": "off",
     "no-restricted-exports": "off",
+    // React 17からReactのimportが必要なくなったため
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
+    // defaultPropsがReact 18から非推奨になるためデフォルト引数の形を受け入れる
     "react/require-default-props": ["error", { functions: "defaultArguments" }]
   },
 };
