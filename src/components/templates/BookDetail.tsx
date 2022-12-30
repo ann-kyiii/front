@@ -102,10 +102,10 @@ export const BookDetail = () => {
             />
           </div>
           <div className={style.Contents}>
-            <p className={style.itemName}>著者：</p>
-            <p className={style.item}>{storeBookData.author}</p>
-            <p className={style.itemName}>出版社：</p>
-            <p className={style.item}>
+            <p className={style.ItemName}>著者：</p>
+            <p className={style.Item}>{storeBookData.author}</p>
+            <p className={style.ItemName}>出版社：</p>
+            <p className={style.Item}>
               <span>{storeBookData.publisher}</span>
               <span> (</span>
               <span>{storeBookData.pubdate}</span>
