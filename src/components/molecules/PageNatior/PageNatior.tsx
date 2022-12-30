@@ -15,7 +15,43 @@ export const PageNatior = ({
 }: PageNatiorProps) => {
   const innerPage = () => {
     const items = [];
-    for (let idx = 1; idx <= totalPage; idx += 1) {
+    const limit = 5;
+    let startPage;
+    let endPage;
+    if (currentPage <= Math.ceil(limit / 2)) {
+      startPage = 1;
+      endPage = limit;
+    } else if (
+      currentPage > Math.ceil(limit / 2) &&
+      currentPage <= totalPage - Math.ceil(limit / 2) - 1
+    ) {
+      startPage = currentPage - Math.floor(limit / 2);
+      endPage = currentPage + Math.ceil(limit / 2) - 1;
+    } else {
+      startPage = totalPage - limit + 1;
+      endPage = totalPage;
+    }
+    if (totalPage < limit) {
+      startPage = 1;
+      endPage = totalPage;
+    }
+
+    if (currentPage > 1) {
+      items.push(
+        <li key={0}>
+          <button
+            type="button"
+            tabIndex={0}
+            onClick={handleClick}
+            className={styles.ListButton}
+            value={currentPage - 1}
+          >
+            {"<"}
+          </button>
+        </li>
+      );
+    }
+    for (let idx = startPage; idx <= endPage; idx += 1) {
       items.push(
         <li key={idx}>
           <button
@@ -29,6 +65,21 @@ export const PageNatior = ({
             disabled={(() => idx === currentPage)()}
           >
             {idx}
+          </button>
+        </li>
+      );
+    }
+    if (currentPage < totalPage) {
+      items.push(
+        <li key={totalPage + 1}>
+          <button
+            type="button"
+            tabIndex={0}
+            onClick={handleClick}
+            className={styles.ListButton}
+            value={currentPage + 1}
+          >
+            {">"}
           </button>
         </li>
       );
