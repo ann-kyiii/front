@@ -108,6 +108,7 @@ export const ResultLists = () => {
       `page=${e.currentTarget.value}`
     )}`;
     dispatch(push(encode));
+    e.currentTarget.blur();
     // ページ上部に戻す
     window.scrollTo(0, 0);
   };
