@@ -123,6 +123,10 @@ export const BookDetail = () => {
               <span> / </span>
               <span>{storeBookData.find}</span>
             </p>
+            <p className={style.ItemName}>場所：</p>
+            <p className={style.Item}>
+              {storeBookData.locateAt4F ? "4F" : "3F"}
+            </p>
           </div>
         </div>
 
