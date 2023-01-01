@@ -12,6 +12,7 @@ export const BookSearcher = ({ className = [""] }: BookSearchProps) => {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState<string>("");
   const [canEnter, setCanEnter] = useState<boolean>(false);
+  const [isAndSearch, setIsAndSearch] = useState(true);
   const keywordTags = useSelector((state: RootState) => state.tagSelector);
   const path = useSelector(
     (state: RootState) => state.router.location.pathname
@@ -41,7 +42,7 @@ export const BookSearcher = ({ className = [""] }: BookSearchProps) => {
       .split(/\s+/)
       .map(key => `key=${key}`)
       .join("&");
-    const encode = encodeURI(`/book-lists?${keys}&page=1`);
+    const encode = encodeURI(`/book-lists?${keys}&and=${isAndSearch}&page=1`);
     dispatch(push(encode));
   };
 
@@ -77,6 +78,14 @@ export const BookSearcher = ({ className = [""] }: BookSearchProps) => {
     handleToBookLists();
   };
 
+  const handleChange = useCallback(() => {
+    if (isAndSearch) {
+      setIsAndSearch(false);
+    } else {
+      setIsAndSearch(true);
+    }
+  }, [isAndSearch]);
+
   useEffect(() => {
     if (path === "/") {
       sessionStorage.removeItem("keyword");
@@ -100,6 +109,7 @@ export const BookSearcher = ({ className = [""] }: BookSearchProps) => {
       handleOnChange={handleOnChange}
       handleKeyPress={handleKeyPress}
       handleKeyUp={handleKeyUp}
+      handleChange={handleChange}
       className={className}
     />
   );

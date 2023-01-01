@@ -1,0 +1,46 @@
+.SearchToggleButtonWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.SearchToggleButtonText {
+  margin-right: 5px;
+  color: var(--app-default-blue);
+}
+
+.SearchToggleButtonInput {
+  display: none;
+}
+
+.SearchToggleButtonInput:checked + .SearchToggleButtonLabel {
+  background-color: var(--app-default-blue);
+}
+
+.SearchToggleButtonInput:checked + .SearchToggleButtonLabel::before {
+  left: 1em;
+}
+
+.SearchToggleButtonLabel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 1.75em;
+  height: 1em;
+  background-color: #4e92db;
+  border: 2px solid var(--text-color);
+  border-radius: 2em;
+  transition: 0.2s;
+}
+.SearchToggleButtonLabel::before {
+  position: absolute;
+  left: 0.25em;
+  z-index: 2;
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  content: "";
+  background: #fff;
+  border-radius: 100%;
+  transition: 0.2s ease-out;
+}

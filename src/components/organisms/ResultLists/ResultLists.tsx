@@ -23,6 +23,9 @@ export const ResultLists = () => {
   const keyWords: string[] = urlParams
     .filter(param => param.startsWith("key="))
     .map(param => param.replace(/^key=/g, ""));
+  const isAndSearch: boolean = urlParams
+    .filter(param => param.startsWith("and="))
+    .map(param => param.replace(/^and=/g, "").toLowerCase() === "true")[0];
 
   const pageIndex: number =
     parseInt(
@@ -68,7 +71,8 @@ export const ResultLists = () => {
     const payload = {
       keywords: keyWords,
       offset: offset.toString(),
-      limit: limit.toString()
+      limit: limit.toString(),
+      isAndSearch
     };
     try {
       dispatch(fetchBookLists.started({ pageIndex: page }));

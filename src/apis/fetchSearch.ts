@@ -2,6 +2,7 @@ type FetchSearchPayload = {
   keywords: string[];
   offset: string;
   limit: string;
+  isAndSearch: boolean;
 };
 
 export const fetchSearch = (payload: FetchSearchPayload) => {
