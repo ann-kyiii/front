@@ -3,6 +3,7 @@ import cx from "classnames";
 import SearchBox from "../../atoms/SearchBox";
 import SearchIcon from "../../atoms/SearchIcon";
 import styles from "./StringBookSearcher.module.css";
+import SearchToggleButton from "../../atoms/SearchToggleButton";
 
 type StringBookSearcherProps = {
   inputValue: string;
@@ -11,6 +12,7 @@ type StringBookSearcherProps = {
   handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleKeyPress: (event: React.KeyboardEvent<HTMLElement>) => void;
   handleKeyUp: (event: React.KeyboardEvent<HTMLElement>) => void;
+  handleChange: (event: React.InputHTMLAttributes<HTMLInputElement>) => void;
 };
 
 export const StringBookSearcher = ({
@@ -19,7 +21,8 @@ export const StringBookSearcher = ({
   handleOnChange,
   handleKeyPress,
   handleKeyUp,
-  handleClick
+  handleClick,
+  handleChange
 }: StringBookSearcherProps) => {
   return (
     <div
@@ -35,6 +38,7 @@ export const StringBookSearcher = ({
         handleKeyPress={handleKeyPress}
         handleKeyUp={handleKeyUp}
       />
+      <SearchToggleButton text="AND" handleChange={handleChange} />
       <SearchIcon handleClick={handleClick} className={className} />
     </div>
   );

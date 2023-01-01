@@ -45,6 +45,8 @@ module.exports = {
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     // defaultPropsがReact 18から非推奨になるためデフォルト引数の形を受け入れる
-    "react/require-default-props": ["error", { functions: "defaultArguments" }]
+    "react/require-default-props": ["error", { functions: "defaultArguments" }],
+    // トグルボタンでlabelタグの中にinputタグを入れないことを許容する
+    "jsx-a11y/label-has-associated-control": "off"
   },
 };
