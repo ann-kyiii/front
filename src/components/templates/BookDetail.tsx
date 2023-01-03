@@ -14,6 +14,7 @@ import SelectButton from "../organisms/SelectButton";
 export const BookDetail = () => {
   const dispatch = useDispatch();
   const sessValue = sessionStorage.getItem("keyword") || "";
+  const sessIsAndSearch = sessionStorage.getItem("isAndSearch") || "true";
   const path = useSelector(
     (state: RootState) => state.router.location.pathname
   ).slice(1);
@@ -81,10 +82,14 @@ export const BookDetail = () => {
     const stockN = storeBookData.find - storeBookData.borrower.length;
     const borrowAbled = stockN > 0;
     const returnAbled = storeBookData.borrower.length > 0;
+    const keys: string = sessValue
+      .split(/\s+/)
+      .map(key => `key=${key}`)
+      .join("&");
 
     return (
       <div id={style.book_detail}>
-        <Header backLink={`/book-lists?key=${sessValue}&page=1`} />
+        <Header backLink={`/book-lists?${keys}&and=${sessIsAndSearch}&page=1`} />
 
         <div className={style.Main}>
           <h1 className={style.BookTitle}>{storeBookData.bookName}</h1>

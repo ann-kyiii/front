@@ -35,6 +35,7 @@ export const BookSearcher = ({ className = [""] }: BookSearchProps) => {
       .concat(" ", inputValue)
       .trim();
     sessionStorage.setItem("keyword", keyWord);
+    sessionStorage.setItem("isAndSearch", isAndSearch.toString());
     // TODO: おそらくconnected-react-routerがreact-reduxのhooksに未対応
     // process.envについて
     // https://create-react-app.dev/docs/adding-custom-environment-variables/
@@ -89,6 +90,7 @@ export const BookSearcher = ({ className = [""] }: BookSearchProps) => {
   useEffect(() => {
     if (path === "/") {
       sessionStorage.removeItem("keyword");
+      sessionStorage.removeItem("isAndSearch");
       return;
     }
     // ブラウザの戻るで一致しなくなった時に設定し直し
@@ -97,14 +99,18 @@ export const BookSearcher = ({ className = [""] }: BookSearchProps) => {
       (sessionStorage.getItem("keyword") || "") !== keyWords.join(" ")
     ) {
       sessionStorage.setItem("keyword", keyWords.join(" "));
+      sessionStorage.setItem("isAndSearch", isAndSearch.toString());
     }
     const sessValue = sessionStorage.getItem("keyword") || "";
+    const sessIsAndSearch = sessionStorage.getItem("isAndSearch") || "true";
     setInputValue(sessValue);
+    setIsAndSearch(sessIsAndSearch.toLowerCase() === "true");
   }, [search]);
 
   return (
     <StringBookSearcher
       inputValue={inputValue}
+      checked={isAndSearch}
       handleClick={handleClick}
       handleOnChange={handleOnChange}
       handleKeyPress={handleKeyPress}

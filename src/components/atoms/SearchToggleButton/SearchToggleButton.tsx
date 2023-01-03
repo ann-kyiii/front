@@ -3,11 +3,13 @@ import styles from "./SearchToggleButton.module.css";
 
 type SearchToggleButtonProps = {
   text: string;
+  checked: boolean;
   handleChange: (event: React.InputHTMLAttributes<HTMLInputElement>) => void;
 };
 
 export const SearchToggleButton = ({
   text,
+  checked,
   handleChange
 }: SearchToggleButtonProps) => {
   return (
@@ -17,6 +19,7 @@ export const SearchToggleButton = ({
         id="btn-mode"
         type="checkbox"
         className={styles.SearchToggleButtonInput}
+        checked={!checked}
         onChange={handleChange}
       />
       <label htmlFor="btn-mode" className={styles.SearchToggleButtonLabel} />

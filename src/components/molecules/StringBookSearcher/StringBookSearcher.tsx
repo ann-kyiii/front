@@ -7,6 +7,7 @@ import SearchToggleButton from "../../atoms/SearchToggleButton";
 
 type StringBookSearcherProps = {
   inputValue: string;
+  checked: boolean;
   className?: string[];
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -17,6 +18,7 @@ type StringBookSearcherProps = {
 
 export const StringBookSearcher = ({
   inputValue,
+  checked,
   className = [""],
   handleOnChange,
   handleKeyPress,
@@ -38,7 +40,7 @@ export const StringBookSearcher = ({
         handleKeyPress={handleKeyPress}
         handleKeyUp={handleKeyUp}
       />
-      <SearchToggleButton text="AND" handleChange={handleChange} />
+      <SearchToggleButton text="AND" checked={checked} handleChange={handleChange} />
       <SearchIcon handleClick={handleClick} className={className} />
     </div>
   );
