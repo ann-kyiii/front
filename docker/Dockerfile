@@ -2,7 +2,7 @@ FROM node:16.17.1-slim AS builder
 WORKDIR /app
 
 COPY . .
-RUN npm install --force && npm run build --production
+RUN npm install && npm run build --production
 
 FROM node:16.17.1-slim
 
